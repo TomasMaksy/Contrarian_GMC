@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 
 import Image from "next/image";
 import blob from "@/app/assets/blob.png";
@@ -9,8 +9,6 @@ import blob2sm from "@/app/assets/blob2sm.png";
 import blob2 from "@/app/assets/blob2.png";
 import Contrarian_logo_white from "@/app/assets/Contrarian_logo_white.png";
 import BBVA_logo_white from "@/app/assets/BBVA_logo_white.png";
-
-import { useRef } from "react";
 
 import ScrollingBanner from "./scrolling-banner";
 

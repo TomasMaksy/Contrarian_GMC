@@ -55,7 +55,7 @@ const ScrollingBanner = React.forwardRef<HTMLDivElement, ScrollingBannerProps>(
 					className
 				)}
 				style={{
-					// @ts-ignore
+					// @ts-expect-error Custom CSS properties are not recognized by TypeScript
 					"--gap": gap,
 					"--duration": `${duration}s`,
 					...style,
@@ -72,7 +72,7 @@ const ScrollingBanner = React.forwardRef<HTMLDivElement, ScrollingBannerProps>(
 					})}
 				>
 					{React.Children.map(children, (child) =>
-						React.cloneElement(child as any)
+						React.isValidElement(child) ? React.cloneElement(child) : child
 					)}
 				</div>
 			</ScrollShadow>
