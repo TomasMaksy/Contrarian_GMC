@@ -41,17 +41,18 @@ export const Hero = () => {
 				<div className="md:flex items-center pb-5">
 					<div className="md:w-[478px]">
 						<div className="text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50">
-							Testing in progress
+							Plan your meetings
 						</div>
 						<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-[#3fafa8] to-white text-transparent bg-clip-text mt-6">
-							Growth Meets Capital Demo
+							Growth Meets Capital
 						</h1>
 						<p className="text-xl text-white tracking-tight mt-6">
-							This is a place where investors and and startups can fill out the
-							forms
+							Connect with the right people and maximize your meetings. Share
+							your top preferences, and let our smart algorithm match you with
+							the most relevant startups or investors.{" "}
 						</p>
 
-						<div className="flex gap-10 items-center mt-[80px] ">
+						<div className="flex gap-10 items-center mt-[40px] ">
 							<button
 								onClick={scrollToAnalysis}
 								className="px-8 pr-12 custom-btn custom-btn-primary relative flex items-center justify-between group hover:bg-[#151515] duration-300 "
@@ -86,7 +87,7 @@ export const Hero = () => {
 					<motion.img
 						src={blob2.src}
 						alt="img"
-						className="md:block md:absolute md:h-[1000px] md:w-auto md:max-w-none md:-left-80 lg:left-[700px] hidden hover:opacity-65 duration-300"
+						className="md:block md:absolute md:h-[1000px] md:w-auto md:max-w-none md:left-80 lg:left-[700px] hidden hover:opacity-65 duration-300"
 						animate={{ translateY: [-100, -280] }}
 						transition={{
 							repeat: Infinity,

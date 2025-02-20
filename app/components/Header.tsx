@@ -1,7 +1,7 @@
 "use client";
 
 import Logo from "@/app/assets/logo.png";
-
+import Link from "next/link";
 import Image from "next/image";
 
 export const Header = () => {
@@ -29,16 +29,18 @@ export const Header = () => {
 				<div className="container">
 					<div className="flex items-center justify-between gap-3 align-middle">
 						<div className="flex gap-2">
-							<Image
-								src={Logo}
-								alt="Contrarian Ventures Logo"
-								className="max-h-10 w-auto"
-							/>
+							<Link href="/" passHref>
+								<Image
+									src={Logo}
+									alt="Contrarian Ventures Logo"
+									className="max-h-10 w-auto"
+								/>
+							</Link>
 						</div>
 						{/* <Menu className="h-5 w-5 md:hidden" /> */}
 						<nav className="flex gap-6 text-white items-center">
 							<button className="custom-btn-hover">
-								<a onClick={scrollToAnalysis}>Agenda</a>
+								<a href="/about">About</a>
 							</button>
 							<button className="bg-[#3fafa8] text-white px-4 py-2 rounded-lg font-medium inline-flex align-items justify-center tracking-tight hover:bg-teal-600 duration-300">
 								Register

@@ -1,12 +1,15 @@
-import Forma from "./components/Forma";
-import { Header } from "./components/Header";
-import { Hero } from "./components/Hero";
+import Forma from "@/app/components/Forma";
+import { Header } from "@/app/components/Header";
+import { Hero } from "@/app/components/Hero";
+import Footer from "@/app/components/Footer";
+
 export default function Home() {
 	return (
-		<main className="min-h-screen dark">
+		<main className="dark">
 			<Header />
 			<Hero />
-			<Forma />
+			{/* <Forma /> */}
+			<Footer />
 		</main>
 	);
 }
