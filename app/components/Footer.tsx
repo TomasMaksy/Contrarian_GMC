@@ -80,7 +80,7 @@ export default function Footer() {
 					<Image
 						src={contratian_logo}
 						alt="Contrarian Ventures Logo"
-						className="max-h-10 w-auto"
+						className="max-h-10 w-auto mb-8"
 						width={100}
 					/>
 				</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Header } from "@/app/components/Header";
+import { Info } from "@/app/about/info";
 
 import React from "react";
 import { Button } from "@heroui/react";
@@ -8,33 +9,45 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 
 import blob from "@/app/assets/blob.png";
+import blob2 from "@/app/assets/blob2sm.png";
+
+import Link from "next/link";
+import Footer from "../components/Footer";
+
+import { Image as HeroImage } from "@heroui/react";
 
 export default function About() {
 	return (
-		<div className="overflow-hidden flex flex-col h-dvh w-full">
+		<div className="overflow-hidden flex flex-col w-full">
 			<Header />
-			<main className="container flex flex-1 flex-col items-center justify-center overflow-hidden px-8 dark">
-				<section className="z-20 flex flex-col items-center justify-center gap-[18px] sm:gap-6">
-					<Button
-						className="h-9 overflow-hidden border-1 border-default-100 bg-default-50 px-[18px] py-2 text-small font-normal leading-5 text-default-500"
-						endContent={
-							<Icon
-								className="flex-none outline-none [&>path]:stroke-[2]"
-								icon="solar:arrow-right-linear"
-								width={20}
-							/>
-						}
-						radius="full"
-						variant="bordered"
+			<main className="container flex flex-1 flex-col items-center overflow-hidden dark ">
+				<section className="z-20 flex flex-col items-center justify-center -mt-12 gap-[18px] sm:gap-6 h-[calc(100vh-30px)] ">
+					<Link
+						href={"https://energytechsummit.com/"}
+						target="_blank"
+						rel="noopener noreferrer"
 					>
-						New onboarding experience
-					</Button>
-					<div className="text-center text-[clamp(40px,10vw,44px)] font-bold leading-[1.2] tracking-tighter sm:text-[64px]">
-						<div className="bg-hero-section-title bg-clip-text bg-gradient-to-b from-[#3fafa8] to-black text-transparent ">
-							Growth Meets Capital.
+						<Button
+							className="h-9 overflow-hidden border-1 border-default-100 bg-default-50 px-[18px] py-2 text-small font-normal leading-5 text-default-500"
+							endContent={
+								<Icon
+									className="flex-none outline-none [&>path]:stroke-[2]"
+									icon="solar:arrow-right-linear"
+									width={20}
+								/>
+							}
+							radius="full"
+							variant="bordered"
+						>
+							Energy Tech Summit
+						</Button>
+					</Link>
+					<div className="text-center font-bold leading-[1.2] tracking-tighter sm:text-[64px]">
+						<div className="bg-hero-section-title bg-clip-text bg-gradient-to-b from-[#3fafa8] to-black text-transparent sm:scale-90 md:scale-100">
+							Growth Meets Capital
 						</div>
 					</div>
-					<p className="text-center font-normal leading-7 text-default-500 sm:w-[466px] sm:text-[18px]">
+					<p className="text-center font-normal leading-7 text-default-500 w-[480px] sm:w-[370px] sm:text-[18px]">
 						Invite-only side event of Energy Tech Summit bringing leading growth
 						investors and entrepreneurs together under one roof.
 					</p>
@@ -62,17 +75,53 @@ export default function About() {
 							See Participants
 						</Button>
 					</div>
-					<div className="text-center text-[clamp(40px,10vw,44px)] font-bold leading-[1.2] tracking-tighter sm:text-[64px] mt-64">
-						<div className="text-4xl bg-clip-text text-white ">
-							About the Event{" "}
-						</div>
-					</div>
+					<section className="flex justify-center flex-row pt-24 flex-wrap ">
+						<HeroImage
+							isBlurred
+							alt="HeroUI Album Cover"
+							className="m-5 md:w-56 h-auto sm:w-36"
+							src={"photos/GMC-07.jpeg"}
+						/>
+						<HeroImage
+							isBlurred
+							alt="HeroUI Album Cover"
+							className="m-5 md:w-56 h-auto sm:w-36"
+							src={"photos/GMC-03.jpeg"}
+						/>
+						<HeroImage
+							isBlurred
+							alt="HeroUI Album Cover"
+							className="m-5 md:w-56 h-auto sm:w-36"
+							src={"photos/GMC-10.jpeg"}
+						/>
+						<HeroImage
+							isBlurred
+							alt="HeroUI Album Cover"
+							className="m-5 md:w-56 h-auto sm:w-36"
+							src={"photos/GMC-05.jpeg"}
+						/>
+					</section>
 				</section>
-				<div className="pointer-events-none absolute inset-0 top-[-25%] z-10 scale-150 select-none sm:scale-125"></div>
-				<div className="absolute top-[50%] z-0">
-					<Image src={blob} alt="blob" />
+				<div className=" overflow-hidden">
+					<div className="absolute top-20 left-2/3 w-full overflow-hidden">
+						<Image
+							src={blob}
+							alt="blob"
+							className="w-[800px] h-[750px] z-0 opacity-65"
+						/>
+					</div>
+					<div className="absolute -top-2/4 md:-left-1/3 sm:-left-2/3 w-full overflow-hidden">
+						<Image
+							src={blob2}
+							alt="blob"
+							className="w-[1200px] h-[1800px] z-0 opacity-55"
+						/>
+					</div>
 				</div>
 			</main>
+
+			<Info />
+			<Footer />
 		</div>
 	);
 }
