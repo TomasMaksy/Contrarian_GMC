@@ -6,15 +6,15 @@ import Image from "next/image";
 
 export const Header = () => {
 	// Scroll function
-	const scrollToAnalysis = () => {
-		const analysisSection = document.getElementById("analysis-section");
-		if (analysisSection) {
-			const yOffset = -140; // Leave 50px above
-			const yPosition =
-				analysisSection.getBoundingClientRect().top + window.scrollY + yOffset;
-			window.scrollTo({ top: yPosition, behavior: "smooth" });
-		}
-	};
+	// const scrollToAnalysis = () => {
+	// 	const analysisSection = document.getElementById("analysis-section");
+	// 	if (analysisSection) {
+	// 		const yOffset = -140; // Leave 50px above
+	// 		const yPosition =
+	// 			analysisSection.getBoundingClientRect().top + window.scrollY + yOffset;
+	// 		window.scrollTo({ top: yPosition, behavior: "smooth" });
+	// 	}
+	// };
 
 	return (
 		<header className="sticky top-0 backdrop-blur-sm z-20">

@@ -9,10 +9,6 @@ import Card4 from "@/app/about/card4";
 import contrarian_logo from "@/app/assets/Contrarian_logo_white.png";
 import bbva_logo from "@/app/assets/BBVA_logo_white.png";
 
-import blob from "@/app/assets/blob.png";
-
-import { ScrollShadow } from "@heroui/react";
-
 export const Info = () => {
 	return (
 		<>

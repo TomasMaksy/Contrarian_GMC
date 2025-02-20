@@ -3,7 +3,7 @@
 import type { CardProps } from "@heroui/react";
 
 import React from "react";
-import { Card, CardBody, Image, CardHeader } from "@heroui/react";
+import { Card, CardBody } from "@heroui/react";
 import {
 	m,
 	useMotionValue,
@@ -13,8 +13,8 @@ import {
 } from "framer-motion";
 
 export default function Card1(props: CardProps) {
-	let mouseX = useMotionValue(0);
-	let mouseY = useMotionValue(0);
+	const mouseX = useMotionValue(0);
+	const mouseY = useMotionValue(0);
 
 	const cardRef = React.useRef<HTMLDivElement>(null);
 
@@ -24,7 +24,7 @@ export default function Card1(props: CardProps) {
 	}: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 		if (!cardRef?.current) return;
 
-		let { left, top } = cardRef.current?.getBoundingClientRect();
+		const { left, top } = cardRef.current?.getBoundingClientRect();
 
 		mouseX.set(clientX - left);
 		mouseY.set(clientY - top);

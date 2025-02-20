@@ -11,6 +11,7 @@ import Contrarian_logo_white from "@/app/assets/Contrarian_logo_white.png";
 import BBVA_logo_white from "@/app/assets/BBVA_logo_white.png";
 
 import ScrollingBanner from "./scrolling-banner";
+import Link from "next/link";
 
 const logos = [
 	{
@@ -53,20 +54,22 @@ export const Hero = () => {
 						</p>
 
 						<div className="flex gap-10 items-center mt-[40px] ">
-							<button
-								onClick={scrollToAnalysis}
-								className="px-8 pr-12 custom-btn custom-btn-primary relative flex items-center justify-between group hover:bg-[#151515] duration-300 "
-							>
-								<Image
-									src={blob}
-									alt="OpenAI logo"
-									className="h-7 w-7 ease absolute left-[17px] translate-x-0 opacity-100 transition duration-300 group-hover:-translate-x-full group-hover:scale-x-50 group-hover:opacity-0 group-hover:blur-sm"
-								/>
-								<span className="ease translate-x-6 transition duration-300 group-hover:-translate-x-1">
-									Fill out the form
-								</span>
-								<ArrowRight className="h-5 w-5 ease absolute right-4 translate-x-full scale-x-50 opacity-0 blur-sm transition duration-300 group-hover:translate-x-0 group-hover:scale-x-100 group-hover:opacity-100 group-hover:blur-none" />
-							</button>
+							<Link href="/fillout">
+								<button
+									onClick={scrollToAnalysis}
+									className="px-8 pr-12 custom-btn custom-btn-primary relative flex items-center justify-between group hover:bg-[#151515] duration-300 "
+								>
+									<Image
+										src={blob}
+										alt="OpenAI logo"
+										className="h-7 w-7 ease absolute left-[17px] translate-x-0 opacity-100 transition duration-300 group-hover:-translate-x-full group-hover:scale-x-50 group-hover:opacity-0 group-hover:blur-sm"
+									/>
+									<span className="ease translate-x-6 transition duration-300 group-hover:-translate-x-1">
+										Fill out the form
+									</span>
+									<ArrowRight className="h-5 w-5 ease absolute right-4 translate-x-full scale-x-50 opacity-0 blur-sm transition duration-300 group-hover:translate-x-0 group-hover:scale-x-100 group-hover:opacity-100 group-hover:blur-none" />
+								</button>
+							</Link>
 							<button
 								onClick={scrollToAnalysis}
 								className="px-8 custom-btn custom-btn-text relative flex items-center justify-between group duration-200"
