@@ -55,10 +55,13 @@ const MultiStepSidebar = React.forwardRef<
 		return (
 			<div
 				ref={ref}
-				className={cn("flex h-[calc(100vh_-_120px)] w-full gap-x-2", className)}
+				className={cn(
+					"flex md:h-[calc(100vh_-_180px)] sm:h-[calc(100vh_-_120px)] mt-5 w-full gap-x-2 overflow-hidden",
+					className
+				)}
 				{...props}
 			>
-				<div className=" hidden h-full w-[400px] flex-shrink-0 flex-col justify-between items-start gap-y-8 rounded-large bg-gradient-to-b to-[#0a6dad] via-gray-800 from-[#42bbb2] px-8 py-6 shadow-small lg:flex">
+				<div className=" hidden h-full w-[400px] flex-shrink-0 flex-col justify-between items-start gap-y-8 rounded-large bg-gradient-to-tl to-[#0a6dad] from-[#42bbb2] px-8 py-6 shadow-small lg:flex">
 					<div className="flex flex-col items-left gap-4">
 						<Button
 							className="bg-default-50 text-small font-medium text-default-500 shadow-lg"
@@ -90,14 +93,18 @@ const MultiStepSidebar = React.forwardRef<
 								},
 								{
 									title: "Meeting preferences",
-									description: "Tell us about your business",
+									description: "Select your top meeting preferences",
+								},
+								{
+									title: "Backup options",
+									description: "Choose back-up preferences ",
 								},
 							]}
 							onStepChange={onChangePage}
 						/>
 					</div>
 					<div className="flex flex-col items-center gap-12">
-						<div className="flex flex-row items-center w-full gap-4 opacity-75 w-max">
+						<div className="flex flex-row items-center gap-4 opacity-75 w-max">
 							<Image
 								src={contrarian_logo}
 								alt="Contrarian Ventures"
@@ -108,8 +115,8 @@ const MultiStepSidebar = React.forwardRef<
 						<SupportCard className="w-full backdrop-blur-lg lg:bg-white/40 lg:shadow-none dark:lg:bg-white/20 " />
 					</div>
 				</div>
-				<div className="flex h-full w-full flex-col items-center gap-4 md:p-4">
-					<div className="sticky top-0 z-10 w-full rounded-large bg-gradient-to-r from-default-100 via-danger-100 to-secondary-100 py-4 shadow-small md:max-w-xl lg:hidden">
+				<div className="md:container flex h-full w-full flex-col items-center gap-4 md:p-4 ">
+					<div className="sticky top-0 z-10 w-full rounded-large bg-gradient-to-tl to-[#0a6dad] via-black-500 from-[#3fafa8] py-4 shadow-small md:max-w-xl lg:hidden ">
 						<div className="flex justify-center">
 							{/* Mobile Steps */}
 							<RowSteps
@@ -117,10 +124,13 @@ const MultiStepSidebar = React.forwardRef<
 								currentStep={currentPage}
 								steps={[
 									{
-										title: "Account",
+										title: "Identification",
 									},
 									{
-										title: "Information",
+										title: "Preferences",
+									},
+									{
+										title: "Backup",
 									},
 								]}
 								onStepChange={onChangePage}
@@ -146,16 +156,24 @@ const MultiStepSidebar = React.forwardRef<
 						<SupportCard className="mx-auto w-full max-w-[252px] lg:hidden" />
 					</div>
 				</div>
+
 				<motion.img
 					src={blob.src}
 					alt="img"
-					className="md:block md:absolute md:h-[1000px] md:w-auto md:max-w-none md:left-80 lg:left-[1000px] hidden hover:opacity-15 duration-300 opacity-70"
+					className="md:block md:absolute md:h-[1000px] md:w-auto md:max-w-none md:left-80 lg:left-[1200px] hidden hover:opacity-50 duration-300 opacity-70 overflow-clip"
 					animate={{ translateY: [-100, -280] }}
 					transition={{
 						repeat: Infinity,
 						repeatType: "mirror",
 						duration: 3,
 						ease: easeInOut,
+					}}
+					style={{
+						objectFit: "cover", // Ensures the image fits the container and crops excess parts
+						objectPosition: "center", // Keeps the image centered
+						maxWidth: "none", // Ensures it can expand freely without constraints
+						maxHeight: "none", // Ensures it can expand freely without constraints
+						overflow: "hidden", // Ensures the image doesn't overflow
 					}}
 				/>
 			</div>

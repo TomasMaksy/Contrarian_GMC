@@ -4,10 +4,9 @@ import React from "react";
 import { domAnimation, LazyMotion, m } from "framer-motion";
 
 import MultistepSidebar from "./multistep-sidebar";
-import SignUpForm from "./signup-form";
-import CompanyInformationForm from "./company-information-form";
-import ChooseAddressForm from "./choose-address-form";
-import ReviewAndPaymentForm from "./review-and-payment-form";
+import Identification from "./identification";
+import Preferences from "./preferences";
+import Backup from "./backup";
 import MultistepNavigationButtons from "./multistep-navigation-buttons";
 
 import { Header } from "../components/Header";
@@ -60,17 +59,14 @@ export default function Fillout() {
 	}, [paginate]);
 
 	const content = React.useMemo(() => {
-		let component = <SignUpForm />;
+		let component = <Identification />;
 
 		switch (page) {
 			case 1:
-				component = <CompanyInformationForm />;
+				component = <Preferences />;
 				break;
 			case 2:
-				component = <ChooseAddressForm />;
-				break;
-			case 3:
-				component = <ReviewAndPaymentForm />;
+				component = <Backup />;
 				break;
 		}
 
@@ -99,16 +95,16 @@ export default function Fillout() {
 	}, [direction, page]);
 
 	return (
-		<main className="dark h-screen mx-60">
-			<div className="items-center">
-				<Header />
+		<main className="dark h-screen ">
+			<Header />
+			<div className="items-center container ">
 				<MultistepSidebar
 					currentPage={page}
 					onBack={onBack}
 					onChangePage={onChangePage}
 					onNext={onNext}
 				>
-					<div className="relative flex h-fit w-full flex-col pt-6 text-center lg:h-full lg:justify-center lg:pt-0">
+					<div className="relative flex h-fit w-full flex-col  text-center lg:h-full lg:justify-center lg:pt-0">
 						{content}
 						<MultistepNavigationButtons
 							backButtonProps={{ isDisabled: page === 0 }}
@@ -116,10 +112,12 @@ export default function Fillout() {
 							nextButtonProps={{
 								children:
 									page === 0
-										? "Sign Up for Free"
-										: page === 3
-										? "Go to Payment"
-										: "Continue",
+										? "Confirm Identity"
+										: page === 1
+										? "Confirm Preferences"
+										: page === 2
+										? "Submit your preferences"
+										: "",
 							}}
 							onBack={onBack}
 							onNext={onNext}

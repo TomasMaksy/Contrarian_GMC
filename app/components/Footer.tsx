@@ -22,7 +22,7 @@ const navLinks = [
 	},
 	{
 		name: "Form",
-		href: "#",
+		href: "/fillout",
 	},
 	{
 		name: "Register",
@@ -30,7 +30,7 @@ const navLinks = [
 	},
 	{
 		name: "About us",
-		href: "#",
+		href: "/about",
 	},
 ];
 

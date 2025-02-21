@@ -16,11 +16,14 @@ import Footer from "../components/Footer";
 
 import { Image as HeroImage } from "@heroui/react";
 
+import contrarian_logo from "@/app/assets/Contrarian_logo_white.png";
+import bbva_logo from "@/app/assets/BBVA_logo_white.png";
+
 export default function About() {
 	return (
 		<div className="overflow-hidden flex flex-col w-full">
 			<Header />
-			<main className="container flex flex-1 flex-col items-center overflow-hidden dark ">
+			<main className="flex flex-1 flex-col items-center overflow-hidden dark ">
 				<section className="z-20 flex flex-col items-center justify-center -mt-12 gap-[18px] sm:gap-6 h-[calc(100vh-30px)] ">
 					<Link
 						href={"https://energytechsummit.com/"}
@@ -119,6 +122,27 @@ export default function About() {
 					</div>
 				</div>
 			</main>
+			<section className="md:pt-5 bg-[radial-gradient(ellipse_70%_150%_at_top,#3fafa8,black)] overflow-x-clip bg-opacity-70">
+				<div className="text-center text-[clamp(40px,10vw,44px)] font-normal leading-[1.2] tracking-[-0.01em] sm:text-[64px]  flex flex-col justify-center align-middle">
+					<div className=" z-10">
+						<div className="text-2xl bg-clip-text text-white flex flex-col items-center z-10 mt-2 ">
+							<p className="z-10 mb-5">Hosted by </p>
+						</div>
+					</div>
+					<div className="flex flex-row mb-16 items-center justify-center md:px-46 z-10 md:gap-36 sm:gap-12">
+						<Image
+							src={contrarian_logo}
+							alt="Contrarian Ventures Logo"
+							className="md:h-16 w-auto sm:h-12 z-10"
+						/>
+						<Image
+							src={bbva_logo}
+							alt="BBVA Logo"
+							className="md:h-16 w-auto sm:h-12 z-10"
+						/>
+					</div>
+				</div>
+			</section>
 
 			<Info />
 			<Footer />

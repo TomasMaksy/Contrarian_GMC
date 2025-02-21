@@ -34,7 +34,7 @@ export default function Card1(props: CardProps) {
 		<Card
 			{...props}
 			ref={cardRef}
-			className="group relative w-[420px] bg-neutral-900 shadow-large"
+			className="group relative w-[420px] bg-black-900 shadow-large"
 			radius="lg"
 			onMouseMove={onMouseMove}
 		>
@@ -45,7 +45,7 @@ export default function Card1(props: CardProps) {
 						background: useMotionTemplate`
             radial-gradient(
               450px circle at ${mouseX}px ${mouseY}px,
-              rgba(56, 189, 158, 0.2),
+              rgba(56, 189, 158, 0.3),
               transparent 80%
             )
           `,
@@ -53,11 +53,11 @@ export default function Card1(props: CardProps) {
 				/>
 			</LazyMotion>
 
-			<CardBody className="pt-4 flex flex-col items-center align-middle text-center justify-between py-4">
-				<p className="lg:text-7xl sm:text-5xl text-neutral-50 font-extrabold">
+			<CardBody className="pt-4 flex flex-col items-center align-middle text-center justify-top gap-2 p-4 scrollbar-hide">
+				<p className="lg:text-7xl sm:text-3xl text-neutral-50 font-extrabold">
 					1
 				</p>
-				<p className="align-middle font-medium lg:text-xl sm:text-sm text-neutral-400">
+				<p className="align-middle font-normal lg:text-xl sm:text-xs text-neutral-400">
 					DEDICATED AREA
 				</p>
 			</CardBody>

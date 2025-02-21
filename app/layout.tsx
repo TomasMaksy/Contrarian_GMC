@@ -1,7 +1,7 @@
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
-import { ClientProvider } from "./ClientProvider"; // Adjust the import path as needed
+import { Providers } from "./providers"; // Adjust the import path as needed
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
@@ -13,7 +13,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={clsx(dmSans.className, "antialiased bg-[#000]")}>
-				<ClientProvider>{children}</ClientProvider>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	);

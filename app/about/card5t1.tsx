@@ -34,7 +34,7 @@ export default function Card1(props: CardProps) {
 		<Card
 			{...props}
 			ref={cardRef}
-			className="group relative w-[420px] bg-black-900 shadow-large"
+			className="group relative w-[420px] bg-transparentshadow-large"
 			radius="lg"
 			onMouseMove={onMouseMove}
 		>
@@ -44,8 +44,8 @@ export default function Card1(props: CardProps) {
 					style={{
 						background: useMotionTemplate`
             radial-gradient(
-              450px circle at ${mouseX}px ${mouseY}px,
-              rgba(56, 189, 158, 0.3),
+              500px circle at ${mouseX}px ${mouseY}px,
+              rgba(10, 109, 173, 0.6),
               transparent 80%
             )
           `, // <- Add your own color here
@@ -53,12 +53,20 @@ export default function Card1(props: CardProps) {
 				/>
 			</LazyMotion>
 
-			<CardBody className="pt-4 flex flex-col items-center align-middle text-center justify-top gap-2 p-4 scrollbar-hide">
-				<p className="lg:text-7xl sm:text-3xl text-neutral-50 font-extrabold">
-					50
+			<CardBody className="pt-4 flex flex-col items-center align-middle text-center justify-center py-4 gap-4 p-4">
+				<p className="lg:text-4xl sm:text-3xl text-neutral-50 font-extrabold text-wrap">
+					Day activities
 				</p>
-				<p className="align-middle font-normal lg:text-xl sm:text-xs text-neutral-400">
-					SERIES A+ STAGE STARTUPS
+				<p className="align-middle font-thin lg:text-lg sm:text-sm text-neutral-400">
+					When:
+					<span className="font-semibold">
+						<br /> Day 1 (April 9) 9:30 AM to 6 PM{" "}
+					</span>
+					<br />
+					Where:
+					<span className="font-semibold">
+						<br /> Euskalduna Conference Centre
+					</span>
 				</p>
 			</CardBody>
 		</Card>

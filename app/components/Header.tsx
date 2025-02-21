@@ -25,8 +25,8 @@ export const Header = () => {
 				</div>
 			</div> */}
 
-			<div className="py-5">
-				<div className="container">
+			<div className="py-5 mx-8">
+				<div className="md:container">
 					<div className="flex items-center justify-between gap-3 align-middle">
 						<div className="flex gap-2">
 							<Link href="/" passHref>
@@ -39,12 +39,16 @@ export const Header = () => {
 						</div>
 						{/* <Menu className="h-5 w-5 md:hidden" /> */}
 						<nav className="flex gap-6 text-white items-center">
-							<button className="custom-btn-hover">
+							<button className="custom-btn-hover sm:text-[12px] md:text-[16px]">
 								<a href="/about">About</a>
 							</button>
-							<button className="bg-[#3fafa8] text-white px-4 py-2 rounded-lg font-medium inline-flex align-items justify-center tracking-tight hover:bg-teal-600 duration-300">
-								Register
-							</button>
+							<Link href="/fillout" passHref>
+								<div className="group">
+									<button className="bg-[#3fafa7cb] text-white px-4 py-2 rounded-lg font-medium inline-flex justify-center tracking-tight sm:text-[12px] md:text-[16px] hover:bg-[#3fafa7a5] duration-400">
+										Meeting Form
+									</button>
+								</div>
+							</Link>
 						</nav>
 					</div>
 				</div>

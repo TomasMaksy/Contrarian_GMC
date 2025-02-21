@@ -22,19 +22,19 @@ const SupportCard = React.forwardRef<HTMLDivElement, SupportCardProps>(
 					classNames={{
 						base: "ring-0 ring-offset-1 w-[35px] h-[35px]",
 					}}
-					src="photos/RP.jpg"
+					src={"photos/RP.jpg"}
 				/>
 				<Avatar
 					classNames={{
 						base: "ring-0 ring-offset-1 w-[35px] h-[35px]",
 					}}
-					src="photos/RS.jpg"
+					src={"photos/RS.jpg"}
 				/>
 				<Avatar
 					classNames={{
 						base: "ring-0 ring-offset-1 w-[35px] h-[35px]",
 					}}
-					src="photos/TK.jpg"
+					src={"photos/TK.jpg"}
 				/>
 			</AvatarGroup>
 			<div className="line-clamp-2 text-left text-tiny font-medium text-default-700">
