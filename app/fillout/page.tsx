@@ -50,15 +50,6 @@ const variants = {
 		y: 0,
 		opacity: 1,
 	},
-	/*************  ✨ Codeium Command ⭐  *************/
-	/**
- * Generates an exit animation configuration object for Framer Motion.
- *
- * @param {number} direction - The direction of the exit animation. A negative
- * direction will animate the element upwards, while a positive direction will
- * animate it downwards.
- * @returns {Object} - The configuration object for the exit animation, 
-/******  ef9ea0aa-1eaf-464e-8f80-f65cbc28626d  *******/
 	exit: (direction: number) => ({
 		zIndex: 0,
 		y: direction < 0 ? 30 : -30,
@@ -74,6 +65,7 @@ export default function Fillout() {
 		email: "",
 		organisation: undefined as FormOrgType | undefined,
 		preferences: Array(10).fill(""),
+		backup: Array(14).fill(""),
 	});
 
 	const setFormPreference = (index: number, value: string) => {
@@ -84,11 +76,81 @@ export default function Fillout() {
 		});
 	};
 
-	const handleSubmit = React.useCallback(async () => {
-		console.log(formValues);
-		console.log("Submitted the final form values");
-	}, [formValues]);
+	const setFormBackup = (index: number, value: string) => {
+		setFormValues((prev) => {
+			const updatedBackups = [...prev.backup];
+			updatedBackups[index] = value;
+			return { ...prev, backup: updatedBackups };
+		});
+	};
 
+	const cleanName = formValues.name.replace(/^"|"$/g, "").trim();
+
+	const handleSubmit = React.useCallback(async () => {
+		// Get non-empty values from backup
+		const nonEmptyBackupValues = formValues.backup.filter(
+			(value) => value !== ""
+		);
+
+		// If there are any non-empty backup values, add them to preferences
+		if (nonEmptyBackupValues.length > 0) {
+			setFormValues((prev) => ({
+				...prev,
+				preferences: [...prev.preferences, ...nonEmptyBackupValues], // Update preferences state directly
+			}));
+		}
+
+		// Make sure the preferences state is updated correctly before logging
+		const updatedPreferencesData = [
+			...formValues.preferences,
+			...nonEmptyBackupValues,
+		];
+
+		// Create an object for the preferences (preference1, preference2, ..., preference24)
+		const preferencesData = updatedPreferencesData.reduce(
+			(acc, value, index) => {
+				acc[`Preference ${index + 1}`] = value || ""; // If preference is empty, set it to an empty string
+				return acc;
+			},
+			{}
+		);
+		console.log("Updated formValues", formValues);
+		console.log("preferencesData", preferencesData);
+		console.log("backup", formValues.backup);
+
+		// Ensure that we have 24 preferences (fill with empty strings if necessary)
+		for (let i = updatedPreferencesData.length; i < 24; i++) {
+			preferencesData[`Preference ${i + 1}`] = "";
+		}
+
+		// Now, prepare the data to be sent to Airtable
+		const dataToSend = {
+			Organisation: formValues.organisation, // Assuming this is an object with the required field(s)
+			Name: cleanName,
+			Email: formValues.email,
+			...preferencesData, // Include the preferences dynamically
+		};
+
+		try {
+			const request = await fetch("/api/submit", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(dataToSend), // Send the transformed data
+			});
+
+			const result = await request.json();
+
+			if (result.data !== "ok") {
+				console.log("Error submitting form values", result.error);
+			} else {
+				console.log("Form submitted successfully");
+			}
+		} catch (error) {
+			console.error("Error in submitting form:", error);
+		}
+	}, [formValues]);
 	const paginate = React.useCallback((newDirection: number) => {
 		setPage((prev) => {
 			const nextPage = prev[0] + newDirection;
@@ -105,7 +167,6 @@ export default function Fillout() {
 		setToastTriggered(true);
 	}, []);
 
-	// Step 2: Use useEffect to show the toast after render
 	React.useEffect(() => {
 		if (toastTriggered) {
 			addToast({
@@ -113,9 +174,9 @@ export default function Fillout() {
 				description: "Please fill out all the required fields.",
 				color: "warning",
 				variant: "flat",
-				timeout: 3000, // Ensures the toast auto-closes
+				timeout: 3000,
 			});
-			setToastTriggered(false); // Reset state to avoid showing the toast again
+			setToastTriggered(false); // Reset the state to not show toast again
 		}
 	}, [toastTriggered]); // This effect runs when toastTriggered changes
 
@@ -171,20 +232,24 @@ export default function Fillout() {
 					formValues.organisation !== undefined
 				);
 			} else if (page === 1) {
-				// Check if preferences are valid (this can be customized as needed)
+				// Check if preferences are valid (not empty)
 				return formValues.preferences.every((preference) => preference !== "");
 			} else {
-				console.log("passed");
-				return true; // Assume no validation needed for page 2 (backup page)
+				// Page 2 doesn't need validation, just continue
+				return true;
 			}
 		};
 
 		if (validateForm()) {
-			paginate(1);
+			if (page === 2) {
+				handleSubmit(); // Submit form and add backup values to preferences here
+			} else {
+				paginate(1); // Move to the next page
+			}
 		} else {
 			showToast();
 		}
-	}, [paginate, page, formValues, showToast]);
+	}, [paginate, page, formValues, showToast, handleSubmit]);
 
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -213,7 +278,14 @@ export default function Fillout() {
 				);
 				break;
 			case 2:
-				component = <Backup />;
+				component = (
+					<Backup
+						preferences={formValues.preferences}
+						backups={formValues.backup}
+						setBackup={setFormBackup}
+						excludedOrg={formValues.organisation}
+					/>
+				);
 				break;
 		}
 

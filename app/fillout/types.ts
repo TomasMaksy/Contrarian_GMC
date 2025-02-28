@@ -20,6 +20,14 @@ export type OrgProps = {
     className?: string;
   }
 
+  export interface BackupFormProps {
+    preferences: string[];
+    excludedOrg: FormOrgType;
+    backups: string[];
+    setBackup: (index: number, value: string) => void;
+    className?: string;
+  }
+
 
   export type FormOrgType =
     | (typeof investors)[number]["value"]
