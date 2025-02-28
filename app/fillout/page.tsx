@@ -9,6 +9,7 @@ import MultistepSidebar from "./multistep-sidebar";
 import Identification from "./1_identification";
 import Preferences from "./2_preferences";
 import Backup from "./3_backup";
+
 import MultistepNavigationButtons from "./components/multistep-navigation-buttons";
 
 import { FormOrgType } from "./types";
@@ -84,13 +85,6 @@ export default function Fillout() {
 	};
 
 	const handleSubmit = React.useCallback(async () => {
-		addToast({
-			title: "Toast title",
-			description: "Toast displayed successfully",
-			color: "success",
-			timeout: 1500,
-		});
-
 		console.log(formValues);
 		console.log("Submitted the final form values");
 	}, [formValues]);
@@ -365,6 +359,12 @@ export default function Fillout() {
 									variant="light"
 									onPress={() => {
 										onClose();
+										addToast({
+											title: formValues.organisation,
+											description: "Your form was submitted successfully",
+											color: "success",
+											timeout: 3000,
+										});
 										redirect("/");
 									}}
 								>
