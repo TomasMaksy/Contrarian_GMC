@@ -13,7 +13,7 @@ const SupportCard = React.forwardRef<HTMLDivElement, SupportCardProps>(
 			{...props}
 			ref={ref}
 			className={cn(
-				"align-center my-2 flex shrink-0 items-center justify-center gap-3 self-stretch rounded-large bg-content1 px-3 py-3 shadow-small",
+				"align-center my-2 flex shrink-0 items-center justify-center gap-3 self-stretch rounded-large bg-content1 px-3 py-3 shadow-small w-full",
 				className
 			)}
 		>

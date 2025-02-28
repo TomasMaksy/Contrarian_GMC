@@ -57,7 +57,7 @@ export default function Card1(props: CardProps) {
 				<p className="lg:text-7xl sm:text-3xl text-neutral-50 font-extrabold">
 					50
 				</p>
-				<p className="align-middle font-normal lg:text-xl sm:text-xs text-neutral-400">
+				<p className="align-middle font-normal lg:text-xl sm:text-xs text-neutral-400 tracking-normal">
 					SERIES A+ STAGE STARTUPS
 				</p>
 			</CardBody>

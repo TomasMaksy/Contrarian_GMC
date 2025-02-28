@@ -17,7 +17,7 @@ export const Header = () => {
 	// };
 
 	return (
-		<header className="sticky top-0 backdrop-blur-sm z-20">
+		<header className="sticky top-0 backdrop-blur-sm z-50">
 			{/* <div className="flex justify-center items-center bg-[#3fafa8] text-white py-1 gap-3">
 				<p className="hidden md:block">Agenda Tool</p>
 				<div className="flex justify-center items-center py-3 bg-[#3fafa8]">
@@ -44,8 +44,8 @@ export const Header = () => {
 							</button>
 							<Link href="/fillout" passHref>
 								<div className="group">
-									<button className="bg-[#3fafa7cb] text-white px-4 py-2 rounded-lg font-medium inline-flex justify-center tracking-tight sm:text-[12px] md:text-[16px] hover:bg-[#3fafa7a5] duration-400">
-										Meeting Form
+									<button className="bg-[#3fafa7cb] text-white px-4 py-2 rounded-lg font-medium inline-flex justify-center tracking-tight sm:text-[12px] md:text-[16px] hover:bg-[#3fafa7a5] duration-400 flex-nowrap">
+										Form
 									</button>
 								</div>
 							</Link>

@@ -21,9 +21,9 @@ import bbva_logo from "@/app/assets/BBVA_logo_white.png";
 
 export default function About() {
 	return (
-		<div className="overflow-hidden flex flex-col w-full">
+		<main className="dark h-screen overflow-y-auto bg-black relative overflow-hidden">
 			<Header />
-			<main className="flex flex-1 flex-col items-center overflow-hidden dark ">
+			<main className="flex flex-1 flex-col items-center overflow-hidden dark relative">
 				<section className="z-20 flex flex-col items-center justify-center -mt-12 gap-[18px] sm:gap-6 h-[calc(100vh-30px)] ">
 					<Link
 						href={"https://energytechsummit.com/"}
@@ -81,46 +81,38 @@ export default function About() {
 					<section className="flex justify-center flex-row pt-24 flex-wrap ">
 						<HeroImage
 							isBlurred
-							alt="HeroUI Album Cover"
 							className="m-5 md:w-56 h-auto sm:w-36"
 							src={"photos/GMC-07.jpeg"}
 						/>
 						<HeroImage
 							isBlurred
-							alt="HeroUI Album Cover"
 							className="m-5 md:w-56 h-auto sm:w-36"
 							src={"photos/GMC-03.jpeg"}
 						/>
 						<HeroImage
 							isBlurred
-							alt="HeroUI Album Cover"
 							className="m-5 md:w-56 h-auto sm:w-36"
 							src={"photos/GMC-10.jpeg"}
 						/>
 						<HeroImage
 							isBlurred
-							alt="HeroUI Album Cover"
 							className="m-5 md:w-56 h-auto sm:w-36"
 							src={"photos/GMC-05.jpeg"}
 						/>
 					</section>
 				</section>
-				<div className=" overflow-hidden">
-					<div className="absolute top-20 left-2/3 w-full overflow-hidden">
-						<Image
-							src={blob}
-							alt="blob"
-							className="w-[800px] h-[750px] z-0 opacity-65"
-						/>
-					</div>
-					<div className="absolute -top-2/4 md:-left-1/3 sm:-left-2/3 w-full overflow-hidden">
-						<Image
-							src={blob2}
-							alt="blob"
-							className="w-[1200px] h-[1800px] z-0 opacity-55"
-						/>
-					</div>
-				</div>
+
+				<Image
+					src={blob}
+					alt="blob"
+					className=" absolute bottom-28 right-2/3 w-[1200px] h-[1250px] z-0 opacity-65"
+				/>
+
+				<Image
+					src={blob2}
+					alt="blob"
+					className="absolute left-1/3 -top-1/3 w-[2600px] h-[2000px] z-0 opacity-70 "
+				/>
 			</main>
 			<section className="md:pt-5 bg-[radial-gradient(ellipse_70%_150%_at_top,#3fafa8,black)] overflow-x-clip bg-opacity-70">
 				<div className="text-center text-[clamp(40px,10vw,44px)] font-normal leading-[1.2] tracking-[-0.01em] sm:text-[64px]  flex flex-col justify-center align-middle">
@@ -146,6 +138,6 @@ export default function About() {
 
 			<Info />
 			<Footer />
-		</div>
+		</main>
 	);
 }

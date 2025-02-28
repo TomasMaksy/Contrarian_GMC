@@ -57,14 +57,14 @@ export default function Card1(props: CardProps) {
 				<p className="lg:text-4xl sm:text-3xl text-neutral-50 font-extrabold text-wrap">
 					Day activities
 				</p>
-				<p className="align-middle font-thin lg:text-lg sm:text-sm text-neutral-400">
+				<p className="align-middle font-thin lg:text-lg sm:text-sm text-neutral-400 tracking-wider">
 					When:
-					<span className="font-semibold">
+					<span className="font-semibold tracking-normal">
 						<br /> Day 1 (April 9) 9:30 AM to 6 PM{" "}
 					</span>
 					<br />
 					Where:
-					<span className="font-semibold">
+					<span className="font-semibold tracking-normal">
 						<br /> Euskalduna Conference Centre
 					</span>
 				</p>

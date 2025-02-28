@@ -19,3 +19,8 @@
 		@apply px-8 py-3 rounded-xl font-medium tracking-tight border-1 border-white;
 	}
 }
+
+
+input, textarea, select {
+	font-size: 16px;
+  }

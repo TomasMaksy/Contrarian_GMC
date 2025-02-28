@@ -4,20 +4,17 @@ import React from "react";
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { cn } from "@heroui/react";
-import { easeInOut, motion } from "framer-motion";
 
-import SupportCard from "./support-card";
-import VerticalSteps from "./vertical-steps";
+import SupportCard from "./components/support-card";
+import VerticalSteps from "./components/vertical-steps";
 
 import Image from "next/image";
 
-import RowSteps from "./row-steps";
-import MultistepNavigationButtons from "./multistep-navigation-buttons";
+import RowSteps from "./components/row-steps";
+import MultistepNavigationButtons from "./components/multistep-navigation-buttons";
 
 import contrarian_logo from "@/app/assets/Contrarian_logo_white.png";
 import bbva_logo from "@/app/assets/BBVA_logo_white.png";
-
-import blob from "@/app/assets/blob.png";
 
 export type MultiStepSidebarProps = React.HTMLAttributes<HTMLDivElement> & {
 	currentPage: number;
@@ -56,12 +53,12 @@ const MultiStepSidebar = React.forwardRef<
 			<div
 				ref={ref}
 				className={cn(
-					"flex md:h-[calc(100vh_-_180px)] sm:h-[calc(100vh_-_120px)] mt-5 w-full gap-x-2 overflow-hidden",
+					"flex md:h-full sm:h-full mt-5 w-full gap-x-2 overflow-clip z-10 ",
 					className
 				)}
 				{...props}
 			>
-				<div className=" hidden h-full w-[400px] flex-shrink-0 flex-col justify-between items-start gap-y-8 rounded-large bg-gradient-to-tl to-[#0a6dad] from-[#42bbb2] px-8 py-6 shadow-small lg:flex">
+				<div className=" hidden min-h-[calc(100vh-180px)] w-[400px] flex-shrink-0 flex-col justify-between items-start gap-y-8 rounded-large bg-gradient-to-tl to-[#0a6dad] from-[#42bbb2] px-8 py-6 shadow-small lg:flex">
 					<div className="flex flex-col items-left gap-4">
 						<Button
 							className="bg-default-50 text-small font-medium text-default-500 shadow-lg"
@@ -77,7 +74,7 @@ const MultiStepSidebar = React.forwardRef<
 							<div className="text-xl font-medium leading-7 text-default-foreground mt-10">
 								Meeting Preferences Form
 							</div>
-							<div className="mt-1 text-base font-medium leading-6 text-default-500">
+							<div className="mt-1 text-base font-medium leading-6 text-default-700">
 								Choose your meeting preferences. Starting from most desired
 							</div>
 						</div>
@@ -145,37 +142,19 @@ const MultiStepSidebar = React.forwardRef<
 							nextButtonProps={{
 								children:
 									currentPage === 0
-										? "Sign Up for Free"
-										: currentPage === 3
-										? "Go to Payment"
-										: "Continue",
+										? "Confirm Identity"
+										: currentPage === 1
+										? "Confirm Preferences"
+										: currentPage === 2
+										? "Submit"
+										: "",
 							}}
 							onBack={onBack}
 							onNext={onNext}
 						/>
-						<SupportCard className="mx-auto w-full max-w-[252px] lg:hidden" />
+						<SupportCard className="mx-auto w-full max-w-[290px] lg:hidden" />
 					</div>
 				</div>
-
-				<motion.img
-					src={blob.src}
-					alt="img"
-					className="md:block md:absolute md:h-[1000px] md:w-auto md:max-w-none md:left-80 lg:left-[1200px] hidden hover:opacity-50 duration-300 opacity-70 overflow-clip"
-					animate={{ translateY: [-100, -280] }}
-					transition={{
-						repeat: Infinity,
-						repeatType: "mirror",
-						duration: 3,
-						ease: easeInOut,
-					}}
-					style={{
-						objectFit: "cover", // Ensures the image fits the container and crops excess parts
-						objectPosition: "center", // Keeps the image centered
-						maxWidth: "none", // Ensures it can expand freely without constraints
-						maxHeight: "none", // Ensures it can expand freely without constraints
-						overflow: "hidden", // Ensures the image doesn't overflow
-					}}
-				/>
 			</div>
 		);
 	}

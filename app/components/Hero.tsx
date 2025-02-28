@@ -40,14 +40,14 @@ export const Hero = () => {
 
 	return (
 		<>
-			<section className="pt-8  md:pt-5 md:pb-12 bg-[radial-gradient(ellipse_120%_80%_at_bottom_left,#3fafa8,black)] overflow-x-clip">
-				<div className="container relative mt-44 mb-80">
+			<section className="pt-8  md:pt-5 md:pb-12 bg-[radial-gradient(ellipse_120%_80%_at_bottom_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-between">
+				<div className="container relative mt-28 md:mb-72 sm:mb-24">
 					<div className="md:flex items-center pb-5">
 						<div className="md:w-[478px]">
 							<div className="text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50">
 								Plan your meetings
 							</div>
-							<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-[#3fafa8] to-[#141414] text-transparent bg-clip-text mt-6">
+							<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-[#3fafa8] to-[#ffffff] text-transparent bg-clip-text mt-6">
 								Growth Meets Capital
 							</h1>
 							<p className="text-xl text-default-500 tracking-tight mt-6">
@@ -104,17 +104,17 @@ export const Hero = () => {
 						/>
 					</div>
 				</div>
-				<div className="pb-10 bg-black">
-					<section className=" w-screen left-0 right-0 bottom-10 mt-36 pt-16 pb-8">
+				<div className="pb-10 bg-black md:m-10">
+					<section className=" w-screen left-0 right-0 bottom-10 pt-10 pb-1">
 						<ScrollingBanner shouldPauseOnHover gap="80px">
 							{Array.from(
-								{ length: 20 },
+								{ length: 40 },
 								(_, i) => logos[i % logos.length]
 							).map(({ key, logo }, index) => (
 								<div
 									key={`${key}-${index}`}
 									className="flex items-center justify-center text-foreground"
-									style={{ minWidth: "200px" }}
+									style={{ minWidth: "130px" }}
 								>
 									<Image src={logo} alt={key} />
 								</div>

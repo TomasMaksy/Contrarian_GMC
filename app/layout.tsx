@@ -12,7 +12,21 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={clsx(dmSans.className, "antialiased bg-[#000]")}>
+			<head className="dark">
+				{/* Add the meta tag for disabling zoom on mobile */}
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+				/>
+
+				{/* You can add other head tags here as well */}
+			</head>
+			<body
+				className={clsx(
+					dmSans.className,
+					"antialiased bg-[#000] dark text-default-600 min-h-screen flex flex-col"
+				)}
+			>
 				<Providers>{children}</Providers>
 			</body>
 		</html>

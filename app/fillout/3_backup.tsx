@@ -4,23 +4,22 @@ import React from "react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { cn } from "@heroui/react";
 
-import organisations from "./organisations";
+import organisations from "./investors";
 
-export type CompanyInformationFormProps = React.HTMLAttributes<HTMLFormElement>;
+export type ChooseAddressFormProps = React.HTMLAttributes<HTMLFormElement>;
 
-const CompanyInformationForm = React.forwardRef<
+const ChooseAddressForm = React.forwardRef<
 	HTMLFormElement,
-	CompanyInformationFormProps
+	ChooseAddressFormProps
 >(({ className, ...props }, ref) => {
 	return (
 		<>
 			<div className="text-3xl font-bold leading-9 text-default-foreground">
-				Your meeting preferences
+				Choose Your Back-up Preferences
 			</div>
-			<div className="py-4 text-default-500">
-				Please provide the names of the organizations you’d like to meet,
-				starting with your
-				<span className="text-[#3fafa8]"> top priority.</span>
+			<div className="py-4 text-base leading-5 text-default-500">
+				We will choose from these preferences in a case where your
+				top-priorities are unavailable
 			</div>
 			<form
 				ref={ref}
@@ -28,24 +27,11 @@ const CompanyInformationForm = React.forwardRef<
 				{...props}
 			>
 				<Autocomplete
-					className="col-span-12"
+					className="col-span-6"
 					defaultItems={organisations}
-					label="First Choice"
+					label="11th Choice"
 					labelPlacement="outside"
-					placeholder="Organisation Name"
-				>
-					{(organisation) => (
-						<AutocompleteItem key={organisation.value}>
-							{organisation.title}
-						</AutocompleteItem>
-					)}
-				</Autocomplete>
-				<Autocomplete
-					className="col-span-12"
-					defaultItems={organisations}
-					label="Second Choice"
-					labelPlacement="outside"
-					placeholder="Second Organisation"
+					placeholder="11th Choice"
 				>
 					{(organisation) => (
 						<AutocompleteItem key={organisation.value}>
@@ -56,9 +42,9 @@ const CompanyInformationForm = React.forwardRef<
 				<Autocomplete
 					className="col-span-6"
 					defaultItems={organisations}
-					label="Third Choice"
+					label="12th Choice"
 					labelPlacement="outside"
-					placeholder="Third Organisation"
+					placeholder="12th Choice"
 				>
 					{(organisation) => (
 						<AutocompleteItem key={organisation.value}>
@@ -69,9 +55,9 @@ const CompanyInformationForm = React.forwardRef<
 				<Autocomplete
 					className="col-span-6"
 					defaultItems={organisations}
-					label="Fourth Choice"
+					label="13th Choice"
 					labelPlacement="outside"
-					placeholder="Fourth Organisation"
+					placeholder="13th Choice"
 				>
 					{(organisation) => (
 						<AutocompleteItem key={organisation.value}>
@@ -82,9 +68,9 @@ const CompanyInformationForm = React.forwardRef<
 				<Autocomplete
 					className="col-span-6"
 					defaultItems={organisations}
-					label="Fifth Choice"
+					label="14th Choice"
 					labelPlacement="outside"
-					placeholder="Fifth Organisation"
+					placeholder="14th Choice"
 				>
 					{(organisation) => (
 						<AutocompleteItem key={organisation.value}>
@@ -95,9 +81,9 @@ const CompanyInformationForm = React.forwardRef<
 				<Autocomplete
 					className="col-span-6"
 					defaultItems={organisations}
-					label="Sixth Choice"
+					label="15th Choice"
 					labelPlacement="outside"
-					placeholder="Sixth Organisation"
+					placeholder="15th Choice"
 				>
 					{(organisation) => (
 						<AutocompleteItem key={organisation.value}>
@@ -108,9 +94,9 @@ const CompanyInformationForm = React.forwardRef<
 				<Autocomplete
 					className="col-span-6"
 					defaultItems={organisations}
-					label="Seventh Choice"
+					label="16th Choice"
 					labelPlacement="outside"
-					placeholder="Seventh Organisation"
+					placeholder="16th Choice"
 				>
 					{(organisation) => (
 						<AutocompleteItem key={organisation.value}>
@@ -121,9 +107,9 @@ const CompanyInformationForm = React.forwardRef<
 				<Autocomplete
 					className="col-span-6"
 					defaultItems={organisations}
-					label="Eighth Choice"
+					label="17th Choice"
 					labelPlacement="outside"
-					placeholder="Eighth Organisation"
+					placeholder="17th Choice"
 				>
 					{(organisation) => (
 						<AutocompleteItem key={organisation.value}>
@@ -134,9 +120,9 @@ const CompanyInformationForm = React.forwardRef<
 				<Autocomplete
 					className="col-span-6"
 					defaultItems={organisations}
-					label="Ninth Choice"
+					label="18th Choice"
 					labelPlacement="outside"
-					placeholder="Ninth Organisation"
+					placeholder="18th Choice"
 				>
 					{(organisation) => (
 						<AutocompleteItem key={organisation.value}>
@@ -147,9 +133,74 @@ const CompanyInformationForm = React.forwardRef<
 				<Autocomplete
 					className="col-span-6"
 					defaultItems={organisations}
-					label="Tenth Choice"
+					label="19th Choice"
 					labelPlacement="outside"
-					placeholder="Tenth Organisation"
+					placeholder="19th Choice"
+				>
+					{(organisation) => (
+						<AutocompleteItem key={organisation.value}>
+							{organisation.title}
+						</AutocompleteItem>
+					)}
+				</Autocomplete>
+				<Autocomplete
+					className="col-span-6"
+					defaultItems={organisations}
+					label="20th Choice"
+					labelPlacement="outside"
+					placeholder="20th Choice"
+				>
+					{(organisation) => (
+						<AutocompleteItem key={organisation.value}>
+							{organisation.title}
+						</AutocompleteItem>
+					)}
+				</Autocomplete>
+				<Autocomplete
+					className="col-span-6"
+					defaultItems={organisations}
+					label="21th Choice"
+					labelPlacement="outside"
+					placeholder="21st Choice"
+				>
+					{(organisation) => (
+						<AutocompleteItem key={organisation.value}>
+							{organisation.title}
+						</AutocompleteItem>
+					)}
+				</Autocomplete>
+				<Autocomplete
+					className="col-span-6"
+					defaultItems={organisations}
+					label="22nd Choice"
+					labelPlacement="outside"
+					placeholder="22nd Choice"
+				>
+					{(organisation) => (
+						<AutocompleteItem key={organisation.value}>
+							{organisation.title}
+						</AutocompleteItem>
+					)}
+				</Autocomplete>
+				<Autocomplete
+					className="col-span-6"
+					defaultItems={organisations}
+					label="23rd Choice"
+					labelPlacement="outside"
+					placeholder="23rd Choice"
+				>
+					{(organisation) => (
+						<AutocompleteItem key={organisation.value}>
+							{organisation.title}
+						</AutocompleteItem>
+					)}
+				</Autocomplete>
+				<Autocomplete
+					className="col-span-6"
+					defaultItems={organisations}
+					label="24th Choice"
+					labelPlacement="outside"
+					placeholder="24th Choice"
 				>
 					{(organisation) => (
 						<AutocompleteItem key={organisation.value}>
@@ -162,6 +213,6 @@ const CompanyInformationForm = React.forwardRef<
 	);
 });
 
-CompanyInformationForm.displayName = "CompanyInformationForm";
+ChooseAddressForm.displayName = "Backup Choices";
 
-export default CompanyInformationForm;
+export default ChooseAddressForm;

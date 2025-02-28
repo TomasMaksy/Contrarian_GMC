@@ -4,9 +4,10 @@ import Footer from "@/app/components/Footer";
 
 export default function Home() {
 	return (
-		<main className="dark">
+		<main className="dark bg-black flex flex-col min-h-screen">
 			<Header />
 			<Hero />
+
 			<Footer />
 		</main>
 	);
