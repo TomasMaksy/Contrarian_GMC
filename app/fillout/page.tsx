@@ -114,9 +114,6 @@ export default function Fillout() {
 			},
 			{}
 		);
-		console.log("Updated formValues", formValues);
-		console.log("preferencesData", preferencesData);
-		console.log("backup", formValues.backup);
 
 		// Ensure that we have 24 preferences (fill with empty strings if necessary)
 		for (let i = updatedPreferencesData.length; i < 24; i++) {

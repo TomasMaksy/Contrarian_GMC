@@ -4,11 +4,18 @@ import React from "react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { cn } from "@heroui/react";
 
-import { organisations, PreferencesFormProps } from "./types";
+import startups from "./startups";
+import investors from "./investors";
+
+import { PreferencesFormProps } from "./types";
 
 const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 	({ className, preferences, setPreference, excludedOrg, ...props }, ref) => {
 		const selectedOrganisations = preferences.filter((pref) => pref);
+
+		// Determine which list to use based on excludedOrg
+		const isExcludedInStartups = startups.some((s) => s.title === excludedOrg);
+		const organisations = isExcludedInStartups ? investors : startups;
 
 		// Create a filtered list of organisations that do not include the selected ones or the excluded organisation
 		const filteredOrganisations = organisations.filter(
@@ -44,8 +51,12 @@ const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 							defaultItems={filteredOrganisations}
 							label={`${choice}${getOrdinalSuffix(choice)} Choice`}
 							labelPlacement="outside"
-							placeholder={`${choice}${getOrdinalSuffix(choice)} Organisation`}
-							value={preferences[index] || ""}
+							placeholder={`${
+								preferences[index]
+									? preferences[index]
+									: `${choice}${getOrdinalSuffix(choice)}`
+							} Organisation`}
+							value={preferences[index]}
 							onValueChange={(value) => setPreference(index, value)}
 							onSelectionChange={(key) => {
 								const selectedItem = filteredOrganisations.find(

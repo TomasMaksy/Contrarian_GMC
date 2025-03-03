@@ -4,7 +4,10 @@ import React from "react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { cn } from "@heroui/react";
 
-import { organisations, BackupFormProps } from "./types";
+import { BackupFormProps } from "./types";
+
+import startups from "./startups";
+import investors from "./investors";
 
 export type ChooseAddressFormProps = React.HTMLAttributes<HTMLFormElement>;
 
@@ -13,6 +16,10 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 		{ className, backups, setBackup, excludedOrg, preferences, ...props },
 		ref
 	) => {
+		// Determine which list to use based on excludedOrg
+		const isExcludedInStartups = startups.some((s) => s.title === excludedOrg);
+		const organisations = isExcludedInStartups ? investors : startups;
+
 		const selectedOrganisations = preferences.filter((pref) => pref);
 
 		// Include backup preferences in the list of disabled organisations
@@ -58,7 +65,11 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 							defaultItems={filteredOrganisations}
 							label={`${choice}${getOrdinalSuffix(choice)} Choice`}
 							labelPlacement="outside"
-							placeholder={`${choice}${getOrdinalSuffix(choice)} Organisation`}
+							placeholder={`${
+								backups[index]
+									? backups[index]
+									: `${choice}${getOrdinalSuffix(choice)}`
+							} Organisation`}
 							value={preferences[index] || ""}
 							onValueChange={(value) => handleValueChange(index, value)}
 							onSelectionChange={(key) => {

@@ -9,9 +9,6 @@ export type OrgProps = {
     type: number;
   };
   
-  export const organisations: OrgProps[] = [...investors, ...startups].sort((a, b) =>
-    a.title.localeCompare(b.title)
-  );
   
   export interface PreferencesFormProps {
     excludedOrg: FormOrgType;

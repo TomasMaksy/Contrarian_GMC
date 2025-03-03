@@ -79,7 +79,7 @@ const IdentificationForm = React.forwardRef<
 						defaultItems={autocompleteOptions} // Dynamically update based on selected tab
 						label="Your Organisation"
 						labelPlacement="outside"
-						placeholder="Type in your organisation name"
+						placeholder={`${idOrg ? idOrg : "Type in your organisation name"}`}
 						value={idOrg}
 						isRequired
 						onValueChange={setFormOrg}
