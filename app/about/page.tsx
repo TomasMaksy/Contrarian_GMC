@@ -58,25 +58,28 @@ export default function About() {
 						<Button
 							className="h-10 w-[163px] bg-default-foreground px-[16px] py-[10px] text-small font-medium leading-5 text-background"
 							radius="full"
+							variant="shadow"
 						>
 							Request Invite
 						</Button>
-						<Button
-							className="h-10 w-[163px] border-1 border-default-100 px-[16px] py-[10px] text-small font-medium leading-5"
-							endContent={
-								<span className="pointer-events-none flex h-[22px] w-[22px] items-center justify-center rounded-full bg-default-100">
-									<Icon
-										className="text-default-500 [&>path]:stroke-[1.5]"
-										icon="solar:arrow-right-linear"
-										width={16}
-									/>
-								</span>
-							}
-							radius="full"
-							variant="bordered"
-						>
-							See Participants
-						</Button>
+						<Link href={"/participants"}>
+							<Button
+								className="h-10 w-[163px] border-1 border-default-100 px-[16px] py-[10px] text-small font-medium leading-5"
+								endContent={
+									<span className="pointer-events-none flex h-[22px] w-[22px] items-center justify-center rounded-full bg-default-100">
+										<Icon
+											className="text-default-500 [&>path]:stroke-[1.5]"
+											icon="solar:arrow-right-linear"
+											width={16}
+										/>
+									</span>
+								}
+								radius="full"
+								variant="bordered"
+							>
+								See Participants
+							</Button>
+						</Link>
 					</div>
 					<section className="flex justify-center flex-row pt-24 flex-wrap ">
 						<HeroImage

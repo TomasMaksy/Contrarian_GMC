@@ -30,7 +30,6 @@ import {
 	ModalFooter,
 	useDisclosure,
 } from "@heroui/modal";
-
 import {
 	Table,
 	TableHeader,
@@ -39,6 +38,8 @@ import {
 	TableRow,
 	TableCell,
 } from "@heroui/table";
+import { Divider } from "@heroui/divider";
+import { Icon } from "@iconify/react";
 
 const variants = {
 	enter: (direction: number) => ({
@@ -147,7 +148,7 @@ export default function Fillout() {
 		} catch (error) {
 			console.error("Error in submitting form:", error);
 		}
-	}, [formValues]);
+	}, [formValues, cleanName]);
 	const paginate = React.useCallback((newDirection: number) => {
 		setPage((prev) => {
 			const nextPage = prev[0] + newDirection;
@@ -248,7 +249,19 @@ export default function Fillout() {
 		}
 	}, [paginate, page, formValues, showToast, handleSubmit]);
 
-	const { isOpen, onOpen, onOpenChange } = useDisclosure();
+	const { isOpen, onOpen } = useDisclosure();
+
+	const handleClose = (isOpen: boolean) => {
+		if (!isOpen) {
+			addToast({
+				title: formValues.organisation,
+				description: "Your form was submitted successfully",
+				color: "success",
+				timeout: 3000,
+			});
+			redirect("/");
+		}
+	};
 
 	const content = React.useMemo(() => {
 		let component = (
@@ -367,40 +380,40 @@ export default function Fillout() {
 					ease: easeInOut,
 				}}
 			/>
-			<Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
+			<Modal isOpen={isOpen} onOpenChange={handleClose} backdrop="blur">
 				<ModalContent>
 					{(onClose) => (
-						<>
-							<ModalHeader className="flex flex-col m-5 text-center font-normal text-2xl">
-								<span className="font-extrabold  text-[#3fafa8] ">
-									Thank you!
-								</span>{" "}
-								Your results are saved
-							</ModalHeader>
-							<ModalBody className="text-left ">
-								{/* <p>Your timetable will be emailed to you as soon as possible</p> */}
-								<div className="text-[15px]">
-									<p className="">
-										<span className=" font-black text-[16px] text-[#3fafa8]">
-											Organisation:
+						<div className="flex w-full flex-col items-center gap-5 rounded-large bg-default-50 pt-8 pb-4 shadow-small">
+							<div className="flex w-full flex-col items-center px-8">
+								<ModalHeader className="flex flex-col items-center m-5 text-center font-normal text-2xl">
+									<Icon
+										className="mb-3 text-success-500"
+										icon="solar:check-circle-bold-duotone"
+										width={56}
+									/>
+									<p className="mb-2 text-base font-medium">
+										Thank you{" "}
+										<span className="font-black ">{formValues.name}</span>!{" "}
+										<br /> The results for{" "}
+										<span className="font-black text-success/85">
+											{formValues.organisation}
 										</span>{" "}
-										<br />
-										{formValues.organisation} <br />
+										are saved!
 									</p>
-									<p className="">
-										<span className="font-black text-[16px] text-[#3fafa8]">
-											Name:
-										</span>
-										<br />
-										{formValues.name}
-										<br />
-										<span className="font-black text-[16px] text-[#3fafa8]">
-											Email:
-										</span>
-										<br />
-										{formValues.email}
-										<br />
+									<p className="text-center text-small text-default-500">
+										Your timetable will be emailed to{" "}
+										<span className="font-black">{formValues.email} </span> as
+										soon as possible.
 									</p>
+								</ModalHeader>
+							</div>
+							<Divider className="w-full bg-default-200" />
+							<ModalBody className="text-left w-full">
+								{/* <p></p> */}
+								<div className="text-[15px]">
+									<div className="text-center">
+										<p className="pt-5">Your chosen preferences:</p>
+									</div>
 									<div>
 										<Table
 											aria-label="Preferences Table"
@@ -424,24 +437,16 @@ export default function Fillout() {
 							</ModalBody>
 							<ModalFooter>
 								<Button
-									color="primary"
+									color="success"
 									variant="light"
-									onPress={() => {
-										onClose();
-										addToast({
-											title: formValues.organisation,
-											description: "Your form was submitted successfully",
-											color: "success",
-											timeout: 3000,
-										});
-										redirect("/");
-									}}
+									onPress={onClose}
+									size="lg"
 								>
 									{" "}
 									Close
 								</Button>
 							</ModalFooter>
-						</>
+						</div>
 					)}
 				</ModalContent>
 			</Modal>

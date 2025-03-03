@@ -7,11 +7,6 @@ export async function POST(req: NextRequest) {
 
         const { Organisation, Name, Email, ...rest } = requestData;
 
-        // // Check for required fields
-        // if (!Organisation || !Name || !Email) {
-        //     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-        // }
-
         // Extract preferences dynamically
         const formattedPreferences: Record<string, string> = {};
         for (let i = 1; i <= 24; i++) {
