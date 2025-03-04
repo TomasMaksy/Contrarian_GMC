@@ -9,8 +9,6 @@ import Image from "next/image";
 import blob from "@/app/assets/blob.png";
 import blob2sm from "@/app/assets/blob2sm.png";
 import blob2 from "@/app/assets/blob2.png";
-import Contrarian_logo_white from "@/app/assets/Contrarian_logo_white.png";
-import BBVA_logo_white from "@/app/assets/BBVA_logo_white.png";
 
 import ScrollingBanner from "@/app/about/scrollingBanner";
 import Link from "next/link";
