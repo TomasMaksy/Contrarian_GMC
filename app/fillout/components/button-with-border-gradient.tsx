@@ -4,7 +4,6 @@ import type { ButtonProps, LinkProps } from "@heroui/react";
 
 import { Button } from "@heroui/react";
 import { startsWith } from "lodash";
-import Link from "next/link";
 
 export type ButtonWithBorderGradientProps = ButtonProps &
 	LinkProps & {
@@ -23,21 +22,19 @@ export const ButtonWithBorderGradient = ({
 
 	const style = {
 		border: "solid 2px transparent",
-		backgroundImage: `linear-gradient(${linearGradientBg}, ${linearGradientBg}), linear-gradient(to right, #0a6dad, #42bbb2)`,
+		backgroundImage: `linear-gradient(${linearGradientBg}, ${linearGradientBg}), linear-gradient(to right, #3fafa8, #0a6dad)`,
 		backgroundOrigin: "border-box",
 		backgroundClip: "padding-box, border-box",
 	};
 
 	return (
 		<Button
-			as={Link}
-			href="#"
 			{...props}
 			style={{
 				...style,
 				...styleProp,
 			}}
-			type="submit"
+			type="button"
 		>
 			{children}
 		</Button>

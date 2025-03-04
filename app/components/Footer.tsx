@@ -13,23 +13,23 @@ type SocialIconProps = Omit<IconProps, "icon">;
 
 const navLinks = [
 	{
-		name: "Agenda",
-		href: "#",
+		name: "Home",
+		href: "/",
 	},
 	{
 		name: "Participants",
-		href: "#",
+		href: "/participants",
 	},
 	{
 		name: "Form",
 		href: "/fillout",
 	},
+	// {
+	// 	name: "Register",
+	// 	href: "#",
+	// },
 	{
-		name: "Register",
-		href: "#",
-	},
-	{
-		name: "About us",
+		name: "About",
 		href: "/about",
 	},
 ];

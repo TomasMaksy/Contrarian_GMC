@@ -3,7 +3,7 @@ import Airtable, { FieldSet, Record } from "airtable";
 
 const AIRTABLE_READONLY_API = process.env.AIRTABLE_READONLY_API as string;
 const BASE_ID = "appCup7R4k8cZF33V";
-const TABLE_NAME = "GMC Investors";
+const TABLE_NAME = "GMC Startups";
 
 // Define the Airtable record type
 export interface InvestorRecord {
@@ -24,7 +24,7 @@ export async function GET() {
 
       base(TABLE_NAME)
         .select({
-          view: "Growth Meets Capital Investors",
+          view: "Growth Meets Capital Startups",
         })
         .eachPage(
           (records: ReadonlyArray<Record<FieldSet>>, fetchNextPage) => {
@@ -48,10 +48,10 @@ export async function GET() {
 
       return {
         id: record.id,
-        name: (record.get("Investor Name") as string) || "Unknown",
-        representative: (record.get("Representative Name") as string) || "N/A",
-        title: (record.get("Representative Title") as string) || "N/A",
-        website: (record.get("Website") as string) || "N/A",
+        name: (record.get("Startup Name") as string) || "Unknown",
+        representative: (record.get("Representative Name") as string) || "",
+        title: (record.get("Representative Title") as string) || "",
+        website: (record.get("Website") as string) || "",
         logo: logoUrl, // Use the logo URL
       };
     });
