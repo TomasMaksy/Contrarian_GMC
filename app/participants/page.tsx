@@ -95,8 +95,8 @@ export default function Participants() {
 								<Tab
 									key="investors"
 									title={
-										<div className="flex flex-row gap-2">
-											<HandCoins />
+										<div className="flex flex-row gap-2 justify-between items-center align-middle">
+											<HandCoins size={20} />
 											<span>Investors</span>
 										</div>
 									}
@@ -104,8 +104,8 @@ export default function Participants() {
 								<Tab
 									key="startups"
 									title={
-										<div className="flex flex-row gap-2">
-											<Rocket />
+										<div className="flex flex-row gap-2 justify-between items-center align-middle">
+											<Rocket size={20} />
 											<span>Startups</span>
 										</div>
 									}

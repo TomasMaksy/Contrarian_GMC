@@ -1,8 +1,4 @@
 "use client";
-
-import { Header } from "@/app/components/Header";
-import { Info } from "@/app/about/info";
-
 import React from "react";
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
@@ -12,19 +8,15 @@ import blob from "@/app/assets/blob.png";
 import blob2 from "@/app/assets/blob2sm.png";
 
 import Link from "next/link";
-import Footer from "../components/Footer";
 
 import { Image as HeroImage } from "@heroui/react";
 
-import contrarian_logo from "@/app/assets/Contrarian_logo_white.png";
-import bbva_logo from "@/app/assets/BBVA_logo_white.png";
-
 export default function About() {
 	return (
-		<main className="dark h-screen overflow-y-auto bg-black relative overflow-hidden">
-			<Header />
-			<main className="flex flex-1 flex-col items-center overflow-hidden dark relative">
-				<section className="z-20 flex flex-col items-center justify-center -mt-12 gap-[18px] sm:gap-6 h-[calc(100vh-30px)] ">
+		<main className="dark h-max bg-black relative">
+			{/* <Header /> */}
+			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative">
+				<section className="z-20 flex flex-col items-center justify-center  gap-[18px] sm:gap-6 h-max py-24 ">
 					<Link
 						href={"https://energytechsummit.com/"}
 						target="_blank"
@@ -46,8 +38,8 @@ export default function About() {
 						</Button>
 					</Link>
 					<div className="text-center font-bold leading-[1.2] tracking-tighter sm:text-[64px]">
-						<div className="bg-hero-section-title bg-clip-text bg-gradient-to-b from-[#3fafa8] to-black text-transparent sm:scale-90 md:scale-100">
-							Growth Meets Capital
+						<div className="bg-hero-section-title bg-clip-text bg-gradient-to-tr from-gray-300 to-[#ffffff] text-transparent sm:scale-90 md:scale-100 leading-[0.9]">
+							What is GMC?
 						</div>
 					</div>
 					<p className="text-center font-normal leading-7 text-default-500 w-[480px] sm:w-[370px] sm:text-[18px]">
@@ -126,30 +118,9 @@ export default function About() {
 					className="absolute left-1/3 -top-1/3 w-[2600px] h-[2000px] z-0 opacity-70 "
 				/>
 			</main>
-			<section className="md:pt-5 bg-[radial-gradient(ellipse_70%_150%_at_top,#3fafa8,black)] overflow-x-clip bg-opacity-70">
-				<div className="text-center text-[clamp(40px,10vw,44px)] font-normal leading-[1.2] tracking-[-0.01em] sm:text-[64px]  flex flex-col justify-center align-middle">
-					<div className=" z-10">
-						<div className="text-2xl bg-clip-text text-white flex flex-col items-center z-10 mt-2 ">
-							<p className="z-10 mb-5">Hosted by </p>
-						</div>
-					</div>
-					<div className="flex flex-row mb-16 items-center justify-center md:px-46 z-10 md:gap-36 sm:gap-12">
-						<Image
-							src={contrarian_logo}
-							alt="Contrarian Ventures Logo"
-							className="md:h-16 w-auto sm:h-12 z-10"
-						/>
-						<Image
-							src={bbva_logo}
-							alt="BBVA Logo"
-							className="md:h-16 w-auto sm:h-12 z-10"
-						/>
-					</div>
-				</div>
-			</section>
 
-			<Info />
-			<Footer />
+			{/* <Info /> */}
+			{/* <Footer /> */}
 		</main>
 	);
 }

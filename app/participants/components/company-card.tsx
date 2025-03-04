@@ -25,7 +25,7 @@ export function CompanyCard({
 }: // onViewTimetable,
 CompanyCardProps) {
 	return (
-		<Card className="w-full p-2 z-50">
+		<Card className="w-full p-2 z-20">
 			<CardBody className="p-4">
 				<div className="flex flex-col gap-4 h-full">
 					<div className="bg-white rounded-2xl w-full flex justify-center items-center">

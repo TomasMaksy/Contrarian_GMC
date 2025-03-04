@@ -170,7 +170,7 @@ export default function Fillout() {
 			addToast({
 				title: "Missing fields",
 				description: "Please fill out all the required fields.",
-				color: "warning",
+				color: "danger",
 				variant: "flat",
 				timeout: 3000,
 			});

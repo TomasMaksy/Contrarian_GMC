@@ -12,19 +12,9 @@ import blob2 from "@/app/assets/blob2.png";
 import Contrarian_logo_white from "@/app/assets/Contrarian_logo_white.png";
 import BBVA_logo_white from "@/app/assets/BBVA_logo_white.png";
 
-import ScrollingBanner from "./scrolling-banner";
+import ScrollingBanner from "@/app/about/scrollingBanner";
 import Link from "next/link";
-
-const logos = [
-	{
-		key: "logo-1",
-		logo: Contrarian_logo_white,
-	},
-	{
-		key: "logo-2",
-		logo: BBVA_logo_white,
-	},
-];
+import About from "../about/page";
 
 export const Hero = () => {
 	// Scroll function
@@ -40,14 +30,14 @@ export const Hero = () => {
 
 	return (
 		<>
-			<section className="pt-8  md:pt-5 md:pb-12 bg-[radial-gradient(ellipse_120%_80%_at_bottom_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-between">
-				<div className="container relative mt-28 md:mb-72 sm:mb-24">
+			<section className="pt-8  md:pt-5 md:pb-12 bg-[radial-gradient(ellipse_120%_70%_at_bottom_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-between">
+				<div className="container relative sm:mt-28 md:mt-56 md:mb-72 sm:mb-24">
 					<div className="md:flex items-center pb-5">
 						<div className="md:w-[478px]">
 							<div className="text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50">
 								Plan your meetings
 							</div>
-							<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-[#3fafa8] to-[#ffffff] text-transparent bg-clip-text mt-6">
+							<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-br from-[#3fafa8] to-[#000000] text-transparent bg-clip-text mt-6">
 								Growth Meets Capital
 							</h1>
 							<p className="text-xl text-default-500 tracking-tight mt-6">
@@ -106,25 +96,10 @@ export const Hero = () => {
 						/>
 					</div>
 				</div>
-				<div className="pb-10 bg-black md:m-10">
-					<section className=" w-screen left-0 right-0 bottom-10 pt-10 pb-1">
-						<ScrollingBanner shouldPauseOnHover gap="80px">
-							{Array.from(
-								{ length: 40 },
-								(_, i) => logos[i % logos.length]
-							).map(({ key, logo }, index) => (
-								<div
-									key={`${key}-${index}`}
-									className="flex items-center justify-center text-foreground"
-									style={{ minWidth: "130px" }}
-								>
-									<Image src={logo} alt={key} />
-								</div>
-							))}
-						</ScrollingBanner>
-					</section>
-				</div>
 			</section>
+
+			<ScrollingBanner />
+			<About />
 			<Info />
 		</>
 	);

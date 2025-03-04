@@ -38,9 +38,9 @@ export const Header = () => {
 							</Link>
 						</div>
 						{/* <Menu className="h-5 w-5 md:hidden" /> */}
-						<nav className="flex gap-6 text-white items-center">
+						<nav className="flex gap-4 text-white items-center">
 							<button className="custom-btn-hover sm:text-[12px] md:text-[16px]">
-								<a href="/about">About</a>
+								<a href="/participants">Participants</a>
 							</button>
 							<Link href="/fillout" passHref>
 								<div className="group">

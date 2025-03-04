@@ -12,6 +12,7 @@ import investors from "./investors";
 import startups from "./startups";
 
 import { IdentifactionFormProps } from "./types";
+import { HandCoins, Rocket } from "lucide-react";
 
 const IdentificationForm = React.forwardRef<
 	HTMLFormElement,
@@ -63,15 +64,33 @@ const IdentificationForm = React.forwardRef<
 					className={cn("dark grid flex-col gap-4 py-8", className)}
 				>
 					<Tabs
-						className="col-span-12"
-						classNames={{
-							cursor: "group-data-[selected=true]:bg-[#3fafa8] col-span-6",
-						}}
+						aria-label="Options"
 						selectedKey={selectedTab} // Bind selected tab to state
 						onSelectionChange={(key) => setSelectedTab(key as string)} // Update state on tab change
+						size="md"
+						radius="lg"
+						classNames={{
+							cursor: "group-data-[selected=true]:bg-[#3fafa8]",
+						}}
 					>
-						<Tab key="investors" title="Investor" />
-						<Tab key="startups" title="Startup" />
+						<Tab
+							key="investors"
+							title={
+								<div className="flex flex-row gap-2 justify-between items-center align-middle">
+									<HandCoins size={15} />
+									<span>Investors</span>
+								</div>
+							}
+						/>
+						<Tab
+							key="startups"
+							title={
+								<div className="flex flex-row gap-2 justify-between items-center align-middle">
+									<Rocket size={15} />
+									<span>Startups</span>
+								</div>
+							}
+						/>
 					</Tabs>
 
 					<Autocomplete
