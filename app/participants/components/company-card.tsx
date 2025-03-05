@@ -7,33 +7,17 @@ import {
 	CardFooter,
 	Button,
 	Image,
-	// Popover,
-	// PopoverTrigger,
-	// PopoverContent,
-	// useDisclosure,
 	Divider,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import type { OrganisationTypes } from "../utils/types";
-// import TimetableModal from "./timetable-modal"; // Import the new component
-// import { User } from "@heroui/react";
 
 interface CompanyCardProps {
 	organisation: OrganisationTypes;
 	meetings: string[];
 }
 
-export function CompanyCard({
-	organisation,
-	meetings,
-}: // onViewTimetable,
-CompanyCardProps) {
-	// const { isOpen, onOpen, onClose } = useDisclosure();
-	// const handleOpen = () => {
-	// 	onOpen();
-	// };
-	console.log("Meetings for", { organisation }, { meetings });
-
+export function CompanyCard({ organisation }: CompanyCardProps) {
 	return (
 		<div>
 			<Card className="w-full p-2 z-20">
@@ -78,60 +62,9 @@ CompanyCardProps) {
 						>
 							View Website
 						</Button>
-
-						{/* {meetings.includes("ERROR") ? (
-							<Popover placement="right">
-								<PopoverTrigger>
-									<Button
-										startContent={<Icon icon="lucide:calendar-1" />}
-										className="w-full bg-black text-white shadow-lg hover:bg-gray-800"
-										style={{
-											border: "2px solid transparent",
-											backgroundImage: `linear-gradient(#000000, #000000), linear-gradient(to right, #3fafa8, #0a6dad)`,
-											backgroundOrigin: "border-box",
-											backgroundClip: "padding-box, border-box",
-										}}
-									>
-										View Timetable
-									</Button>
-								</PopoverTrigger>
-								<PopoverContent>
-									<div className="px-1 py-2">
-										<div className="text-small font-bold">
-											The timetable is not ready!
-										</div>
-										<div className="text-tiny">
-											We will update it as soon as possible
-										</div>
-									</div>
-								</PopoverContent>
-							</Popover>
-						) : (
-							<Button
-								startContent={<Icon icon="lucide:calendar-1" />}
-								className="w-full bg-black text-white shadow-lg hover:bg-gray-800"
-								style={{
-									border: "2px solid transparent",
-									backgroundImage: `linear-gradient(#000000, #000000), linear-gradient(to right, #3fafa8, #0a6dad)`,
-									backgroundOrigin: "border-box",
-									backgroundClip: "padding-box, border-box",
-								}}
-								onPress={handleOpen}
-							>
-								View Timetable
-							</Button>
-						)} */}
 					</div>
 				</CardFooter>
 			</Card>
-
-			{/* Use the TimetableModal component */}
-			{/* <TimetableModal
-				isOpen={isOpen}
-				onClose={onClose}
-				organisation={organisation}
-				meetings={meetings}
-			/> */}
 		</div>
 	);
 }

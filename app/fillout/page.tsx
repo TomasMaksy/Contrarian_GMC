@@ -148,6 +148,7 @@ export default function Fillout() {
 			console.error("Error in submitting form:", error);
 		}
 	}, [formValues, cleanName]);
+
 	const paginate = React.useCallback((newDirection: number) => {
 		setPage((prev) => {
 			const nextPage = prev[0] + newDirection;

@@ -20,6 +20,7 @@ import { Image as HeroImage } from "@heroui/react";
 import { Info } from "./info";
 import ScrollingBanner from "./scrollingBanner";
 import Participants from "../participants/components/hero";
+import WaitlistForm from "./waitlist-form";
 
 export default function About() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,7 +29,7 @@ export default function About() {
 	};
 
 	return (
-		<main className="dark  bg-black relative">
+		<main className="dark bg-black relative">
 			{/* <Header /> */}
 			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative min-h-screen justify-center">
 				<section className="z-20 flex flex-col items-center justify-center  gap-[18px] sm:gap-6 h-max py-24 ">
@@ -133,21 +134,30 @@ export default function About() {
 			{/* <Footer /> */}
 			<Participants />
 
-			<Modal isOpen={isOpen} size="2xl" onClose={onClose} backdrop="blur">
+			<Modal
+				isOpen={isOpen}
+				onClose={onClose}
+				backdrop="blur"
+				scrollBehavior="outside"
+				size="lg"
+			>
 				<ModalContent>
-					<main id="schedule-template">
-						<ModalHeader className="">
-							<div className="flex flex-row gap-5 justify-between align-middle items-center w-full ">
-								<h2 className="text-xl font-bold">FORM </h2>
-								<div className="flex gap-4"></div>
+					<main>
+						<ModalHeader className="pb-8 pt-4">
+							{" "}
+							{/* Add padding-top */}
+							<div className="flex flex-col gap-2 justify-between align-middle items-center w-full mt-8">
+								<h2 className="text-2xl font-bold">Join the Waitlist</h2>
+
+								<p className="text-default-600 font-normal text-center max-w-lg">
+									Complete the form below to join the waitlist for Growth Meets
+									Capital 2025 side event.
+								</p>
 							</div>
 						</ModalHeader>
 						<ModalBody>
-							<iframe
-								src="https://airtable.com/app2cbs31SmE8wf5V/shr6MGgNCgCgaiJgJ"
-								width="100%"
-								height="800px"
-							></iframe>
+							{" "}
+							<WaitlistForm onClose={onClose} />
 						</ModalBody>
 					</main>
 				</ModalContent>
