@@ -3,8 +3,6 @@
 import { ArrowRight } from "lucide-react";
 import { easeInOut, motion } from "framer-motion";
 
-import { Info } from "@/app/about/info";
-
 import Image from "next/image";
 import blob from "@/app/assets/blob.png";
 import blob2sm from "@/app/assets/blob2sm.png";
@@ -98,7 +96,6 @@ export const Hero = () => {
 
 			<ScrollingBanner />
 			<About />
-			<Info />
 		</>
 	);
 };

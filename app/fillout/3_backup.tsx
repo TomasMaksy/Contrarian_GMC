@@ -1,21 +1,73 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { cn } from "@heroui/react";
 
 import { BackupFormProps } from "./types";
 
-import startups from "./startups";
-import investors from "./investors";
-
-export type ChooseAddressFormProps = React.HTMLAttributes<HTMLFormElement>;
+export type Organisation = {
+	value: string;
+	title: string;
+};
 
 const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 	(
 		{ className, backups, setBackup, excludedOrg, preferences, ...props },
 		ref
 	) => {
+		const [startups, setStartups] = useState<Organisation[]>([]);
+		const [investors, setInvestors] = useState<Organisation[]>([]);
+
+		// Fetch investors and startups data
+		useEffect(() => {
+			const fetchData = async () => {
+				try {
+					const [investorsRes, startupsRes] = await Promise.all([
+						fetch("/api/get_investors"),
+						fetch("/api/get_startups"),
+					]);
+
+					const investorsData = await investorsRes.json();
+					const startupsData = await startupsRes.json();
+
+					if (investorsData.success && Array.isArray(investorsData.data)) {
+						setInvestors(
+							investorsData.data.map(
+								(investor: { id: string; name: string }) => ({
+									value: investor.id,
+									title: investor.name,
+								})
+							)
+						);
+					} else {
+						console.error("Unexpected investors response:", investorsData);
+						setInvestors([]);
+					}
+
+					if (startupsData.success && Array.isArray(startupsData.data)) {
+						setStartups(
+							startupsData.data.map(
+								(startup: { id: string; name: string }) => ({
+									value: startup.id,
+									title: startup.name,
+								})
+							)
+						);
+					} else {
+						console.error("Unexpected startups response:", startupsData);
+						setStartups([]);
+					}
+				} catch (error) {
+					console.error("Error fetching data:", error);
+					setInvestors([]);
+					setStartups([]);
+				}
+			};
+
+			fetchData();
+		}, []);
+
 		// Determine which list to use based on excludedOrg
 		const isExcludedInStartups = startups.some((s) => s.title === excludedOrg);
 		const organisations = isExcludedInStartups ? investors : startups;
@@ -70,7 +122,7 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 									? backups[index]
 									: `${choice}${getOrdinalSuffix(choice)}`
 							} Organisation`}
-							value={preferences[index] || ""}
+							value={preferences[index]}
 							onValueChange={(value) => handleValueChange(index, value)}
 							onSelectionChange={(key) => {
 								const selectedItem = filteredOrganisations.find(

@@ -1,16 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { cn } from "@heroui/react";
 
-import startups from "./startups";
-import investors from "./investors";
-
 import { PreferencesFormProps } from "./types";
+
+// Define the structure for Investor and Startup
+interface Organisation {
+	value: string;
+	title: string;
+}
 
 const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 	({ className, preferences, setPreference, excludedOrg, ...props }, ref) => {
+		const [startups, setStartups] = useState<Organisation[]>([]);
+		const [investors, setInvestors] = useState<Organisation[]>([]);
+
 		const selectedOrganisations = preferences.filter((pref) => pref);
 
 		// Determine which list to use based on excludedOrg
@@ -24,10 +30,61 @@ const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 
 		// Create an array of the "value" keys for selected organisations to disable them in the dropdown
 		const disabledKeys: string[] = selectedOrganisations
-			.map((pref) => organisations.find((org) => org.title === pref)?.value)
+			.map(
+				(pref) => organisations.find((org) => org.title === pref)?.value // Ensure that the mapping works
+			)
 			.filter((key): key is string => key !== undefined); // Ensure the result is an array of strings
 
 		const choices = Array.from({ length: 10 }, (_, i) => i + 1);
+
+		// Fetch investors and startups data
+		useEffect(() => {
+			const fetchData = async () => {
+				try {
+					const [investorsRes, startupsRes] = await Promise.all([
+						fetch("/api/get_investors"),
+						fetch("/api/get_startups"),
+					]);
+
+					const investorsData = await investorsRes.json();
+					const startupsData = await startupsRes.json();
+
+					if (investorsData.success && Array.isArray(investorsData.data)) {
+						setInvestors(
+							investorsData.data.map(
+								(investor: { id: string; name: string }) => ({
+									value: investor.id,
+									title: investor.name,
+								})
+							)
+						);
+					} else {
+						console.error("Unexpected investors response:", investorsData);
+						setInvestors([]);
+					}
+
+					if (startupsData.success && Array.isArray(startupsData.data)) {
+						setStartups(
+							startupsData.data.map(
+								(startup: { id: string; name: string }) => ({
+									value: startup.id,
+									title: startup.name,
+								})
+							)
+						);
+					} else {
+						console.error("Unexpected startups response:", startupsData);
+						setStartups([]);
+					}
+				} catch (error) {
+					console.error("Error fetching data:", error);
+					setInvestors([]);
+					setStartups([]);
+				}
+			};
+
+			fetchData();
+		}, []);
 
 		return (
 			<>

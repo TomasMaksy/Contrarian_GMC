@@ -14,6 +14,7 @@ import blob from "@/app/assets/blob.png";
 import blob2 from "@/app/assets/blob2.png";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { TimetableProps } from "../api/get_timetables/route";
 
 export default function Participants() {
 	const [selected, setSelected] = React.useState("investors");
@@ -24,13 +25,15 @@ export default function Participants() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const [investorsRes, startupsRes] = await Promise.all([
-					fetch("/api/get_participants"),
+				const [investorsRes, startupsRes, timetablesRes] = await Promise.all([
+					fetch("/api/get_investors"),
 					fetch("/api/get_startups"),
+					fetch("/api/get_timetables"),
 				]);
 
 				const investorsData = await investorsRes.json();
 				const startupsData = await startupsRes.json();
+				const timetablesData = await timetablesRes.json();
 
 				if (investorsData.success && Array.isArray(investorsData.data)) {
 					setInvestors(investorsData.data);
@@ -45,10 +48,18 @@ export default function Participants() {
 					console.error("Unexpected startups response:", startupsData);
 					setStartups([]);
 				}
+
+				if (timetablesData.success && Array.isArray(timetablesData.data)) {
+					setTimetables(timetablesData.data);
+				} else {
+					console.error("Unexpected timetables response:", timetablesData);
+					setTimetables([]);
+				}
 			} catch (error) {
 				console.error("Error fetching data:", error);
 				setInvestors([]);
 				setStartups([]);
+				setTimetables([]);
 			}
 		};
 
@@ -58,9 +69,32 @@ export default function Participants() {
 	// State for storing both datasets
 	const [investors, setInvestors] = useState<OrganisationTypes[]>([]);
 	const [startups, setStartups] = useState<OrganisationTypes[]>([]);
+	const [timetables, setTimetables] = useState<TimetableProps[]>([]);
 
 	// Determine which dataset to display
 	const displayedData = selected === "investors" ? investors : startups;
+
+	// Find the timetable for each organization
+	const getTimetableForOrg = (orgName: string) => {
+		// Log the orgName we're searching for
+		console.log("Searching for orgName:", orgName);
+
+		// Find the matching timetable
+		const timetable = timetables.find((t) => {
+			// Log each orgName to see if it matches
+			console.log("Checking orgName:", t.orgName);
+			return t.orgName === orgName;
+		});
+
+		// Log the result of the find operation
+		if (timetable) {
+			console.log("Found matching orgName:", timetable.orgName);
+			return timetable.meetings;
+		} else {
+			console.log("No match found");
+			return ["ERROR"];
+		}
+	};
 
 	const heroRef = useRef(null);
 
@@ -139,14 +173,16 @@ export default function Participants() {
 											</Card>
 										</div>
 								  ))
-								: displayedData.map((org) => (
-										<CompanyCard
-											key={org.id}
-											organisation={org}
-
-											// onViewTimetable={handleViewTimetable} // Pass the handler
-										/>
-								  ))}
+								: displayedData.map((org) => {
+										const meetings = getTimetableForOrg(org.name); // Get meetings for the org
+										return (
+											<CompanyCard
+												key={org.id}
+												organisation={org}
+												meetings={meetings} // Pass meetings to CompanyCard
+											/>
+										);
+								  })}
 						</div>
 					</div>
 					<div className="z-0">

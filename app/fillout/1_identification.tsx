@@ -2,17 +2,26 @@
 
 import type { InputProps } from "@heroui/react";
 
-import React, { useState } from "react";
+import React from "react";
 import { Input, Tabs, Tab, Checkbox } from "@heroui/react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 
 import { cn } from "@heroui/react";
 
-import investors from "./investors";
-import startups from "./startups";
+import { useState, useEffect } from "react";
 
 import { IdentifactionFormProps } from "./types";
 import { HandCoins, Rocket } from "lucide-react";
+
+export interface AutocompleteOrganisation {
+	value: string;
+	title: string;
+}
+
+export interface OrganisationTypes {
+	id: string; // assuming the data has 'id' field
+	name: string; // assuming the data has 'name' field
+}
 
 const IdentificationForm = React.forwardRef<
 	HTMLFormElement,
@@ -39,6 +48,56 @@ const IdentificationForm = React.forwardRef<
 					"dark text-small font-medium text-default-700 group-data-[filled-within=true]:text-default-700",
 			},
 		};
+
+		useEffect(() => {
+			const fetchData = async () => {
+				try {
+					const [investorsRes, startupsRes] = await Promise.all([
+						fetch("/api/get_investors"),
+						fetch("/api/get_startups"),
+					]);
+
+					const investorsData: { success: boolean; data: OrganisationTypes[] } =
+						await investorsRes.json();
+					const startupsData: { success: boolean; data: OrganisationTypes[] } =
+						await startupsRes.json();
+
+					if (investorsData.success && Array.isArray(investorsData.data)) {
+						setInvestors(
+							investorsData.data.map((investor) => ({
+								value: investor.id, // Unique identifier
+								title: investor.name, // Display name
+							}))
+						);
+					} else {
+						console.error("Unexpected investors response:", investorsData);
+						setInvestors([]);
+					}
+
+					if (startupsData.success && Array.isArray(startupsData.data)) {
+						setStartups(
+							startupsData.data.map((startup) => ({
+								value: startup.id, // Unique identifier
+								title: startup.name, // Display name
+							}))
+						);
+					} else {
+						console.error("Unexpected startups response:", startupsData);
+						setStartups([]);
+					}
+				} catch (error) {
+					console.error("Error fetching data:", error);
+					setInvestors([]);
+					setStartups([]);
+				}
+			};
+
+			fetchData();
+		}, []);
+
+		// State should use `AutocompleteOrganisation[]`
+		const [investors, setInvestors] = useState<AutocompleteOrganisation[]>([]);
+		const [startups, setStartups] = useState<AutocompleteOrganisation[]>([]);
 
 		// Conditionally display autocomplete options based on active tab
 		const [selectedTab, setSelectedTab] = useState("investors"); // Track active tab
@@ -98,7 +157,7 @@ const IdentificationForm = React.forwardRef<
 						defaultItems={autocompleteOptions} // Dynamically update based on selected tab
 						label="Your Organisation"
 						labelPlacement="outside"
-						placeholder={`${idOrg ? idOrg : "Type in your organisation name"}`}
+						placeholder={`${"Type in your organisation name"}`}
 						value={idOrg}
 						isRequired
 						onValueChange={setFormOrg}
@@ -112,9 +171,9 @@ const IdentificationForm = React.forwardRef<
 							}
 						}}
 					>
-						{(investor) => (
-							<AutocompleteItem key={investor.value}>
-								{investor.title}
+						{(organisation) => (
+							<AutocompleteItem key={organisation.value}>
+								{organisation.title}
 							</AutocompleteItem>
 						)}
 					</Autocomplete>
@@ -140,24 +199,6 @@ const IdentificationForm = React.forwardRef<
 						{...inputProps}
 						isRequired
 					/>
-
-					{/* <Input
-					className="col-span-12 md:col-span-6"
-					label="Password"
-					name="password"
-					placeholder="*********"
-					type="password"
-					{...inputProps}
-				/>
-
-				<Input
-					className="col-span-12 md:col-span-6"
-					label="Confirm Password"
-					name="confirm-password"
-					placeholder="*********"
-					type="password"
-					{...inputProps}
-				/> */}
 
 					<Checkbox
 						defaultSelected
