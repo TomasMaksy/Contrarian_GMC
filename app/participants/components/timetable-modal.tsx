@@ -39,27 +39,35 @@ const TimetableModal: React.FC<TimetableModalProps> = ({
 	return (
 		<Modal
 			isOpen={isOpen}
-			size="5xl"
+			size="2xl"
 			onClose={onClose}
 			hideCloseButton
 			backdrop="blur"
 		>
 			<ModalContent>
 				<main id="schedule-template">
-					<ModalHeader className="px-24 py-12">
+					<ModalHeader className="sm:px-12 md:px-24 py-12">
 						<div className="flex flex-row gap-5 justify-between align-middle items-center w-full ">
 							<h2 className="text-xl font-bold">Meeting Schedule</h2>
 							<div className="flex gap-4">
 								<Button
-									variant="shadow"
-									color="primary"
+									size="sm"
 									startContent={<Icon icon="lucide:download" />}
+									className="w-full text-xs bg-black text-white shadow-lg hover:bg-gray-800"
+									style={{
+										border: "2px solid transparent",
+										backgroundImage: `linear-gradient(#222222, #222222), linear-gradient(to right, #3fafa8, #0a6dad)`,
+										backgroundOrigin: "border-box",
+										backgroundClip: "padding-box, border-box",
+									}}
 									onPress={handleExport}
 								>
 									Download as PDF
 								</Button>
 								<Button
-									variant="light"
+									variant="bordered"
+									className="w-max"
+									size="sm"
 									onPress={onClose}
 									startContent={<Icon icon="lucide:x" />}
 								>
@@ -68,7 +76,7 @@ const TimetableModal: React.FC<TimetableModalProps> = ({
 							</div>
 						</div>
 					</ModalHeader>
-					<ModalBody className="px-24 pb-12">
+					<ModalBody className="sm:px-12 md:px-24 pb-12">
 						<div className="flex flex-col gap-4 h-full">
 							<Image
 								alt="Organisation logo"
@@ -76,7 +84,6 @@ const TimetableModal: React.FC<TimetableModalProps> = ({
 								src={organisation.logo}
 								isBlurred
 							/>
-							Organisation: {organisation.name}
 						</div>
 
 						<Table aria-label="Meeting Schedule">
@@ -84,7 +91,7 @@ const TimetableModal: React.FC<TimetableModalProps> = ({
 								<TableColumn className="bg-default-100 text-center">
 									TIME
 								</TableColumn>
-								<TableColumn className="bg-default-100 text-center">
+								<TableColumn className="bg-default-100 text-left">
 									MEETING
 								</TableColumn>
 							</TableHeader>
@@ -104,7 +111,9 @@ const TimetableModal: React.FC<TimetableModalProps> = ({
 											<TableCell className="text-center">
 												{formattedTime}
 											</TableCell>
-											<TableCell className="text-center">{meeting}</TableCell>
+											<TableCell className="text-left pl-5">
+												{meeting}
+											</TableCell>
 										</TableRow>
 									);
 								})}

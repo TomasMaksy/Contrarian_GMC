@@ -7,16 +7,16 @@ import {
 	CardFooter,
 	Button,
 	Image,
-	Popover,
-	PopoverTrigger,
-	PopoverContent,
+	// Popover,
+	// PopoverTrigger,
+	// PopoverContent,
+	// useDisclosure,
 	Divider,
-	useDisclosure,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import type { OrganisationTypes } from "../utils/types";
-import TimetableModal from "./timetable-modal"; // Import the new component
-import { User } from "@heroui/react";
+// import TimetableModal from "./timetable-modal"; // Import the new component
+// import { User } from "@heroui/react";
 
 interface CompanyCardProps {
 	organisation: OrganisationTypes;
@@ -28,10 +28,10 @@ export function CompanyCard({
 	meetings,
 }: // onViewTimetable,
 CompanyCardProps) {
-	const { isOpen, onOpen, onClose } = useDisclosure();
-	const handleOpen = () => {
-		onOpen();
-	};
+	// const { isOpen, onOpen, onClose } = useDisclosure();
+	// const handleOpen = () => {
+	// 	onOpen();
+	// };
 	console.log("Meetings for", { organisation }, { meetings });
 
 	return (
@@ -52,36 +52,34 @@ CompanyCardProps) {
 								{organisation.website}
 							</p>
 						</div>
-						<Divider />
+						{/* <Divider />
 						<div className="flex flex-col flex-grow items-start pl-1">
 							<User
 								name={organisation.representative}
 								description={organisation.title}
 							/>
-						</div>
+						</div> */}
 					</div>
 				</CardBody>
 				<Divider />
-				<CardFooter className="justify-between flex flex-col mt-2">
-					<div className="flex flex-row gap-2 ">
-						<div>
-							<Button
-								color="default"
-								variant="faded"
-								startContent={<Icon icon="lucide:link" />}
-								className="w-full sm:z-0"
-								onPress={() => {
-									const url = organisation.website.startsWith("http")
-										? organisation.website
-										: `https://${organisation.website}`;
-									window.open(url, "_blank", "noopener,noreferrer"); // This opens in a new tab
-								}}
-							>
-								View Website
-							</Button>
-						</div>
+				<CardFooter className="justify-center flex mt-2 w-full">
+					<div className="flex flex-row w-full items-center ">
+						<Button
+							color="default"
+							variant="faded"
+							startContent={<Icon icon="lucide:link" />}
+							className="w-full sm:z-0"
+							onPress={() => {
+								const url = organisation.website.startsWith("http")
+									? organisation.website
+									: `https://${organisation.website}`;
+								window.open(url, "_blank", "noopener,noreferrer"); // This opens in a new tab
+							}}
+						>
+							View Website
+						</Button>
 
-						{meetings.includes("ERROR") ? (
+						{/* {meetings.includes("ERROR") ? (
 							<Popover placement="right">
 								<PopoverTrigger>
 									<Button
@@ -122,18 +120,18 @@ CompanyCardProps) {
 							>
 								View Timetable
 							</Button>
-						)}
+						)} */}
 					</div>
 				</CardFooter>
 			</Card>
 
 			{/* Use the TimetableModal component */}
-			<TimetableModal
+			{/* <TimetableModal
 				isOpen={isOpen}
 				onClose={onClose}
 				organisation={organisation}
 				meetings={meetings}
-			/>
+			/> */}
 		</div>
 	);
 }
