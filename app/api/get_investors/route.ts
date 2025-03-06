@@ -53,6 +53,7 @@ export async function GET() {
         title: (record.get("Representative Title") as string) || "N/A",
         website: (record.get("Website") as string) || "N/A",
         logo: logoUrl, // Use the logo URL
+        type: (record.get("Type") as string) || "N/A",
       };
     });
 

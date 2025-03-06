@@ -5,15 +5,7 @@ const AIRTABLE_READONLY_API = process.env.AIRTABLE_READONLY_API as string;
 const BASE_ID = "appCup7R4k8cZF33V";
 const TABLE_NAME = "GMC Startups";
 
-// Define the Airtable record type
-export interface InvestorRecord {
-  id: string;
-  name: string;
-  representative: string;
-  title: string;
-  website: string;
-  logo: string;
-}
+import type { OrganisationTypes } from "@/app/participants/utils/types";
 
 const base = new Airtable({ apiKey: AIRTABLE_READONLY_API }).base(BASE_ID);
 
@@ -39,7 +31,7 @@ export async function GET() {
     });
 
     // Format the records into a clean JSON response
-    const investors: InvestorRecord[] = records.map((record) => {
+    const investors: OrganisationTypes[] = records.map((record) => {
       // Safely handle the logo field
       const logoField = record.get("Logo");
       const logoUrl = logoField && Array.isArray(logoField) && logoField.length > 0
@@ -53,6 +45,7 @@ export async function GET() {
         title: (record.get("Representative Title") as string) || "",
         website: (record.get("Website") as string) || "",
         logo: logoUrl, // Use the logo URL
+        type: (record.get("Type") as string) || "",
       };
     });
 

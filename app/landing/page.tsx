@@ -5,7 +5,6 @@ import {
 	Modal,
 	ModalBody,
 	ModalContent,
-	ModalHeader,
 	useDisclosure,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
@@ -69,7 +68,7 @@ export default function About() {
 					</p>
 					<div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
 						<Button
-							className="h-12 w-[263px] bg-default-foreground px-[16px] py-[10px] text-medium font-medium leading-5 text-background"
+							className="h-12 w-[263px] bg-default-foreground px-[16px] py-[10px] text-medium  font-bold leading-5 text-background"
 							radius="full"
 							variant="shadow"
 							onPress={handleOpen}
@@ -150,23 +149,11 @@ export default function About() {
 				onClose={onClose}
 				backdrop="blur"
 				size="lg"
+				placement="center"
 				scrollBehavior="outside"
-				placement="bottom-center"
 			>
 				<ModalContent>
 					<main>
-						<ModalHeader className="pb-8 pt-4">
-							{" "}
-							{/* Add padding-top */}
-							<div className="flex flex-col gap-2 justify-between align-middle items-center w-full mt-8">
-								<h2 className="text-2xl font-bold">Join the Waitlist</h2>
-
-								<p className="text-default-600 font-normal text-center max-w-lg">
-									Complete the form below to join the waitlist for Growth Meets
-									Capital 2025 side event.
-								</p>
-							</div>
-						</ModalHeader>
 						<ModalBody>
 							{" "}
 							<WaitlistForm onClose={onClose} />

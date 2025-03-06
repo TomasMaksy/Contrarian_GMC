@@ -5,6 +5,7 @@ export interface OrganisationTypes {
     title: string;
     website: string;
     logo: string;
+    type: string;
   }
   
   export interface Meeting {

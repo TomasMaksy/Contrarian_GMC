@@ -10,7 +10,9 @@ import {
 	RadioGroup,
 	RadioProps,
 	addToast,
+	ModalHeader,
 } from "@heroui/react";
+import { HandCoins, Rocket } from "lucide-react";
 
 interface ContactFormProps {
 	onClose: () => void;
@@ -26,8 +28,8 @@ export const CustomRadio = (
 			{...otherProps}
 			classNames={{
 				base: cn(
-					"inline-flex m-0 bg-content1 hover:bg-content2 items-center justify-between",
-					"flex-row-reverse max-w-[300px] cursor-pointer rounded-xl gap-4 p-4 border-2 border-transparent",
+					"inline-flex m-0 bg-content2 hover:bg-content3 items-center justify-between",
+					"flex-row-reverse max-w-[300px] cursor-pointer rounded-xl gap-4 sm:p-3 md:p-4 border-2 border-transparent",
 					"data-[selected=true]:border-primary"
 				),
 			}}
@@ -121,9 +123,21 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 	return (
 		<Form
 			onSubmit={handleSubmit}
-			className="space-y-4 items-center align-middle"
+			className="space-y-4 items-center align-middle "
 		>
-			<div className="flex flex-col justify-between gap-4 w-full px-2 ">
+			<ModalHeader className="pb-8 pt-4">
+				{" "}
+				{/* Add padding-top */}
+				<div className="flex flex-col gap-2 justify-between align-middle items-center w-full mt-4">
+					<h2 className="text-2xl font-bold">Join the Waitlist</h2>
+
+					<p className="text-default-600 font-normal text-center max-w-lg">
+						Complete the form below to join the waitlist for Growth Meets
+						Capital 2025 side event.
+					</p>
+				</div>
+			</ModalHeader>
+			<div className="flex flex-col justify-between gap-4 w-full md:px-2 sm:px-1">
 				<RadioGroup
 					description=""
 					label="Are you an investor or a startup?"
@@ -132,12 +146,26 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					defaultValue={formData.type}
 					onValueChange={(value) => handleChange("type", value)}
 				>
-					<div className="flex flex-row w-full justify-between gap-4">
-						<CustomRadio description="" value="Investor" className="w-full">
-							Investor
+					<div className="flex flex-row  w-fill justify-between sm:gap-2 md:gap-4 mb-1">
+						<CustomRadio
+							// description="Join as an investor"
+							value="Investor"
+							className="w-full"
+						>
+							<div className="flex flex-row items-center align-middle gap-2">
+								<HandCoins size={18} color="#f0f0f0" strokeWidth="1.5" />
+								<p>Investor</p>
+							</div>
 						</CustomRadio>
-						<CustomRadio description="" value="Startup" className="w-full">
-							Startup
+						<CustomRadio
+							// description="Join as a startup"
+							value="Startup"
+							className="w-full"
+						>
+							<div className="flex flex-row items-center align-middle gap-2">
+								<Rocket size={18} color="#f0f0f0" strokeWidth="1.5" />
+								<p>Startup</p>
+							</div>
 						</CustomRadio>
 					</div>
 				</RadioGroup>
