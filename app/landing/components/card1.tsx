@@ -58,7 +58,7 @@ export default function Card1(props: CardProps) {
 					1
 				</p>
 				<p className="align-middle font-normal lg:text-xl sm:text-xs text-neutral-400 tracking-normal">
-					DEDICATED AREA
+					DEDICATED AREA{" "}
 				</p>
 			</CardBody>
 		</Card>

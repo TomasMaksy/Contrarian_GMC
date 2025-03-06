@@ -9,6 +9,7 @@ import {
 	cn,
 	RadioGroup,
 	RadioProps,
+	addToast,
 } from "@heroui/react";
 
 interface ContactFormProps {
@@ -48,12 +49,68 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 		phone: "",
 	});
 
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		console.log("Form submitted:", formData);
-		onClose();
-	};
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault(); // Prevent default form submission behavior
 
+		// Check if any field is empty
+		const isFormValid = Object.values(formData).every(
+			(value) => value.trim() !== ""
+		);
+
+		if (!isFormValid) {
+			addToast({
+				title: "Missing fields",
+				description: "Please fill out all the required fields.",
+				color: "danger",
+				variant: "flat",
+				timeout: 3000,
+			});
+			return;
+		}
+
+		try {
+			const response = await fetch("/api/submit_waitlist_form", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					Type: formData.type,
+					FirstName: formData.firstName,
+					LastName: formData.lastName,
+					Position: formData.position,
+					CompanyName: formData.companyName,
+					Phone: formData.phone,
+					Website: formData.website,
+					Email: formData.email,
+				}),
+			});
+
+			const data = await response.json();
+
+			if (response.ok) {
+				addToast({
+					title: "Success",
+					description: "Form submitted successfully!",
+					color: "success",
+					variant: "flat",
+					timeout: 3000,
+				});
+				onClose(); // Close modal
+			} else {
+				throw new Error(data.error || "Submission failed");
+			}
+		} catch (error) {
+			console.error("Error submitting form:", error);
+			addToast({
+				title: "Error",
+				description: "Something went wrong. Please try again.",
+				color: "danger",
+				variant: "flat",
+				timeout: 3000,
+			});
+		}
+	};
 	const handleChange = (field: string, value: string | boolean) => {
 		setFormData((prev) => ({
 			...prev,
@@ -62,7 +119,10 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 	};
 	console.log(formData);
 	return (
-		<Form onSubmit={handleSubmit} className="space-y-4 items-center ">
+		<Form
+			onSubmit={handleSubmit}
+			className="space-y-4 items-center align-middle"
+		>
 			<div className="flex flex-col justify-between gap-4 w-full px-2 ">
 				<RadioGroup
 					description=""
@@ -73,34 +133,14 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					onValueChange={(value) => handleChange("type", value)}
 				>
 					<div className="flex flex-row w-full justify-between gap-4">
-						<CustomRadio description="" value="investor" className="w-full">
+						<CustomRadio description="" value="Investor" className="w-full">
 							Investor
 						</CustomRadio>
-						<CustomRadio description="" value="startup" className="w-full">
+						<CustomRadio description="" value="Startup" className="w-full">
 							Startup
 						</CustomRadio>
 					</div>
 				</RadioGroup>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-					<Input
-						label="First name"
-						placeholder="Enter your first name"
-						isRequired
-						value={formData.firstName}
-						onValueChange={(value) => handleChange("firstName", value)}
-						size="lg"
-						labelPlacement="outside"
-					/>
-					<Input
-						label="Last name"
-						placeholder="Enter your last name"
-						isRequired
-						value={formData.lastName}
-						onValueChange={(value) => handleChange("lastName", value)}
-						size="lg"
-						labelPlacement="outside"
-					/>
-				</div>
 
 				<Input
 					label="Company name"
@@ -109,8 +149,26 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					value={formData.companyName}
 					onValueChange={(value) => handleChange("companyName", value)}
 					size="lg"
-					labelPlacement="outside"
 				/>
+
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<Input
+						label="First name"
+						placeholder="Enter your first name"
+						isRequired
+						value={formData.firstName}
+						onValueChange={(value) => handleChange("firstName", value)}
+						size="lg"
+					/>
+					<Input
+						label="Last name"
+						placeholder="Enter your last name"
+						isRequired
+						value={formData.lastName}
+						onValueChange={(value) => handleChange("lastName", value)}
+						size="lg"
+					/>
+				</div>
 
 				<Input
 					label="Position"
@@ -119,7 +177,6 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					value={formData.position}
 					onValueChange={(value) => handleChange("position", value)}
 					size="lg"
-					labelPlacement="outside"
 				/>
 
 				<Input
@@ -130,7 +187,6 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					value={formData.website}
 					onValueChange={(value) => handleChange("website", value)}
 					size="lg"
-					labelPlacement="outside"
 				/>
 
 				<Input
@@ -141,12 +197,11 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					value={formData.email}
 					onValueChange={(value) => handleChange("email", value)}
 					size="lg"
-					labelPlacement="outside"
 				/>
 
 				<div className="flex items-end gap-2">
 					<Input
-						label="Phone"
+						label="Phone number"
 						placeholder="+44 123 456 789"
 						type="tel"
 						isRequired
@@ -154,14 +209,14 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 						value={formData.phone}
 						onValueChange={(value) => handleChange("phone", value)}
 						size="lg"
-						labelPlacement="outside"
 					/>
 				</div>
 				<Checkbox
 					defaultSelected
 					size="md"
 					aria-label="Agree to terms and conditions"
-					required
+					isRequired
+					className=""
 				>
 					{" "}
 					Agree to terms and conditions{" "}

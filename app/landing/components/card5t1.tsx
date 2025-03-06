@@ -34,7 +34,7 @@ export default function Card1(props: CardProps) {
 		<Card
 			{...props}
 			ref={cardRef}
-			className="group relative w-[420px] bg-transparentshadow-large"
+			className="group relative w-[420px] bg-transparent shadow-large"
 			radius="lg"
 			onMouseMove={onMouseMove}
 		>
@@ -57,14 +57,14 @@ export default function Card1(props: CardProps) {
 				<p className="lg:text-4xl sm:text-3xl text-neutral-50 font-extrabold text-wrap">
 					Day activities
 				</p>
-				<p className="align-middle font-thin lg:text-lg sm:text-sm text-neutral-400 tracking-wider">
+				<p className="align-middle font-black lg:text-lg sm:text-sm text-neutral-400 tracking-wider">
 					When:
-					<span className="font-semibold tracking-normal">
+					<span className="font-normal tracking-normal">
 						<br /> Day 1 (April 9) 9:30 AM to 6 PM{" "}
 					</span>
 					<br />
 					Where:
-					<span className="font-semibold tracking-normal">
+					<span className="font-normal tracking-normal">
 						<br /> Euskalduna Conference Centre
 					</span>
 				</p>

@@ -168,7 +168,7 @@ const Hero = () => {
 					alt="Cylinder"
 					width={1500}
 					height={1500}
-					className="hidden md:block top-1/3  md:absolute"
+					className="hidden md:block top-1  md:absolute"
 					style={{ translateY: translateY }}
 				/>
 			</div>
