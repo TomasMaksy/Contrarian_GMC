@@ -9,7 +9,6 @@ import {
 	useDisclosure,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import Image from "next/image";
 
 import blob from "@/app/assets/blob.png";
 import blob2 from "@/app/assets/blob2sm.png";
