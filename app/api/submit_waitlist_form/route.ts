@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
         const requestData = await req.json();
         console.log('Received data:', requestData);
 
-        const { Type, FirstName, LastName, Position, CompanyName, Phone, Website, Email } = requestData;
+        const { Type, FirstName, LastName, Position, CompanyName, Phone, Website, Email, Stage, Industry, InvestmentFocus } = requestData;
 
 
         // Prepare the data object to match Airtable's structure
@@ -19,6 +19,9 @@ export async function POST(req: NextRequest) {
             "Company website": Website,
             "E-Mail address":Email,
             "Phone": Phone,
+            "Current company stage": Stage,
+            "Industry": Industry,
+            "Please indicate the investment focus": InvestmentFocus,
         };
 
         console.log('Prepared fields:', fields); // Log the fields before sending

@@ -55,7 +55,7 @@ export default function Card1(props: CardProps) {
 
 			<CardBody className="pt-4 flex flex-col items-center align-middle text-center justify-top gap-2 p-4 scrollbar-hide">
 				<p className="lg:text-7xl sm:text-3xl text-neutral-50 font-extrabold">
-					30
+					50
 				</p>
 				<p className="align-middle font-normal lg:text-xl sm:text-xs text-neutral-400 tracking-normal">
 					GROWTH FUNDS

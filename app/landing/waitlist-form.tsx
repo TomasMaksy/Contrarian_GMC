@@ -11,6 +11,9 @@ import {
 	RadioProps,
 	addToast,
 	ModalHeader,
+	Select,
+	SelectItem,
+	Switch,
 } from "@heroui/react";
 import { HandCoins, Rocket } from "lucide-react";
 
@@ -49,6 +52,9 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 		website: "",
 		email: "",
 		phone: "",
+		stage: "",
+		industry: "",
+		investmentFocus: "",
 	});
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -85,6 +91,9 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					Phone: formData.phone,
 					Website: formData.website,
 					Email: formData.email,
+					Stage: formData.stage,
+					Industry: formData.industry,
+					InvestmentFocus: formData.investmentFocus,
 				}),
 			});
 
@@ -178,6 +187,39 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					onValueChange={(value) => handleChange("companyName", value)}
 					size="lg"
 				/>
+				{/* Conditionally render startup-specific fields */}
+				{formData.type === "Startup" && (
+					<>
+						<Select
+							label="Current Stage"
+							placeholder="Enter your company stage"
+							isRequired
+							size="lg"
+							value={formData.stage}
+							onChange={(e) => handleChange("stage", e.target.value)}
+						>
+							<SelectItem key="Pre-seed">Pre-seed</SelectItem>
+							<SelectItem key="Seed">Seed</SelectItem>
+							<SelectItem key="Series A">Series A</SelectItem>
+							<SelectItem key="Series B">Series B</SelectItem>
+							<SelectItem key="Series C or above">Series C or above</SelectItem>
+						</Select>
+
+						<Input
+							label="Industry"
+							placeholder="Enter your industry"
+							size="lg"
+							isRequired
+							value={formData.industry}
+							onValueChange={(value) => handleChange("industry", value)}
+						/>
+						<Switch
+							onValueChange={(value) => handleChange("fundraising", value)}
+						>
+							<p className="text-default-600">Fundraising this year?</p>
+						</Switch>
+					</>
+				)}
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					<Input
