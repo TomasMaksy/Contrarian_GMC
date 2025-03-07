@@ -117,7 +117,7 @@ const Hero = ({ isDrawer = false }: { isDrawer?: boolean }) => {
 					</div>
 
 					<div
-						className={`grid gap-6 my-10 z-50 ${
+						className={`grid gap-6 my-10 z-99 relative ${
 							isDrawer
 								? "grid-cols-1"
 								: "grid-cols-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
@@ -127,7 +127,10 @@ const Hero = ({ isDrawer = false }: { isDrawer?: boolean }) => {
 						{displayedData.length === 0
 							? Array.from({ length: 12 }, (_, index) => (
 									<div key={index} className="flex flex-col space-y-4">
-										<Card className="w-full space-y-5 p-4 mb-4" radius="lg">
+										<Card
+											className="w-full space-y-5 p-4 mb-4 z-50"
+											radius="lg"
+										>
 											<Skeleton className="rounded-lg">
 												<div className="h-36 rounded-lg bg-default-300" />
 											</Skeleton>

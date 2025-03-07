@@ -13,6 +13,8 @@ import {
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { cn } from "@heroui/react";
+
+// Directly import the Hero component
 import Hero from "@/app/participants/components/hero";
 
 export type SupportCardProps = React.HTMLAttributes<HTMLDivElement>;
@@ -20,6 +22,12 @@ export type SupportCardProps = React.HTMLAttributes<HTMLDivElement>;
 const SupportCard = React.forwardRef<HTMLDivElement, SupportCardProps>(
 	({ className, ...props }, ref) => {
 		const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+		// Use this state or effect to trigger image/API loading or actions inside Hero
+		React.useEffect(() => {
+			// You can add any global setup to trigger loading or API calls
+			console.log("Hero is ready to start loading resources...");
+		}, []);
 
 		return (
 			<div
@@ -77,6 +85,7 @@ const SupportCard = React.forwardRef<HTMLDivElement, SupportCardProps>(
 							<>
 								<DrawerBody>
 									<main className="dark bg-black flex flex-col">
+										{/* Load Hero eagerly */}
 										<Hero isDrawer={true} />
 									</main>
 								</DrawerBody>

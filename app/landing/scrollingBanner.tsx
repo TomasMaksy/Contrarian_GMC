@@ -18,7 +18,7 @@ export default function ScrollingBanner() {
 		<section className=" bg-black w-full bg-[radial-gradient(ellipse_70%_150%_at_top,#3fafa8,black)] overflow-x-clip bg-opacity-70 ">
 			<div className="pb-20  bg-black">
 				<section className=" w-full left-0 right-0 bottom-10 pt-10 pb-1">
-					<Scrolling_Banner shouldPauseOnHover gap="80px">
+					<Scrolling_Banner shouldPauseOnHover gap="70px" duration={100}>
 						{Array.from({ length: 40 }, (_, i) => logos[i % logos.length]).map(
 							({ key, logo }, index) => (
 								<div

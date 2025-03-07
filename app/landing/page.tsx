@@ -16,11 +16,30 @@ import Link from "next/link";
 
 import { Image as HeroImage } from "@heroui/react";
 import { Info } from "./info";
+import ScrollingBanner2 from "../components/scrolling-banner";
 import ScrollingBanner from "./scrollingBanner";
 import Participants from "../participants/components/hero";
 import WaitlistForm from "./waitlist-form";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+
+const imageSources = [
+	"photos/GMC-07.jpeg",
+	"photos/GMC-03.jpeg",
+	"photos/GMC-10.jpeg",
+	"photos/GMC-05.jpeg",
+	"photos/GMC-02.jpeg",
+	"photos/GMC-01.jpeg",
+	"photos/GMC-06.jpeg",
+	"photos/GMC-08.jpeg",
+	"photos/GMC-09.jpeg",
+	"photos/GMC-07.jpeg",
+	"photos/GMC-03.jpeg",
+	"photos/GMC-10.jpeg",
+	"photos/GMC-05.jpeg",
+	"photos/GMC-02.jpeg",
+	"photos/GMC-01.jpeg",
+];
 
 export default function About() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,8 +54,8 @@ export default function About() {
 	return (
 		<main className="dark bg-black relative">
 			{/* <Header /> */}
-			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative min-h-screen justify-center ">
-				<section className="z-20 flex flex-col items-center justify-center  gap-[18px] sm:gap-6 h-max py-24 ">
+			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative min-h-screen md:justify-center sm:justify-top sm:pt-12">
+				<section className="z-20 flex flex-col items-center justify-center  gap-[18px] sm:gap-6 h-max py-24 md:pb-36">
 					<Link
 						href={"https://energytechsummit.com/"}
 						target="_blank"
@@ -68,7 +87,7 @@ export default function About() {
 					</p>
 					<div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
 						<Button
-							className="h-12 w-[263px] bg-default-foreground px-[16px] py-[10px] text-medium  font-bold leading-5 text-background"
+							className="md:h-12 md:w-[263px] sm:h-10 sm:w-[200] bg-default-foreground px-[16px] py-[10px] md:text-medium sm:text-tiny font-bold leading-5 text-background"
 							radius="full"
 							variant="shadow"
 							onPress={handleOpen}
@@ -96,28 +115,26 @@ export default function About() {
 							See Participants
 						</Button> */}
 					</div>
-					<section className="flex justify-center flex-row pt-24 flex-wrap ">
-						<HeroImage
-							isBlurred
-							className="m-5 md:w-56 h-auto sm:w-36"
-							src={"photos/GMC-07.jpeg"}
-						/>
-						<HeroImage
-							isBlurred
-							className="m-5 md:w-56 h-auto sm:w-36"
-							src={"photos/GMC-03.jpeg"}
-						/>
-						<HeroImage
-							isBlurred
-							className="m-5 md:w-56 h-auto sm:w-36"
-							src={"photos/GMC-10.jpeg"}
-						/>
-						<HeroImage
-							isBlurred
-							className="m-5 md:w-56 h-auto sm:w-36"
-							src={"photos/GMC-05.jpeg"}
-						/>
-					</section>
+				</section>
+				<section className=" flex-wrap z-50">
+					<div className="w-full max-w-screen-lg overflow-hidden">
+						<ScrollingBanner2
+							isReverse={false}
+							isVertical={false}
+							duration={150}
+							gap="1rem"
+							showShadow
+						>
+							{imageSources.map((src, index) => (
+								<div
+									key={index}
+									className="md:w-60 sm:w-36 h-auto flex-shrink-0"
+								>
+									<HeroImage className="w-full h-auto" src={src} />
+								</div>
+							))}
+						</ScrollingBanner2>
+					</div>
 				</section>
 
 				<motion.img
