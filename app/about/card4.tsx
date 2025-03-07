@@ -34,7 +34,7 @@ export default function Card1(props: CardProps) {
 		<Card
 			{...props}
 			ref={cardRef}
-			className="group relative w-[420px] bg-black-900 shadow-large"
+			className="group relative w-[320px] bg-black-900 shadow-large"
 			radius="lg"
 			onMouseMove={onMouseMove}
 		>

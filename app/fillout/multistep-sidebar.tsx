@@ -100,7 +100,7 @@ const MultiStepSidebar = React.forwardRef<
 							onStepChange={onChangePage}
 						/>
 					</div>
-					<div className="flex flex-col items-center gap-12">
+					<div className="flex flex-col items-center gap-12 w-full">
 						<div className="flex flex-row items-center gap-4 opacity-75 w-max">
 							<Image
 								src={contrarian_logo}
@@ -152,7 +152,7 @@ const MultiStepSidebar = React.forwardRef<
 							onBack={onBack}
 							onNext={onNext}
 						/>
-						<SupportCard className="mx-auto w-full max-w-[290px] lg:hidden" />
+						<SupportCard className="mx-auto w-full lg:hidden" />
 					</div>
 				</div>
 			</div>

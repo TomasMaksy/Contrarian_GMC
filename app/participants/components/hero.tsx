@@ -10,7 +10,7 @@ import { CompanyCard } from "../components/company-card";
 import blob from "@/app/assets/blob.png";
 import blob2 from "@/app/assets/blob2.png";
 
-const Hero = () => {
+const Hero = ({ isDrawer = false }: { isDrawer?: boolean }) => {
 	const [selected, setSelected] = useState("investors");
 
 	// Fetch data from your API endpoint
@@ -79,14 +79,14 @@ const Hero = () => {
 		<section className="bg-[radial-gradient(ellipse_120%_30%_at_bottom_left,#3fafa8,black)] pb-24">
 			<div className="relative overflow-hidden">
 				<div className="container">
-					<div className="flex flex-col gap-5 items-center justify-center mt-24 mb-12">
+					<div className="flex flex-col gap-5 items-center justify-center mt-24 mb-12 z-50">
 						<div className="text-center font-bold leading-[1.2] tracking-tighter sm:text-[64px]">
 							<div className="bg-hero-section-title bg-clip-text bg-gradient-to-b from-[#3fafa8] to-black text-transparent sm:scale-90 md:scale-100 mb-10">
 								Meet the Participants
 							</div>
 						</div>
 						<Tabs
-							aria-label="Options"
+							aria-label="Choose your Company type"
 							selectedKey={selected}
 							onSelectionChange={(key) => setSelected(key.toString())}
 							size="lg"
@@ -98,7 +98,7 @@ const Hero = () => {
 							<Tab
 								key="investors"
 								title={
-									<div className="flex flex-row gap-2 justify-between items-center align-middle">
+									<div className="flex flex-row gap-2 justify-between items-center align-middle z-50">
 										<HandCoins size={20} />
 										<span>Investors</span>
 									</div>
@@ -107,7 +107,7 @@ const Hero = () => {
 							<Tab
 								key="startups"
 								title={
-									<div className="flex flex-row gap-2 justify-between items-center align-middle">
+									<div className="flex flex-row gap-2 justify-between items-center align-middle z-50">
 										<Rocket size={20} />
 										<span>Startups</span>
 									</div>
@@ -116,7 +116,14 @@ const Hero = () => {
 						</Tabs>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10 z-50">
+					<div
+						className={`grid gap-6 my-10 z-50 ${
+							isDrawer
+								? "grid-cols-1"
+								: "grid-cols-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+						}`}
+					>
+						{" "}
 						{displayedData.length === 0
 							? Array.from({ length: 12 }, (_, index) => (
 									<div key={index} className="flex flex-col space-y-4">
@@ -160,7 +167,7 @@ const Hero = () => {
 					alt="Cylinder"
 					width={1200}
 					height={1200}
-					className="block top-1/3 right-0 absolute"
+					className="hidden md:block md:top-1/3 right-0 md:absolute z-0"
 					style={{ translateY: translateY }}
 				/>
 				<motion.img
@@ -168,7 +175,7 @@ const Hero = () => {
 					alt="Cylinder"
 					width={1500}
 					height={1500}
-					className="hidden md:block top-1  md:absolute"
+					className="hidden md:block md:top-1 sm:right-3/4 md:absolute z-0"
 					style={{ translateY: translateY }}
 				/>
 			</div>

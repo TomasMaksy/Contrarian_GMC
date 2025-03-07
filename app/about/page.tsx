@@ -1,6 +1,12 @@
 "use client";
 import React from "react";
-import { Button } from "@heroui/react";
+import {
+	Button,
+	Modal,
+	ModalBody,
+	ModalContent,
+	useDisclosure,
+} from "@heroui/react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 
@@ -11,12 +17,23 @@ import Link from "next/link";
 
 import { Image as HeroImage } from "@heroui/react";
 import { Info } from "./info";
+import WaitlistForm from "../landing/waitlist-form";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function About() {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const handleOpen = () => {
+		onOpen();
+	};
+
+	const { scrollYProgress } = useScroll();
+	const translateY = useTransform(scrollYProgress, [0, 1], [-1800, -500]);
+	const translateY2 = useTransform(scrollYProgress, [0, 1], [-2000, -200]);
+
 	return (
 		<main className="dark h-max bg-black relative">
 			{/* <Header /> */}
-			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative">
+			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative py-5">
 				<section className="z-20 flex flex-col items-center justify-center  gap-[18px] sm:gap-6 h-max py-24 ">
 					<Link
 						href={"https://energytechsummit.com/"}
@@ -52,13 +69,7 @@ export default function About() {
 							className="h-10 w-[163px] bg-default-foreground px-[16px] py-[10px] text-small font-medium leading-5 text-background"
 							radius="full"
 							variant="shadow"
-							onPress={() => {
-								window.open(
-									"https://energytechsummit.com/growth-meets-capital/",
-									"_blank",
-									"noopener,noreferrer"
-								);
-							}}
+							onPress={handleOpen}
 						>
 							Request Invite
 						</Button>
@@ -107,18 +118,41 @@ export default function About() {
 					</section>
 				</section>
 
-				<Image
-					src={blob}
-					alt="blob"
-					className=" absolute bottom-28 right-2/3 w-[1200px] h-[1250px] z-0 opacity-65"
+				<motion.img
+					src={blob.src}
+					alt="blob green"
+					width={800}
+					height={800}
+					className=" block absolute -left-[300] sm:-bottom-[900] md:top-[1000] sm:opacity-55 md:opacity-100"
+					style={{ translateY: translateY }}
 				/>
 
-				<Image
-					src={blob2}
-					alt="blob"
-					className="absolute left-1/3 -top-1/3 w-[2600px] h-[2000px] z-0 opacity-70 "
+				<motion.img
+					src={blob2.src}
+					alt="blob blue"
+					width={2300}
+					height={2300}
+					className="hidden md:block md:absolute md:top-[900px] md:-right-[800px]"
+					style={{ translateY: translateY2 }}
 				/>
 			</main>
+			<Modal
+				isOpen={isOpen}
+				onClose={onClose}
+				backdrop="blur"
+				size="lg"
+				placement="center"
+				scrollBehavior="outside"
+			>
+				<ModalContent>
+					<main>
+						<ModalBody>
+							{" "}
+							<WaitlistForm onClose={onClose} />
+						</ModalBody>
+					</main>
+				</ModalContent>
+			</Modal>
 
 			<Info />
 			{/* <Footer /> */}

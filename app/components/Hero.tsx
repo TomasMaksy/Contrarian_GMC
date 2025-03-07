@@ -33,10 +33,10 @@ export const Hero = () => {
 							<div className="text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50">
 								Plan your meetings
 							</div>
-							<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-br from-[#3fafa8] to-[#000000] text-transparent bg-clip-text mt-6">
+							<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-br from-[#ffffff] to-gray-500 text-transparent bg-clip-text mt-6">
 								Growth Meets Capital
 							</h1>
-							<p className="text-xl text-default-500 tracking-tight mt-6">
+							<p className="text-xl text-default-600 tracking-tight mt-6">
 								Connect with the right people and maximize your meetings. Share
 								your top preferences, and let our smart algorithm match you with
 								the most relevant startups or investors.{" "}

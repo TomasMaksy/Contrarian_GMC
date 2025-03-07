@@ -11,9 +11,9 @@ export const Info = () => {
 	return (
 		<main className="dark relative overflow-hidden flex flex-col gap-12">
 			<section className="text-2xl bg-clip-text text-white flex flex-col items-center mb-5 pt-12 tracking-tight">
-				<p className="z-10 mb-5">About the Event </p>
+				<p className="z-10 mb-5 font-semibold">About the Event </p>
 
-				<p className="text-center font-normal sm:text-[18px] text-default-500 tracking-normal z-10 md:px-64 sm:px-12 pb-24 max-w-screen-lg ">
+				<p className="text-center font-normal sm:text-[18px] text-default-600 tracking-normal z-10 md:px-64 sm:px-12 pb-24 max-w-screen-lg ">
 					Growth Meets Capital is a networking rendezvous for the most
 					influential growth investors and startups currently leading the
 					climate charge. Hosted by our partners Contrarian Ventures and BBVA,
@@ -22,7 +22,7 @@ export const Info = () => {
 				</p>
 			</section>
 
-			<section className="flex justify-center flex-row md:gap-5 sm:gap-1 md:mx-24 sm:mx-4 mb-24 ">
+			<section className="flex justify-center flex-row md:gap-5 sm:gap-1 md:mx-40 sm:mx-4 mb-24 ">
 				<Card1 />
 				<Card2 />
 				<Card3 />
