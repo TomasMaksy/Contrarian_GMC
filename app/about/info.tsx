@@ -13,7 +13,7 @@ export const Info = () => {
 			<section className="text-2xl bg-clip-text text-white flex flex-col items-center mb-5 pt-12 tracking-tight">
 				<p className="z-10 mb-5 mt-12 font-semibold">About the Event </p>
 
-				<p className="text-center font-normal sm:text-[18px] text-default-600 tracking-normal z-10 md:px-64 sm:px-12 pb-24 max-w-screen-lg ">
+				<p className="text-center font-normal sm:text-[18px] text-default-600 tracking-normal z-10 md:px-64 sm:px-12 pb-24 max-w-screen-2xl ">
 					Growth Meets Capital is a networking rendezvous for the most
 					influential growth investors and startups currently leading the
 					climate charge. Hosted by our partners Contrarian Ventures and BBVA,
