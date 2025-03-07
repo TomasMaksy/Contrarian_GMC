@@ -81,7 +81,7 @@ const Hero = ({ isDrawer = false }: { isDrawer?: boolean }) => {
 				<div className="container">
 					<div className="flex flex-col gap-5 items-center justify-center mt-24 mb-12 z-50">
 						<div className="text-center font-bold leading-[1.2] tracking-tighter sm:text-[64px]">
-							<div className="bg-hero-section-title bg-clip-text bg-gradient-to-b from-[#3fafa8] to-black text-transparent sm:scale-90 md:scale-100 mb-10">
+							<div className="bg-hero-section-title bg-clip-text bg-[#3fafa8] text-transparent sm:scale-90 md:scale-95 mb-4">
 								Meet the Participants
 							</div>
 						</div>

@@ -15,7 +15,9 @@ import {
 	SelectItem,
 	Switch,
 } from "@heroui/react";
-import { HandCoins, Rocket } from "lucide-react";
+import { HandCoins, Rocket, DollarSign, X } from "lucide-react";
+
+import { useState } from "react";
 
 interface ContactFormProps {
 	onClose: () => void;
@@ -43,6 +45,17 @@ export const CustomRadio = (
 };
 
 export default function WaitlistForm({ onClose }: ContactFormProps) {
+	const [agreed, setAgreed] = useState(true);
+	const [error, setError] = useState("");
+
+	const handleChangeCheckbox = (value: boolean) => {
+		setAgreed(value);
+		if (!value) {
+			setError("You must accept terms and conditions to join the waitlist");
+		} else {
+			setError("");
+		}
+	};
 	const [formData, setFormData] = React.useState({
 		type: "",
 		firstName: "",
@@ -53,17 +66,19 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 		email: "",
 		phone: "",
 		stage: "",
-		industry: "",
-		investmentFocus: "",
+		fundraising: "",
 	});
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault(); // Prevent default form submission behavior
 
-		// Check if any field is empty
-		const isFormValid = Object.values(formData).every(
-			(value) => value.trim() !== ""
-		);
+		// Check if any field is empty, except for current stage and fundraising
+		const isFormValid = Object.entries(formData).every(([key, value]) => {
+			if (key === "stage" || key === "fundraising") {
+				return true; // Allow empty for these fields
+			}
+			return typeof value === "string" ? value.trim() !== "" : value !== "";
+		});
 
 		if (!isFormValid) {
 			addToast({
@@ -92,8 +107,7 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					Website: formData.website,
 					Email: formData.email,
 					Stage: formData.stage,
-					Industry: formData.industry,
-					InvestmentFocus: formData.investmentFocus,
+					Fundraising: formData.fundraising,
 				}),
 			});
 
@@ -128,7 +142,6 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 			[field]: value,
 		}));
 	};
-	console.log(formData);
 	return (
 		<Form
 			onSubmit={handleSubmit}
@@ -205,16 +218,17 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 							<SelectItem key="Series C or above">Series C or above</SelectItem>
 						</Select>
 
-						<Input
-							label="Industry"
-							placeholder="Enter your industry"
-							size="lg"
-							isRequired
-							value={formData.industry}
-							onValueChange={(value) => handleChange("industry", value)}
-						/>
 						<Switch
-							onValueChange={(value) => handleChange("fundraising", value)}
+							thumbIcon={({ isSelected, className }) =>
+								isSelected ? (
+									<DollarSign className={className} size={14} color="#60a5fa" />
+								) : (
+									<X className={className} size={14} color="#60a5fa" />
+								)
+							}
+							onValueChange={(isSelected) =>
+								handleChange("fundraising", isSelected ? "Yes" : "No")
+							}
 						>
 							<p className="text-default-600">Fundraising this year?</p>
 						</Switch>
@@ -281,16 +295,18 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 						size="lg"
 					/>
 				</div>
-				<Checkbox
-					defaultSelected
-					size="md"
-					aria-label="Agree to terms and conditions"
-					isRequired
-					className=""
-				>
-					{" "}
-					Agree to terms and conditions{" "}
-				</Checkbox>
+				<div>
+					<Checkbox
+						isSelected={agreed}
+						onValueChange={handleChangeCheckbox}
+						size="md"
+						aria-label="Agree to terms and conditions"
+						isRequired
+					>
+						Agree to terms and conditions
+					</Checkbox>
+					{error && <p className="text-danger text-sm">{error}</p>}
+				</div>
 			</div>
 
 			<ModalFooter>

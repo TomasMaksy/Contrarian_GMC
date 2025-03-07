@@ -3,28 +3,41 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(req: NextRequest) {
     try {
         const requestData = await req.json();
-        console.log('Received data:', requestData);
 
-        const { Type, FirstName, LastName, Position, CompanyName, Phone, Website, Email, Stage, Industry, InvestmentFocus } = requestData;
+        // Only destructure the used properties from requestData
+        const { 
+            Type, 
+            FirstName, 
+            LastName, 
+            Position, 
+            CompanyName, 
+            Phone, 
+            Website, 
+            Email, 
+            Stage, 
+            Fundraising 
+        } = requestData;
 
-
-        // Prepare the data object to match Airtable's structure
+        // Prepare the data object to match Airtable's structure, excluding empty fields
         const fields = {
             "Contact full name": `${FirstName} ${LastName}`.trim(),
-            "Investor or startup?":Type,
+            "Investor or startup?": Type,
             "First name": FirstName,
-            "Last name":LastName,
+            "Last name": LastName,
             "Position in a company": Position,
             "Company name": CompanyName,
             "Company website": Website,
-            "E-Mail address":Email,
+            "E-Mail address": Email,
             "Phone": Phone,
             "Current company stage": Stage,
-            "Industry": Industry,
-            "Please indicate the investment focus": InvestmentFocus,
+            "Fundraising in 2025": Fundraising,
         };
 
-        console.log('Prepared fields:', fields); // Log the fields before sending
+        // Remove fields with empty string values or null/undefined
+        const filteredFields = Object.fromEntries(
+            Object.entries(fields).filter((entry) => entry[1] !== "" && entry[1] !== undefined && entry[1] !== null)
+        );
+
 
         // Ensure Airtable API key is set
         if (!process.env.AIRTABLE_API_KEY) {
@@ -41,12 +54,11 @@ export async function POST(req: NextRequest) {
                     Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ records: [{ fields }] }), // Wrap fields in `records`
+                body: JSON.stringify({ records: [{ fields: filteredFields }] }), // Send filtered fields
             }
         );
 
         const responseData = await response.json();
-        console.log('Airtable response:', responseData); // Log the Airtable response
 
         if (!response.ok) {
             return NextResponse.json({
