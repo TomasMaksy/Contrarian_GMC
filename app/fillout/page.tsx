@@ -117,8 +117,8 @@ export default function Fillout() {
 			{}
 		);
 
-		// Ensure that we have 24 preferences (fill with empty strings if necessary)
-		for (let i = updatedPreferencesData.length; i < 24; i++) {
+		// Ensure that we have 26 preferences (fill with empty strings if necessary)
+		for (let i = updatedPreferencesData.length; i < 26; i++) {
 			preferencesData[`Preference ${i + 1}`] = "";
 		}
 
