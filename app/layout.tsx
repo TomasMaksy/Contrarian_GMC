@@ -14,6 +14,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head className="dark">
+				<link rel="icon" href="/favicon.ico" />
+
 				{/* Add the meta tag for disabling zoom on mobile */}
 				<meta
 					name="viewport"

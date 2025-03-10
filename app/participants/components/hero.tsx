@@ -5,27 +5,32 @@ import { Card, Skeleton, Tabs, Tab } from "@heroui/react";
 import { HandCoins, Rocket } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { OrganisationTypes } from "../utils/types";
-import { TimetableProps } from "../../api/get_timetables/route";
 import { CompanyCard } from "../components/company-card";
 import blob from "@/app/assets/blob.png";
 import blob2 from "@/app/assets/blob2.png";
 
-const Hero = ({ isDrawer = false }: { isDrawer?: boolean }) => {
+interface HeroProps {
+	startups: OrganisationTypes[];
+	investors: OrganisationTypes[];
+	isDrawer?: boolean;
+}
+
+const Hero = ({ startups, investors, isDrawer = false }: HeroProps) => {
 	const [selected, setSelected] = useState("investors");
 
 	// Fetch data from your API endpoint
 	useEffect(() => {
+		if (isDrawer) return; // Skip if came from the drawer as we will pass the data instead of quering it
+
 		const fetchData = async () => {
 			try {
-				const [investorsRes, startupsRes, timetablesRes] = await Promise.all([
+				const [investorsRes, startupsRes] = await Promise.all([
 					fetch("/api/get_investors"),
 					fetch("/api/get_startups"),
-					fetch("/api/get_timetables"),
 				]);
 
 				const investorsData = await investorsRes.json();
 				const startupsData = await startupsRes.json();
-				const timetablesData = await timetablesRes.json();
 
 				if (investorsData.success && Array.isArray(investorsData.data)) {
 					setInvestors(investorsData.data);
@@ -40,38 +45,28 @@ const Hero = ({ isDrawer = false }: { isDrawer?: boolean }) => {
 					console.error("Unexpected startups response:", startupsData);
 					setStartups([]);
 				}
-
-				if (timetablesData.success && Array.isArray(timetablesData.data)) {
-					setTimetables(timetablesData.data);
-				} else {
-					console.error("Unexpected timetables response:", timetablesData);
-					setTimetables([]);
-				}
 			} catch (error) {
 				console.error("Error fetching data:", error);
 				setInvestors([]);
 				setStartups([]);
-				setTimetables([]);
 			}
 		};
-
 		fetchData();
 	}, []); // Runs only once when the component mounts
 
 	// State for storing both datasets
-	const [investors, setInvestors] = useState<OrganisationTypes[]>([]);
-	const [startups, setStartups] = useState<OrganisationTypes[]>([]);
-	const [timetables, setTimetables] = useState<TimetableProps[]>([]);
+	const [loaded_investors, setInvestors] = useState<OrganisationTypes[]>([]);
+	const [loaded_startups, setStartups] = useState<OrganisationTypes[]>([]);
 
 	// Determine which dataset to display
-	const displayedData = selected === "investors" ? investors : startups;
-
-	// Find the timetable for each organization
-	const getTimetableForOrg = (orgName: string) => {
-		const timetable = timetables.find((t) => t.orgName === orgName);
-		return timetable ? timetable.meetings : ["ERROR"];
-	};
-
+	const displayedData = isDrawer
+		? selected === "investors"
+			? investors
+			: startups
+		: selected === "investors"
+		? loaded_investors
+		: loaded_startups;
+	console.log(displayedData);
 	const { scrollYProgress } = useScroll();
 	const translateY = useTransform(scrollYProgress, [0, 1], [1500, -1000]);
 
@@ -80,7 +75,7 @@ const Hero = ({ isDrawer = false }: { isDrawer?: boolean }) => {
 			<div className="relative overflow-hidden">
 				<div className="container">
 					<div className="flex flex-col gap-5 items-center justify-center mt-24 mb-12 z-50">
-						<div className="text-center font-bold leading-[1.2] tracking-tighter sm:text-[64px]">
+						<div className="text-center font-bold leading-[1.2] tracking-tight sm:text-[64px]">
 							<div className="bg-hero-section-title bg-clip-text bg-[#3fafa8] text-transparent sm:scale-90 md:scale-95 mb-4">
 								Meet the Participants
 							</div>
@@ -153,14 +148,7 @@ const Hero = ({ isDrawer = false }: { isDrawer?: boolean }) => {
 									</div>
 							  ))
 							: displayedData.map((org) => {
-									const meetings = getTimetableForOrg(org.name); // Get meetings for the org
-									return (
-										<CompanyCard
-											key={org.id}
-											organisation={org}
-											meetings={meetings} // Pass meetings to CompanyCard
-										/>
-									);
+									return <CompanyCard key={org.id} organisation={org} />;
 							  })}
 					</div>
 				</div>

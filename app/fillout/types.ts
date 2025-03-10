@@ -1,45 +1,39 @@
-import investors from "./investors";
-import startups from "./startups";
-
-
-
 export type OrgProps = {
-    title: string;
-    value: string;
-    type: number;
-  };
-  
-  
-  export interface PreferencesFormProps {
-    excludedOrg: FormOrgType;
-    preferences: string[];
-    setPreference: (index: number, value: string) => void;
-    className?: string;
-  }
+  name: string;
+  id: string;
+  logo: string;
+  type: string;
+};
 
-  export interface BackupFormProps {
-    preferences: string[];
-    excludedOrg: FormOrgType;
-    backups: string[];
-    setBackup: (index: number, value: string) => void;
-    className?: string;
-  }
+export interface PreferencesFormProps {
+  excludedOrg: FormOrgType;
+  preferences: string[];
+  setPreference: (index: number, value: string) => void;
+  className?: string;
+  startups: OrgProps[],
+  investors: OrgProps[]
+}
 
+export interface BackupFormProps {
+  preferences: string[];
+  excludedOrg: FormOrgType;
+  backups: string[];
+  setBackup: (index: number, value: string) => void;
+  className?: string;
+  startups: OrgProps[];
+  investors: OrgProps[];
+}
 
-  export type FormOrgType =
-    | (typeof investors)[number]["value"]
-    | (typeof startups)[number]["value"]
-    | undefined;
-  
-  export type IdentifactionFormProps = React.HTMLAttributes<HTMLFormElement> & {
-    idName: string;
-    setFormName: (value: string) => void;
-    idEmail: string;
-    setFormEmail: (value: string) => void;
-    idOrg: FormOrgType;
-    setFormOrg: (value: string) => void;
-  };
+// FormOrgType now accepts any dynamically fetched organisation ID
+export type FormOrgType = string | undefined;
 
-
-
-  
+export type IdentifactionFormProps = React.HTMLAttributes<HTMLFormElement> & {
+  idName: string;
+  setFormName: (value: string) => void;
+  idEmail: string;
+  setFormEmail: (value: string) => void;
+  idOrg: FormOrgType;
+  setFormOrg: (value: string) => void;
+  startups: OrgProps[];
+  investors: OrgProps[];
+};

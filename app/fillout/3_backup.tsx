@@ -1,75 +1,80 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { cn } from "@heroui/react";
 
 import { BackupFormProps } from "./types";
 
-export type Organisation = {
-	value: string;
-	title: string;
-};
-
 const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 	(
-		{ className, backups, setBackup, excludedOrg, preferences, ...props },
+		{
+			className,
+			backups,
+			setBackup,
+			excludedOrg,
+			preferences,
+			startups,
+			investors,
+			...props
+		},
 		ref
 	) => {
-		const [startups, setStartups] = useState<Organisation[]>([]);
-		const [investors, setInvestors] = useState<Organisation[]>([]);
+		// const [startups, setStartups] = useState<OrganisationTypes[]>([]);
+		// const [investors, setInvestors] = useState<OrganisationTypes[]>([]);
+		// // Fetch investors and startups data
+		// useEffect(() => {
+		// 	const fetchData = async () => {
+		// 		try {
+		// 			const [investorsRes, startupsRes] = await Promise.all([
+		// 				fetch("/api/get_investors"),
+		// 				fetch("/api/get_startups"),
+		// 			]);
 
-		// Fetch investors and startups data
-		useEffect(() => {
-			const fetchData = async () => {
-				try {
-					const [investorsRes, startupsRes] = await Promise.all([
-						fetch("/api/get_investors"),
-						fetch("/api/get_startups"),
-					]);
+		// 			const investorsData = await investorsRes.json();
+		// 			const startupsData = await startupsRes.json();
 
-					const investorsData = await investorsRes.json();
-					const startupsData = await startupsRes.json();
+		// 			if (investorsData.success && Array.isArray(investorsData.data)) {
+		// 				setInvestors(
+		// 					investorsData.data.map(
+		// 						(investor: { id: string; name: string; logo: string }) => ({
+		// 							value: investor.id,
+		// 							name: investor.name,
+		// 							logo: investor.logo,
+		// 						})
+		// 					)
+		// 				);
+		// 			} else {
+		// 				console.error("Unexpected investors response:", investorsData);
+		// 				setInvestors([]);
+		// 			}
 
-					if (investorsData.success && Array.isArray(investorsData.data)) {
-						setInvestors(
-							investorsData.data.map(
-								(investor: { id: string; name: string }) => ({
-									value: investor.id,
-									title: investor.name,
-								})
-							)
-						);
-					} else {
-						console.error("Unexpected investors response:", investorsData);
-						setInvestors([]);
-					}
+		// 			if (startupsData.success && Array.isArray(startupsData.data)) {
+		// 				setStartups(
+		// 					startupsData.data.map(
+		// 						(startup: { id: string; name: string; logo: string }) => ({
+		// 							value: startup.id,
+		// 							name: startup.name,
+		// 							logo: startup.logo,
+		// 						})
+		// 					)
+		// 				);
+		// 			} else {
+		// 				console.error("Unexpected startups response:", startupsData);
+		// 				setStartups([]);
+		// 			}
+		// 		} catch (error) {
+		// 			console.error("Error fetching data:", error);
+		// 			setInvestors([]);
+		// 			setStartups([]);
+		// 		}
+		// 	};
 
-					if (startupsData.success && Array.isArray(startupsData.data)) {
-						setStartups(
-							startupsData.data.map(
-								(startup: { id: string; name: string }) => ({
-									value: startup.id,
-									title: startup.name,
-								})
-							)
-						);
-					} else {
-						console.error("Unexpected startups response:", startupsData);
-						setStartups([]);
-					}
-				} catch (error) {
-					console.error("Error fetching data:", error);
-					setInvestors([]);
-					setStartups([]);
-				}
-			};
-
-			fetchData();
-		}, []);
+		// 	fetchData();
+		// }, []);
 
 		// Determine which list to use based on excludedOrg
-		const isExcludedInStartups = startups.some((s) => s.title === excludedOrg);
+		const isExcludedInStartups = startups.some((s) => s.name === excludedOrg);
 		const organisations = isExcludedInStartups ? investors : startups;
 
 		const selectedOrganisations = preferences.filter((pref) => pref);
@@ -79,15 +84,14 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 
 		// Create a filtered list of organisations that do not include the selected ones or the excluded organisation
 		const filteredOrganisations = organisations.filter(
-			(org) => org.title !== excludedOrg
+			(org) => org.name !== excludedOrg
 		);
 
-		// Create an array of the "value" keys for selected organisations to disable them in the dropdown
 		const disabledKeys: string[] = disabledOrganisations
-			.map((pref) => organisations.find((org) => org.title === pref)?.value)
+			.map((pref) => organisations.find((org) => org.name === pref)?.id)
 			.filter((key): key is string => key !== undefined); // Ensure the result is an array of strings
 
-		const choices = Array.from({ length: 14 }, (_, i) => i + 11);
+		const choices = Array.from({ length: 14 }, (_, i) => i + 13);
 
 		const handleValueChange = (index: number, value: string) => {
 			// Check if the value is already selected as a preference (to avoid duplicates)
@@ -103,7 +107,7 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 				</div>
 				<div className="py-4 text-base leading-5 text-default-500">
 					We will choose from these preferences in case your top-priorities are
-					unavailable
+					unavailable.
 				</div>
 				<form
 					ref={ref}
@@ -126,17 +130,27 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 							onValueChange={(value) => handleValueChange(index, value)}
 							onSelectionChange={(key) => {
 								const selectedItem = filteredOrganisations.find(
-									(item) => item.value === key
+									(item) => item.id === key
 								);
 								if (selectedItem) {
-									setBackup(index, selectedItem.title);
+									setBackup(index, selectedItem.name);
 								}
 							}}
 							disabledKeys={disabledKeys}
 						>
 							{(organisation) => (
-								<AutocompleteItem key={organisation.value}>
-									{organisation.title}
+								<AutocompleteItem
+									key={organisation.id}
+									textValue={organisation.name}
+								>
+									<img
+										alt={organisation.name}
+										className="w-8 h-8 rounded-lg object-cover bg-white"
+										src={organisation.logo}
+										width={32} // width of the image
+										height={32} // height of the image
+									/>
+									<span>{organisation.name}</span>
 								</AutocompleteItem>
 							)}
 						</Autocomplete>

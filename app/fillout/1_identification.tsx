@@ -3,7 +3,7 @@
 import type { InputProps } from "@heroui/react";
 
 import React from "react";
-import { Input, Tabs, Tab, Checkbox } from "@heroui/react";
+import { Input, Tabs, Tab } from "@heroui/react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 
 import { cn } from "@heroui/react";
@@ -19,8 +19,8 @@ export interface AutocompleteOrganisation {
 }
 
 export interface OrganisationTypes {
-	id: string; // assuming the data has 'id' field
-	name: string; // assuming the data has 'name' field
+	id: string;
+	name: string;
 }
 
 const IdentificationForm = React.forwardRef<
@@ -108,7 +108,7 @@ const IdentificationForm = React.forwardRef<
 			<main>
 				<div className="text-3xl font-bold leading-9 text-default-foreground ">
 					Welcome to the <br />
-					Meeting Prefference Form 👋
+					Meeting Preference Form 👋
 				</div>
 				<div className="py-2 text-medium text-[#3fafa8]">
 					Select your organization to continue.
@@ -126,7 +126,7 @@ const IdentificationForm = React.forwardRef<
 						aria-label="Options"
 						selectedKey={selectedTab} // Bind selected tab to state
 						onSelectionChange={(key) => setSelectedTab(key as string)} // Update state on tab change
-						size="md"
+						size="lg"
 						radius="lg"
 						classNames={{
 							cursor: "group-data-[selected=true]:bg-[#3fafa8]",
@@ -151,67 +151,59 @@ const IdentificationForm = React.forwardRef<
 							}
 						/>
 					</Tabs>
+					<div className="flex flex-col gap-4">
+						<Autocomplete
+							className="col-span-12 flex"
+							defaultItems={autocompleteOptions} // Dynamically update based on selected tab
+							label="Your Organisation"
+							labelPlacement="outside"
+							placeholder={`${"Type in your organisation name"}`}
+							value={idOrg}
+							isRequired
+							size="lg"
+							onValueChange={setFormOrg}
+							onSelectionChange={(key) => {
+								// Find the selected item based on the key and set its full title
+								const selectedItem = autocompleteOptions.find(
+									(item) => item.value === key
+								);
+								if (selectedItem) {
+									setFormOrg(selectedItem.title);
+								}
+							}}
+						>
+							{(organisation) => (
+								<AutocompleteItem key={organisation.value}>
+									{organisation.title}
+								</AutocompleteItem>
+							)}
+						</Autocomplete>
+						<Input
+							className="col-span-12 flex"
+							label="First Name"
+							labelPlacement="inside"
+							name="first-name"
+							value={idName}
+							onValueChange={setFormName}
+							placeholder="Type your first name here"
+							{...inputProps}
+							isRequired
+							size="lg"
+						/>
 
-					<Autocomplete
-						className="col-span-12"
-						defaultItems={autocompleteOptions} // Dynamically update based on selected tab
-						label="Your Organisation"
-						labelPlacement="outside"
-						placeholder={`${"Type in your organisation name"}`}
-						value={idOrg}
-						isRequired
-						onValueChange={setFormOrg}
-						onSelectionChange={(key) => {
-							// Find the selected item based on the key and set its full title
-							const selectedItem = autocompleteOptions.find(
-								(item) => item.value === key
-							);
-							if (selectedItem) {
-								setFormOrg(selectedItem.title);
-							}
-						}}
-					>
-						{(organisation) => (
-							<AutocompleteItem key={organisation.value}>
-								{organisation.title}
-							</AutocompleteItem>
-						)}
-					</Autocomplete>
-					<Input
-						className="col-span-12"
-						label="First Name"
-						name="first-name"
-						value={idName}
-						onValueChange={setFormName}
-						placeholder="Type your first name here"
-						{...inputProps}
-						isRequired
-					/>
-
-					<Input
-						className="col-span-12 "
-						label="Email"
-						name="email"
-						placeholder="john.doe@gmail.com"
-						type="email"
-						value={idEmail}
-						onValueChange={setFormEmail}
-						{...inputProps}
-						isRequired
-					/>
-
-					<Checkbox
-						defaultSelected
-						className="col-span-12 m-0 p-2 text-left text-[#0a6dad]"
-						color="primary"
-						name="terms-and-privacy-agreement"
-						size="md"
-					>
-						I want to be added to mailing list of
-						<span className="mx-1 text-[#3fafa8] underline">
-							Growth Meets Capital
-						</span>
-					</Checkbox>
+						<Input
+							className="col-span-12 flex"
+							label="Email"
+							name="email"
+							placeholder="john.doe@gmail.com"
+							type="email"
+							value={idEmail}
+							onValueChange={setFormEmail}
+							{...inputProps}
+							isRequired
+							size="lg"
+						/>
+					</div>
 				</form>
 			</main>
 		);

@@ -16,11 +16,14 @@ import { cn } from "@heroui/react";
 
 // Directly import the Hero component
 import Hero from "@/app/participants/components/hero";
+import { OrganisationTypes } from "@/app/participants/utils/types";
 
-export type SupportCardProps = React.HTMLAttributes<HTMLDivElement>;
-
+export type SupportCardProps = React.HTMLAttributes<HTMLDivElement> & {
+	startups: OrganisationTypes[];
+	investors: OrganisationTypes[];
+};
 const SupportCard = React.forwardRef<HTMLDivElement, SupportCardProps>(
-	({ className, ...props }, ref) => {
+	({ className, startups, investors, ...props }, ref) => {
 		const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
 		// Use this state or effect to trigger image/API loading or actions inside Hero
@@ -86,7 +89,11 @@ const SupportCard = React.forwardRef<HTMLDivElement, SupportCardProps>(
 								<DrawerBody>
 									<main className="dark bg-black flex flex-col">
 										{/* Load Hero eagerly */}
-										<Hero isDrawer={true} />
+										<Hero
+											startups={startups}
+											investors={investors}
+											isDrawer={true}
+										/>
 									</main>
 								</DrawerBody>
 								<DrawerFooter className="align-top flex justify-center -mt-2 h-14">

@@ -9,7 +9,8 @@ export default function Participants() {
 	return (
 		<>
 			<Header />
-			<Hero /> {/* Here, you include the Hero section */}
+			<Hero startups={[]} investors={[]} isDrawer={false} />{" "}
+			{/* Here, you include the Hero section */}
 			<Footer />
 		</>
 	);

@@ -16,7 +16,6 @@ import { Contact } from "lucide-react";
 
 interface CompanyCardProps {
 	organisation: OrganisationTypes;
-	meetings: string[];
 }
 
 export function CompanyCard({ organisation }: CompanyCardProps) {

@@ -15,12 +15,15 @@ import MultistepNavigationButtons from "./components/multistep-navigation-button
 
 import contrarian_logo from "@/app/assets/Contrarian_logo_white.png";
 import bbva_logo from "@/app/assets/BBVA_logo_white.png";
+import { OrganisationTypes } from "../participants/utils/types";
 
 export type MultiStepSidebarProps = React.HTMLAttributes<HTMLDivElement> & {
 	currentPage: number;
 	onBack: () => void;
 	onNext: () => void;
 	onChangePage: (page: number) => void;
+	investors: OrganisationTypes[];
+	startups: OrganisationTypes[];
 };
 
 const stepperClasses = cn(
@@ -45,6 +48,8 @@ const MultiStepSidebar = React.forwardRef<
 			onBack,
 			onNext,
 			onChangePage,
+			investors,
+			startups,
 			...props
 		},
 		ref
@@ -75,7 +80,7 @@ const MultiStepSidebar = React.forwardRef<
 								Meeting Preferences Form
 							</div>
 							<div className="mt-1 text-base font-medium leading-6 text-default-700">
-								Choose your meeting preferences. Starting from most desired
+								Select your prefered meetings, starting with your top choice.
 							</div>
 						</div>
 						{/* Desktop Steps */}
@@ -86,7 +91,7 @@ const MultiStepSidebar = React.forwardRef<
 							steps={[
 								{
 									title: "Let's identify you",
-									description: "Select you organisation",
+									description: "Select your organisation",
 								},
 								{
 									title: "Meeting preferences",
@@ -109,11 +114,15 @@ const MultiStepSidebar = React.forwardRef<
 							/>
 							<Image src={bbva_logo} alt="BBVA logo" width={120} />
 						</div>
-						<SupportCard className="w-full backdrop-blur-lg lg:bg-white/40 lg:shadow-none dark:lg:bg-white/20 " />
+						<SupportCard
+							startups={startups}
+							investors={investors}
+							className="w-full backdrop-blur-lg lg:bg-white/40 lg:shadow-none dark:lg:bg-white/20 "
+						/>
 					</div>
 				</div>
 				<div className="md:container flex h-full w-full flex-col items-center gap-4 md:p-4 ">
-					<div className="sticky top-0 z-10 w-full rounded-large bg-gradient-to-tl to-[#0a6dad] via-black-500 from-[#3fafa8] py-4 shadow-small md:max-w-xl lg:hidden ">
+					<div className=" top-0 z-10 w-full rounded-large bg-gradient-to-tl to-[#0a6dad] via-black-500 from-[#3fafa8] py-4 shadow-small md:max-w-xl lg:hidden ">
 						<div className="flex justify-center">
 							{/* Mobile Steps */}
 							<RowSteps
@@ -152,7 +161,11 @@ const MultiStepSidebar = React.forwardRef<
 							onBack={onBack}
 							onNext={onNext}
 						/>
-						<SupportCard className="mx-auto w-full lg:hidden" />
+						<SupportCard
+							startups={startups}
+							investors={investors}
+							className="mx-auto w-full lg:hidden"
+						/>
 					</div>
 				</div>
 			</div>

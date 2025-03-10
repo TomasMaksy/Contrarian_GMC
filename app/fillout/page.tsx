@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { domAnimation, LazyMotion, m } from "framer-motion";
 
 import MultistepSidebar from "./multistep-sidebar";
@@ -20,6 +20,8 @@ import blob from "@/app/assets/blob.png";
 
 import { addToast, Button } from "@heroui/react";
 import { redirect } from "next/navigation";
+
+import { OrganisationTypes } from "../participants/utils/types";
 
 import {
 	Modal,
@@ -64,7 +66,7 @@ export default function Fillout() {
 		name: "",
 		email: "",
 		organisation: undefined as FormOrgType | undefined,
-		preferences: Array(10).fill(""),
+		preferences: Array(12).fill(""),
 		backup: Array(14).fill(""),
 	});
 
@@ -263,6 +265,78 @@ export default function Fillout() {
 		}
 	};
 
+	const [investors, setInvestors] = useState<
+		{
+			id: string;
+			name: string;
+			logo: string;
+			type: string;
+			website: string;
+		}[]
+	>([]);
+
+	const [startups, setStartups] = useState<
+		{
+			id: string;
+			name: string;
+			logo: string;
+			type: string;
+			website: string;
+		}[]
+	>([]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const [startupsRes, investorsRes] = await Promise.all([
+					fetch("/api/get_startups"), // Endpoint for startups involved in a deal
+					fetch("/api/get_investors"), // Endpoint for investors involved in a deal
+				]);
+
+				const startupsData: { success: boolean; data: OrganisationTypes[] } =
+					await startupsRes.json();
+				const investorsData: { success: boolean; data: OrganisationTypes[] } =
+					await investorsRes.json();
+
+				if (investorsData.success && Array.isArray(investorsData.data)) {
+					setInvestors(
+						investorsData.data.map((investor) => ({
+							id: investor.id, // Unique identifier
+							name: investor.name,
+							logo: investor.logo,
+							type: investor.type,
+							website: investor.website,
+						}))
+					);
+				} else {
+					console.error("Unexpected investors response:", investorsData);
+					setInvestors([]);
+				}
+
+				if (startupsData.success && Array.isArray(startupsData.data)) {
+					setStartups(
+						startupsData.data.map((startup) => ({
+							id: startup.id, // Unique identifier
+							name: startup.name,
+							logo: startup.logo,
+							type: startup.type,
+							website: startup.website,
+						}))
+					);
+				} else {
+					console.error("Unexpected startups response:", startupsData);
+					setStartups([]);
+				}
+			} catch (error) {
+				console.error("Error fetching data:", error);
+				setInvestors([]);
+				setStartups([]);
+			}
+		};
+
+		fetchData();
+	}, []);
+
 	const content = React.useMemo(() => {
 		let component = (
 			<Identification
@@ -274,6 +348,8 @@ export default function Fillout() {
 				setFormOrg={(org) =>
 					setFormValues((prev) => ({ ...prev, organisation: org }))
 				}
+				startups={startups}
+				investors={investors}
 			/>
 		);
 
@@ -284,6 +360,8 @@ export default function Fillout() {
 						preferences={formValues.preferences}
 						setPreference={setFormPreference}
 						excludedOrg={formValues.organisation}
+						startups={startups}
+						investors={investors}
 					/>
 				);
 				break;
@@ -294,6 +372,8 @@ export default function Fillout() {
 						backups={formValues.backup}
 						setBackup={setFormBackup}
 						excludedOrg={formValues.organisation}
+						startups={startups}
+						investors={investors}
 					/>
 				);
 				break;
@@ -321,10 +401,10 @@ export default function Fillout() {
 				</m.div>
 			</LazyMotion>
 		);
-	}, [direction, page, formValues, setFormValues]);
+	}, [direction, page, formValues, setFormValues, startups, investors]);
 
 	return (
-		<main className="dark h-screen overflow-y-auto bg-black relative overflow-hidden">
+		<main className="dark h-max bg-black relative overflow-x-hidden">
 			<Header />
 			<div className="items-center container  flex">
 				<MultistepSidebar
@@ -339,6 +419,8 @@ export default function Fillout() {
 							  }
 							: onNext
 					}
+					startups={startups}
+					investors={investors}
 				>
 					<div className="relative lg:h-full flex w-full flex-col text-center lg:justify-center lg:pt-0 ">
 						{content}

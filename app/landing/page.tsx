@@ -159,7 +159,7 @@ export default function About() {
 
 			<Info />
 			{/* <Footer /> */}
-			<Participants />
+			<Participants startups={[]} investors={[]} isDrawer={false} />
 
 			<Modal
 				isOpen={isOpen}
