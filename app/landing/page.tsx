@@ -58,7 +58,7 @@ export default function About() {
 	return (
 		<main className="dark bg-black relative">
 			{/* <Header /> */}
-			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative min-h-screen md:justify-center sm:justify-top sm:pt-12">
+			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative md:min-h-screen md:justify-center sm:justify-top sm:pt-12">
 				<div className="w-max h-max flex flex-col justify-center items-center gap-4 mb-48 -mt-64">
 					<span className="font-normal text-lg text-default-600 tracking-tight">
 						Hosted by
@@ -164,9 +164,8 @@ export default function About() {
 				<motion.img
 					src={blob.src}
 					alt="blob green"
-					width={800}
-					height={800}
-					className=" block absolute -left-[300] sm:-bottom-[900] md:top-[1000] sm:opacity-55 md:opacity-100"
+					width={1200}
+					className=" block absolute -left-[300] sm:-bottom-[500px] md:rigth-[1000px] sm:opacity-55 md:opacity-100"
 					style={{ translateY: translateY }}
 				/>
 
@@ -175,7 +174,7 @@ export default function About() {
 					alt="blob blue"
 					width={2300}
 					height={2300}
-					className="hidden md:block md:absolute md:top-[900px] md:-right-[800px]"
+					className="md:block md:absolute md:top-[900px] md:-right-[800px] hidden"
 					style={{ translateY: translateY2 }}
 				/>
 			</main>

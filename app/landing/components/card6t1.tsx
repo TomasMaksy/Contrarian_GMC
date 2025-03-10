@@ -40,7 +40,7 @@ export default function Card1(props: CardProps) {
 		>
 			<LazyMotion features={domAnimation}>
 				<m.div
-					className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-250 group-hover:opacity-100"
+					className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-250 group-hover:opacity-100 flex flex-col"
 					style={{
 						background: useMotionTemplate`
             radial-gradient(
@@ -53,9 +53,9 @@ export default function Card1(props: CardProps) {
 				/>
 			</LazyMotion>
 
-			<CardBody className="pt-4 flex flex-col items-center align-middle text-center justify-center gap-4 py-12">
-				<p className="lg:text-3xl sm:text-3xl text-neutral-50 font-extrabold">
-					Evening dinner:
+			<CardBody className="pt-4 flex flex-col items-center align-top text-center justify-start py-4 gap-4 p-4">
+				<p className="lg:text-3xl sm:text-xl text-neutral-50 font-extrabold">
+					Evening dinner
 				</p>
 				<p className="align-middle font-black lg:text-lg sm:text-sm text-neutral-400 tracking-tight pt-2">
 					When: <br />{" "}

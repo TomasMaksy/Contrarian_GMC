@@ -77,12 +77,23 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 		nominatedCompanyFounderEmail: "",
 	});
 
+	const [loading, setLoading] = useState(false);
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault(); // Prevent default form submission behavior
 
+		setLoading(true);
+
 		// Check if any field is empty, except for current stage and fundraising
 		const isFormValid = Object.entries(formData).every(([key, value]) => {
-			if (key === "stage" || key === "fundraising") {
+			if (
+				key === "stage" ||
+				key === "fundraising" ||
+				key === "nominatedCompanyStage" ||
+				key === "nominatedCompanyFounder" ||
+				key === "nominatedCompanyFounderEmail" ||
+				key === "nominatedCompanyName"
+			) {
 				return true; // Allow empty for these fields
 			}
 			return typeof value === "string" ? value.trim() !== "" : value !== "";
@@ -133,6 +144,7 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					variant: "flat",
 					timeout: 3000,
 				});
+				setLoading(false);
 				onClose(); // Close modal
 			} else {
 				throw new Error(data.error || "Submission failed");
@@ -154,6 +166,7 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 			[field]: value,
 		}));
 	};
+
 	return (
 		<Form
 			onSubmit={handleSubmit}
@@ -383,7 +396,7 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 									isRequired
 								/>
 								<Input
-									label="Nominee company founder's e-mail address"
+									label="Founder's e-mail address"
 									placeholder="founder@example.com"
 									type="email"
 									value={formData.nominatedCompanyFounderEmail}
@@ -403,7 +416,14 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 				<Button color="danger" variant="light" onPress={onClose}>
 					Cancel
 				</Button>
-				<Button color="primary" type="submit">
+				<Button color="primary" type="submit" isLoading={loading}>
+					{/* {loading && (
+						<CircularProgress
+							aria-label="Loading..."
+							size="sm"
+							color="primary"
+						/>
+					)} */}
 					Submit
 				</Button>
 			</ModalFooter>

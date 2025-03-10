@@ -34,13 +34,13 @@ export default function Card1(props: CardProps) {
 		<Card
 			{...props}
 			ref={cardRef}
-			className="group relative w-[420px] bg-transparent shadow-large"
+			className="group relative w-[420px] bg-transparent shadow-none flex flex-col"
 			radius="lg"
 			onMouseMove={onMouseMove}
 		>
 			<LazyMotion features={domAnimation}>
 				<m.div
-					className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-250 group-hover:opacity-100"
+					className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-250 group-hover:opacity-100 align-top flex flex-col"
 					style={{
 						background: useMotionTemplate`
             radial-gradient(
@@ -53,11 +53,11 @@ export default function Card1(props: CardProps) {
 				/>
 			</LazyMotion>
 
-			<CardBody className="pt-4 flex flex-col items-center align-middle text-center justify-center py-4 gap-4 p-4">
-				<p className="lg:text-3xl sm:text-3xl text-neutral-50 font-extrabold text-wrap">
+			<CardBody className="pt-4 flex flex-col items-center align-top text-center justify-start py-4 gap-4 p-4 ">
+				<p className="lg:text-3xl sm:text-xl text-neutral-50 font-extrabold text-wrap">
 					Day activities
 				</p>
-				<p className="align-middle font-black lg:text-lg sm:text-sm text-neutral-400 tracking-wider pt-2 text-center">
+				<p className="align-middle font-black lg:text-lg sm:text-sm text-neutral-400 tracking-wider pt-2 text-center ">
 					When:
 					<span className="font-normal tracking-normal">
 						<br /> Day 1 (April 9) 9:30 AM to 6 PM{" "}
