@@ -15,7 +15,12 @@ export async function POST(req: NextRequest) {
             Website, 
             Email, 
             Stage, 
-            Fundraising 
+            Fundraising,
+            NominatedCompanyName, 
+            NominatedCompanyStage,
+            NominatedCompanyFounder,
+            NominatedCompanyFounderEmail
+
         } = requestData;
 
         // Prepare the data object to match Airtable's structure, excluding empty fields
@@ -31,6 +36,10 @@ export async function POST(req: NextRequest) {
             "Phone": Phone,
             "Current company stage": Stage,
             "Fundraising in 2025": Fundraising,
+            "Nominee company name": NominatedCompanyName,
+            "Nominee company stage": NominatedCompanyStage,
+            "Nominee company founder’s full name": NominatedCompanyFounder,
+            "Nominee company founder's e-mail address": NominatedCompanyFounderEmail,
         };
 
         // Remove fields with empty string values or null/undefined

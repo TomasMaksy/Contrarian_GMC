@@ -14,6 +14,8 @@ import {
 	Select,
 	SelectItem,
 	Switch,
+	Tabs,
+	Tab,
 } from "@heroui/react";
 import { HandCoins, Rocket, DollarSign, X } from "lucide-react";
 
@@ -45,6 +47,8 @@ export const CustomRadio = (
 };
 
 export default function WaitlistForm({ onClose }: ContactFormProps) {
+	const [selected, setSelected] = React.useState("no");
+
 	const [agreed, setAgreed] = useState(true);
 	const [error, setError] = useState("");
 
@@ -67,6 +71,10 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 		phone: "",
 		stage: "",
 		fundraising: "",
+		nominatedCompanyName: "",
+		nominatedCompanyStage: "",
+		nominatedCompanyFounder: "",
+		nominatedCompanyFounderEmail: "",
 	});
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -108,6 +116,10 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					Email: formData.email,
 					Stage: formData.stage,
 					Fundraising: formData.fundraising,
+					NominatedCompanyName: formData.nominatedCompanyName,
+					NominatedCompanyStage: formData.nominatedCompanyStage,
+					NominatedCompanyFounder: formData.nominatedCompanyFounder,
+					NominatedCompanyFounderEmail: formData.nominatedCompanyFounderEmail,
 				}),
 			});
 
@@ -204,7 +216,7 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 				{formData.type === "Startup" && (
 					<>
 						<Select
-							label="Current Stage"
+							label="Current stage"
 							placeholder="Enter your company stage"
 							isRequired
 							size="lg"
@@ -295,7 +307,7 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 						size="lg"
 					/>
 				</div>
-				<div>
+				<div className="pb-5">
 					<Checkbox
 						isSelected={agreed}
 						onValueChange={handleChangeCheckbox}
@@ -303,9 +315,87 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 						aria-label="Agree to terms and conditions"
 						isRequired
 					>
-						Agree to terms and conditions
+						<span className="leading-[1.15] block pl-1">
+							I understand and agree that my personal data might be used for
+							Energy Tech Summit marketing purposes{" "}
+						</span>
 					</Checkbox>
 					{error && <p className="text-danger text-sm">{error}</p>}
+				</div>
+				<div className="flex flex-col gap-1">
+					<p className="text-default-600 p-1 leading-tight font-semibold">
+						Do you have a company that you would like to{" "}
+						<span className="text-primary font-black ">invite/nominate</span> to
+						join the event? <br />
+						<span className="text-tiny text-default-500 leading-[1.25] font-normal block">
+							{" "}
+							Only startups that have secured funding at the Series A stage or
+							beyond are eligible to be nominated.
+						</span>
+					</p>
+
+					<Tabs
+						fullWidth
+						aria-label="Tabs form"
+						selectedKey={selected}
+						size="md"
+						onSelectionChange={(key) => setSelected(key as string)}
+					>
+						<Tab key="no" title="No"></Tab>
+						<Tab key="yes" title="Yes">
+							<div className="flex flex-col gap-3">
+								<Input
+									label="Nominee company name"
+									placeholder="Enter nominee company name"
+									type="string"
+									value={formData.nominatedCompanyName}
+									onValueChange={(value) =>
+										handleChange("nominatedCompanyName", value)
+									}
+									size="lg"
+									isRequired
+								/>
+								<Select
+									label="Nominee company stage"
+									placeholder="Enter nominee company stage"
+									size="lg"
+									isRequired
+									value={formData.nominatedCompanyStage}
+									onChange={(e) =>
+										handleChange("nominatedCompanyStage", e.target.value)
+									}
+								>
+									<SelectItem key="Series A">Series A</SelectItem>
+									<SelectItem key="Series B">Series B</SelectItem>
+									<SelectItem key="Series C or above">
+										Series C or above
+									</SelectItem>
+								</Select>
+								<Input
+									label="Nominee company founder’s full name"
+									placeholder="Founder's full name"
+									type="string"
+									value={formData.nominatedCompanyFounder}
+									onValueChange={(value) =>
+										handleChange("nominatedCompanyFounder", value)
+									}
+									size="lg"
+									isRequired
+								/>
+								<Input
+									label="Nominee company founder's e-mail address"
+									placeholder="founder@example.com"
+									type="email"
+									value={formData.nominatedCompanyFounderEmail}
+									onValueChange={(value) =>
+										handleChange("nominatedCompanyFounderEmail", value)
+									}
+									size="lg"
+									isRequired
+								/>
+							</div>
+						</Tab>
+					</Tabs>
 				</div>
 			</div>
 

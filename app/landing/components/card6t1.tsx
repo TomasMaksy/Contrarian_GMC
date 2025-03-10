@@ -45,7 +45,7 @@ export default function Card1(props: CardProps) {
 						background: useMotionTemplate`
             radial-gradient(
               500px circle at ${mouseX}px ${mouseY}px,
-              rgba(10, 109, 173, 0.6),
+              rgba(10, 109, 173, 0),
               transparent 80%
             )
           `, // <- Add your own color here
@@ -54,14 +54,15 @@ export default function Card1(props: CardProps) {
 			</LazyMotion>
 
 			<CardBody className="pt-4 flex flex-col items-center align-middle text-center justify-center gap-4 py-12">
-				<p className="lg:text-4xl sm:text-3xl text-neutral-50 font-extrabold">
+				<p className="lg:text-3xl sm:text-3xl text-neutral-50 font-extrabold">
 					Evening dinner:
 				</p>
-				<p className="align-middle font-black lg:text-lg sm:text-sm text-neutral-400 tracking-wider">
+				<p className="align-middle font-black lg:text-lg sm:text-sm text-neutral-400 tracking-tight pt-2">
 					When: <br />{" "}
-					<span className="font-normal tracking-normal">
+					<span className="font-normal tracking-normal ">
 						Day 1 (April 9) 8 PM to 10 PM{" "}
 					</span>
+					<br />
 					<br />
 					Where: <br />
 					<span className="font-normal tracking-normal">TBC </span>

@@ -29,7 +29,7 @@ export const Header = () => {
 				<div className="md:container">
 					<div className="flex items-center justify-between gap-3 align-middle">
 						<div className="flex gap-2">
-							<Link href="/" passHref>
+							<Link href="/home" passHref>
 								<Image
 									src={Logo}
 									alt="Contrarian Ventures Logo"

@@ -2,6 +2,7 @@
 import React from "react";
 import {
 	Button,
+	Image,
 	Modal,
 	ModalBody,
 	ModalContent,
@@ -17,11 +18,14 @@ import Link from "next/link";
 import { Image as HeroImage } from "@heroui/react";
 import { Info } from "./info";
 import ScrollingBanner2 from "../components/scrolling-banner";
-import ScrollingBanner from "./scrollingBanner";
-import Participants from "../participants/components/hero";
+// import ScrollingBanner from "./scrollingBanner";
+// import Participants from "../participants/components/hero";
 import WaitlistForm from "./waitlist-form";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+
+import contrarian_white from "@/app/assets/Contrarian_logo_white.png";
+import bbva_white from "@/app/assets/BBVA_logo_white.png";
 
 const imageSources = [
 	"photos/GMC-07.jpeg",
@@ -48,13 +52,33 @@ export default function About() {
 	};
 
 	const { scrollYProgress } = useScroll();
-	const translateY = useTransform(scrollYProgress, [0, 1], [-1300, 1500]);
+	const translateY = useTransform(scrollYProgress, [0, 1], [-1000, -500]);
 	const translateY2 = useTransform(scrollYProgress, [0, 1], [-1300, 0]);
 
 	return (
 		<main className="dark bg-black relative">
 			{/* <Header /> */}
 			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative min-h-screen md:justify-center sm:justify-top sm:pt-12">
+				<div className="w-max h-max flex flex-col justify-center items-center gap-4 mb-48 -mt-64">
+					<span className="font-normal text-lg text-default-600 tracking-tight">
+						Hosted by
+					</span>
+					<div className="w-max h-max flex flex-row justify-center items-center gap-10 ml-6">
+						<Image
+							src={bbva_white.src}
+							alt="Contrarian Ventures"
+							width={120}
+							isBlurred
+						/>
+						<Image
+							src={contrarian_white.src}
+							alt="Contrarian Ventures"
+							className="mt-1 "
+							width={140}
+							isBlurred
+						/>
+					</div>
+				</div>
 				<section className="z-20 flex flex-col items-center justify-center  gap-[18px] sm:gap-6 h-max py-24 md:pb-36">
 					<Link
 						href={"https://energytechsummit.com/"}
@@ -155,11 +179,11 @@ export default function About() {
 					style={{ translateY: translateY2 }}
 				/>
 			</main>
-			<ScrollingBanner />
+			{/* <ScrollingBanner /> */}
 
 			<Info />
 			{/* <Footer /> */}
-			<Participants startups={[]} investors={[]} isDrawer={false} />
+			{/* <Participants startups={[]} investors={[]} isDrawer={false} /> */}
 
 			<Modal
 				isOpen={isOpen}

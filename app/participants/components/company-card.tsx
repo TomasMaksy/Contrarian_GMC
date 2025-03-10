@@ -4,13 +4,14 @@ import React from "react";
 import {
 	Card,
 	CardBody,
-	CardFooter,
-	Button,
+	// CardFooter,
+	// Button,
 	Image,
-	Divider,
+	// Divider,
 	Chip,
+	Tooltip,
 } from "@heroui/react";
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
 import type { OrganisationTypes } from "../utils/types";
 import { Contact } from "lucide-react";
 
@@ -46,10 +47,27 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 					<div className="flex flex-row align-top justify-between pt-3">
 						<div className="flex flex-col gap-4 h-full">
 							<div className="flex flex-col flex-grow mb-5">
-								<h3 className="text-lg font-semibold">{organisation.name}</h3>
-								<p className="text-small text-default-500">
-									{organisation.website}
-								</p>
+								<a
+									href={
+										organisation.website.startsWith("http")
+											? organisation.website
+											: `https://${organisation.website}`
+									}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h3 className="text-lg font-semibold">{organisation.name}</h3>
+									<Tooltip
+										key={organisation.id}
+										className="capitalize bg-[#3fafa8]"
+										content="View the website"
+										placement="bottom"
+									>
+										<p className="text-small text-[#3fafa8] ">
+											{organisation.website}
+										</p>
+									</Tooltip>
+								</a>
 							</div>
 							{/* <Divider />
 						<div className="flex flex-col flex-grow items-start pl-1">
@@ -61,7 +79,7 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 						</div>
 					</div>
 				</CardBody>
-				<Divider />
+				{/* <Divider />
 				<CardFooter className="justify-center flex mt-2 w-full">
 					<div className="flex flex-row w-full items-center ">
 						<Button
@@ -79,7 +97,7 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 							View Website
 						</Button>
 					</div>
-				</CardFooter>
+				</CardFooter> */}
 			</Card>
 		</div>
 	);

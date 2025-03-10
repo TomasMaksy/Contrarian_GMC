@@ -28,20 +28,20 @@ const navLinks = [
 	// 	name: "Register",
 	// 	href: "#",
 	// },
-	{
-		name: "About",
-		href: "/about",
-	},
+	// {
+	// 	name: "About",
+	// 	href: "/about",
+	// },
 ];
 
 const socialItems = [
-	{
-		name: "Facebook",
-		href: "https://www.facebook.com/EnergyTechSummit/",
-		icon: (props: SocialIconProps) => (
-			<Icon {...props} icon="fontisto:facebook" />
-		),
-	},
+	// {
+	// 	name: "Facebook",
+	// 	href: "https://www.facebook.com/EnergyTechSummit/",
+	// 	icon: (props: SocialIconProps) => (
+	// 		<Icon {...props} icon="fontisto:facebook" />
+	// 	),
+	// },
 	// {
 	// 	name: "Instagram",
 	// 	href: "#",
@@ -49,27 +49,27 @@ const socialItems = [
 	// 		<Icon {...props} icon="fontisto:instagram" />
 	// 	),
 	// },
-	{
-		name: "Twitter",
-		href: "https://x.com/EnergTechSummit?mx=2",
-		icon: (props: SocialIconProps) => (
-			<Icon {...props} icon="fontisto:twitter" />
-		),
-	},
+	// {
+	// 	name: "Twitter",
+	// 	href: "https://x.com/EnergTechSummit?mx=2",
+	// 	icon: (props: SocialIconProps) => (
+	// 		<Icon {...props} icon="fontisto:twitter" />
+	// 	),
+	// },
 	{
 		name: "LinkedIn",
-		href: "https://www.linkedin.com/company/energy-tech-summit/",
+		href: "https://www.linkedin.com/company/contrarian-ventures/posts",
 		icon: (props: SocialIconProps) => (
 			<Icon {...props} icon="fontisto:linkedin" />
 		),
 	},
-	{
-		name: "Medium",
-		href: "#",
-		icon: (props: SocialIconProps) => (
-			<Icon {...props} icon="fontisto:medium" />
-		),
-	},
+	// {
+	// 	name: "Medium",
+	// 	href: "#",
+	// 	icon: (props: SocialIconProps) => (
+	// 		<Icon {...props} icon="fontisto:medium" />
+	// 	),
+	// },
 ];
 
 export default function Footer() {

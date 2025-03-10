@@ -26,7 +26,7 @@ export const Hero = () => {
 
 	return (
 		<>
-			<section className="pt-8  md:pt-5 md:pb-12 bg-[radial-gradient(ellipse_120%_70%_at_bottom_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-between">
+			<section className="pt-8 md:pt-5 md:pb-12 bg-[radial-gradient(ellipse_120%_70%_at_bottom_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-between">
 				<div className="container relative sm:mt-28 md:mt-56 md:mb-72 sm:mb-24">
 					<div className="md:flex items-center pb-5">
 						<div className="md:w-[478px]">

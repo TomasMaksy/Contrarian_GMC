@@ -52,7 +52,7 @@ const Hero = ({ startups, investors, isDrawer = false }: HeroProps) => {
 			}
 		};
 		fetchData();
-	}, []); // Runs only once when the component mounts
+	}, [isDrawer]); // Runs only once when the component mounts
 
 	// State for storing both datasets
 	const [loaded_investors, setInvestors] = useState<OrganisationTypes[]>([]);
@@ -76,7 +76,7 @@ const Hero = ({ startups, investors, isDrawer = false }: HeroProps) => {
 				<div className="container">
 					<div className="flex flex-col gap-5 items-center justify-center mt-24 mb-12 z-50">
 						<div className="text-center font-bold leading-[1.2] tracking-tight sm:text-[64px]">
-							<div className="bg-hero-section-title bg-clip-text bg-[#3fafa8] text-transparent sm:scale-90 md:scale-95 mb-4">
+							<div className="bg-hero-section-title bg-clip-text bg-default-700 text-transparent sm:scale-90 md:scale-95 mb-4">
 								Meet the Participants
 							</div>
 						</div>
