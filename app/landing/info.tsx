@@ -16,9 +16,8 @@ export const Info = () => {
 				<p className="text-center font-normal sm:text-[18px] text-default-600 tracking-normal z-10 md:px-64 sm:px-12 pb-24 max-w-screen-lg ">
 					Growth Meets Capital is a networking rendezvous for the most
 					influential growth investors and startups currently leading the
-					climate charge. Hosted by our partners Contrarian Ventures and BBVA,
-					this is your access to deal-making opportunities you won’t find
-					anywhere else.
+					climate charge. Hosted by Contrarian Ventures and BBVA, this is your
+					access to deal-making opportunities you won’t find anywhere else.
 				</p>
 			</section>
 
