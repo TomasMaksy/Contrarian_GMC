@@ -143,14 +143,16 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 									key={organisation.id}
 									textValue={organisation.name}
 								>
-									<img
-										alt={organisation.name}
-										className="w-8 h-8 rounded-lg object-cover bg-white"
-										src={organisation.logo}
-										width={32} // width of the image
-										height={32} // height of the image
-									/>
-									<span>{organisation.name}</span>
+									<div className="flex gap-2 items-center">
+										<img
+											alt={organisation.name}
+											className="w-8 h-8 rounded-lg object-cover bg-white"
+											src={organisation.logo}
+											width={32} // width of the image
+											height={32} // height of the image
+										/>
+										<span>{organisation.name}</span>
+									</div>
 								</AutocompleteItem>
 							)}
 						</Autocomplete>
