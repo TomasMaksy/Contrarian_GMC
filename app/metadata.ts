@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Growth Meets Capital App",
-  description: "Test app created by Tomas Maksimovic",
+  title: "Growth Meets Capital",
+  description: "Energy Tech Summit Side Event",
 };
