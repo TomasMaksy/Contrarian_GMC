@@ -5,6 +5,7 @@ import { Providers } from "./providers"; // Adjust the import path as needed
 import { Analytics } from "@vercel/analytics/react";
 
 import type { Metadata } from "next";
+import { add } from "lodash";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
@@ -59,13 +60,27 @@ export default function RootLayout({
 							"@type": "Event",
 							name: String(metadata.title),
 							description: String(metadata.description),
-							startDate: "2025-05-10T18:00:00+02:00",
+							startDate: "2025-04-09T10:00:00+02:00",
 							location: {
-								"@type": "Place",
-								name: "Bilbao, Spain",
+								"@type": "PostalAddress",
+								streetAddress: "Abandoibarra Av. 4",
+								addressLocality: "Bilbao",
+								addressRegion: "Bilbao",
+								postalCode: "48011",
+								addressCountry: "ES",
+							},
+							organizer: {
+								"@type": "Organization",
+								name: "Contrarian Ventures",
+								url: "https://www.cventures.vc",
+							},
+							performer: {
+								"@type": "Organization",
+								name: "Growth Meets Capital",
 							},
 							image: "https://www.growthmeetscapital.com/bg.png",
 							url: "https://www.growthmeetscapital.com",
+							eventAttendanceMode: "OfflineEventAttendanceMode",
 						}),
 					}}
 				/>
