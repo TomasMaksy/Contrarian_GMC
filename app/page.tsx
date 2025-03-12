@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-
+import Landing from "@/app/landing/page";
 export default async function Page() {
-	return redirect("/landing");
+	return <Landing />;
 }

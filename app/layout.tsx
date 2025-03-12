@@ -41,7 +41,7 @@ export default function RootLayout({
 				<meta property="og:title" content="Growth Meets Capital" />
 				<meta
 					property="og:description"
-					content="Exclusive networking event connecting growth investors and founders in Bilbao, Spain."
+					content="Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof."
 				/>
 				<meta
 					property="og:image"
@@ -56,7 +56,7 @@ export default function RootLayout({
 				<meta name="twitter:title" content="Growth Meets Capital" />
 				<meta
 					name="twitter:description"
-					content="Exclusive networking event connecting growth investors and founders in Bilbao, Spain."
+					content="Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof."
 				/>
 				<meta
 					name="twitter:image"
@@ -73,13 +73,13 @@ export default function RootLayout({
 							"@type": "Event",
 							name: "Growth Meets Capital",
 							description:
-								"Invite-only networking event for growth investors and startups.",
+								"Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof.",
 							startDate: "2025-05-10T18:00:00+02:00",
 							location: {
 								"@type": "Place",
 								name: "Bilbao, Spain",
 							},
-							image: "https://www.growthmeetscapital.com/og-image.jpg",
+							image: "https://www.growthmeetscapital.com/bg.png",
 							url: "https://www.growthmeetscapital.com",
 						}),
 					}}

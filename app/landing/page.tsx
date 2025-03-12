@@ -211,7 +211,7 @@ export default function About() {
 					<Card4 />
 				</section>
 
-				<div className="text-center w-full font-normal leading-[1.2] tracking-[-0.01em] sm:text-[64px] flex flex-col justify-center align-middle pt-12 pb-48 items-center gap-6">
+				<div className="text-center w-full font-normal leading-[1.2] tracking-[-0.01em] sm:text-[64px] flex flex-col justify-center align-middle pt-12 pb-32 items-center gap-6">
 					{/* <Divider className="bg-default-500 w-[800px]" /> */}
 					<div className="flex justify-center flex-row md:gap-5 sm:gap-1 max-w-screen-md w-full">
 						<Card5t />
