@@ -69,7 +69,7 @@ export default function About() {
 					<span className="font-normal text-lg text-default-600 tracking-tight">
 						Hosted by
 					</span>
-					<div className="w-max h-max flex flex-row justify-center items-center gap-10 relative z-50 mr-2">
+					<div className="w-max h-max flex flex-row justify-center items-center gap-10 relative z-50 mr-4">
 						<a
 							href="https://www.cventures.vc/"
 							target="_blank"
