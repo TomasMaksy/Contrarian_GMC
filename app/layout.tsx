@@ -9,9 +9,9 @@ import type { Metadata } from "next";
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Growth Meets Capital",
+	title: "Growth Meets Capital", // Ensure this is a string
 	description:
-		"Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof.",
+		"Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof.", // Ensure this is a string
 };
 
 export default function RootLayout({
@@ -23,25 +23,15 @@ export default function RootLayout({
 		<html lang="en">
 			<head className="dark">
 				<link rel="icon" href="/favicon.ico" />
-
-				{/* Meta viewport for responsiveness */}
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 				/>
-
-				{/* Title & Description */}
-				<title>Growth Meets Capital</title>
-				<meta
-					name="description"
-					content="Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof."
-				/>
-
-				{/* Open Graph (OG) Tags */}
-				<meta property="og:title" content="Growth Meets Capital" />
+				<meta name="description" content={String(metadata.description)} />
+				<meta property="og:title" content={String(metadata.title)} />
 				<meta
 					property="og:description"
-					content="Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof."
+					content={String(metadata.description)}
 				/>
 				<meta
 					property="og:image"
@@ -50,30 +40,25 @@ export default function RootLayout({
 				<meta property="og:url" content="https://www.growthmeetscapital.com" />
 				<meta property="og:type" content="website" />
 				<meta property="og:site_name" content="Growth Meets Capital" />
-
-				{/* Twitter Card Tags */}
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:title" content="Growth Meets Capital" />
+				<meta name="twitter:title" content={String(metadata.title)} />
 				<meta
 					name="twitter:description"
-					content="Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof."
+					content={String(metadata.description)}
 				/>
 				<meta
 					name="twitter:image"
 					content="https://www.growthmeetscapital.com/og-image.jpg"
 				/>
 				<meta name="twitter:site" content="@YourTwitterHandle" />
-
-				{/* JSON-LD Structured Data */}
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
 						__html: JSON.stringify({
 							"@context": "https://schema.org",
 							"@type": "Event",
-							name: "Growth Meets Capital",
-							description:
-								"Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof.",
+							name: String(metadata.title),
+							description: String(metadata.description),
 							startDate: "2025-05-10T18:00:00+02:00",
 							location: {
 								"@type": "Place",
