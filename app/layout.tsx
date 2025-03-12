@@ -24,13 +24,66 @@ export default function RootLayout({
 			<head className="dark">
 				<link rel="icon" href="/favicon.ico" />
 
-				{/* Add the meta tag for disabling zoom on mobile */}
+				{/* Meta viewport for responsiveness */}
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 				/>
 
-				{/* You can add other head tags here as well */}
+				{/* Title & Description */}
+				<title>Growth Meets Capital</title>
+				<meta
+					name="description"
+					content="Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof."
+				/>
+
+				{/* Open Graph (OG) Tags */}
+				<meta property="og:title" content="Growth Meets Capital" />
+				<meta
+					property="og:description"
+					content="Exclusive networking event connecting growth investors and founders in Bilbao, Spain."
+				/>
+				<meta
+					property="og:image"
+					content="https://www.growthmeetscapital.com/og-image.jpg"
+				/>
+				<meta property="og:url" content="https://www.growthmeetscapital.com" />
+				<meta property="og:type" content="website" />
+				<meta property="og:site_name" content="Growth Meets Capital" />
+
+				{/* Twitter Card Tags */}
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:title" content="Growth Meets Capital" />
+				<meta
+					name="twitter:description"
+					content="Exclusive networking event connecting growth investors and founders in Bilbao, Spain."
+				/>
+				<meta
+					name="twitter:image"
+					content="https://www.growthmeetscapital.com/og-image.jpg"
+				/>
+				<meta name="twitter:site" content="@YourTwitterHandle" />
+
+				{/* JSON-LD Structured Data */}
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify({
+							"@context": "https://schema.org",
+							"@type": "Event",
+							name: "Growth Meets Capital",
+							description:
+								"Invite-only networking event for growth investors and startups.",
+							startDate: "2025-05-10T18:00:00+02:00",
+							location: {
+								"@type": "Place",
+								name: "Bilbao, Spain",
+							},
+							image: "https://www.growthmeetscapital.com/og-image.jpg",
+							url: "https://www.growthmeetscapital.com",
+						}),
+					}}
+				/>
 			</head>
 			<body
 				className={clsx(

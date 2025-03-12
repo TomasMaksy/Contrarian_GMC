@@ -67,8 +67,10 @@ export default function About() {
 	};
 
 	const { scrollYProgress } = useScroll();
-	const translateY = useTransform(scrollYProgress, [0, 1], [-1000, -100]);
+
+	const translateY = useTransform(scrollYProgress, [0, 1], [-1000, 500]);
 	const translateY2 = useTransform(scrollYProgress, [0, 1], [-600, 0]);
+	const translateY3 = useTransform(scrollYProgress, [0, 1], [-100, -600]);
 
 	return (
 		<main className="dark bg-black scrollbar-hide overflow-hidden relative">
@@ -222,24 +224,23 @@ export default function About() {
 				src={blob.src}
 				alt="blob green"
 				width={1200}
-				className=" block absolute -left-[300] sm:top-[500px] md:rigth-[1000px] sm:opacity-55 md:opacity-100"
+				className=" block absolute  md:top-[500px] sm:top-[800px] md:right-[1000px] sm:-right-[200px] sm:opacity-55 md:opacity-100 z-10"
 				style={{ translateY: translateY }}
 			/>
 
 			<motion.img
 				src={blob2.src}
 				alt="blob blue"
-				width={1500}
-				height={1500}
-				className="md:block md:absolute md:top-[900px] md:-right-[500px] hidden"
+				width={2200}
+				className="block md:absolute md:top-[700px] md:-right-[800px]"
 				style={{ translateY: translateY2 }}
 			/>
 			<motion.img
 				src={blob2.src}
 				alt="blob blue"
 				width={1400}
-				className="block absolute md:top-[200px] md:-right-[600px] z-0 sm:top-[1200px] sm:right-[200px]"
-				style={{ translateY: translateY }}
+				className="md:block absolute md:top-[1800px] md:right-[600px] z-0 hidden opacity-30"
+				style={{ translateY: translateY3 }}
 			/>
 
 			{/* <ScrollingBanner /> */}

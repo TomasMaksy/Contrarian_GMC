@@ -28,7 +28,7 @@ export default function Card1(props: CardProps) {
 		<Card
 			{...props}
 			ref={cardRef}
-			className="group relative w-[420px] bg-transparent shadow-none border-none"
+			className="group relative w-full bg-transparent shadow-none border-none"
 			s
 			radius="lg"
 			onMouseMove={onMouseMove}
