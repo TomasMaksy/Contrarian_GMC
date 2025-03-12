@@ -27,7 +27,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
 	formValues,
 	redirect,
 }) => (
-	<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+	<Modal isOpen={isOpen} onOpenChange={onOpenChange} scrollBehavior="outside">
 		<ModalContent>
 			{(onClose) => (
 				<>
@@ -70,7 +70,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
 							variant="light"
 							onPress={() => {
 								onClose();
-								redirect("/");
+								redirect("/home");
 							}}
 						>
 							Close

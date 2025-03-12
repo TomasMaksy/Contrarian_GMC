@@ -16,7 +16,9 @@ import {
 	Switch,
 	Tabs,
 	Tab,
+	ModalBody,
 } from "@heroui/react";
+
 import { HandCoins, Rocket, DollarSign, X } from "lucide-react";
 
 import { useState } from "react";
@@ -170,21 +172,23 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 	return (
 		<Form
 			onSubmit={handleSubmit}
-			className="space-y-4 items-center align-middle "
+			className="space-y-4 items-center align-middle h-auto flex"
 		>
-			<ModalHeader className="pb-8 pt-4">
+			<ModalHeader className="pb-4 pt-4">
 				{" "}
 				{/* Add padding-top */}
-				<div className="flex flex-col gap-2 justify-between align-middle items-center w-full mt-4">
-					<h2 className="text-2xl font-bold">Join the Waitlist</h2>
+				<div className="flex flex-col gap-2 justify-between align-middle items-center w-full mt-6">
+					<h2 className="text-2xl font-bold text-primary tracking-tight">
+						Join the Waitlist
+					</h2>
 
-					<p className="text-default-600 font-normal text-center max-w-lg">
+					<p className="text-default-500 font-normal text-center max-w-lg text-small">
 						Complete the form below to join the waitlist for Growth Meets
 						Capital 2025 side event.
 					</p>
 				</div>
 			</ModalHeader>
-			<div className="flex flex-col justify-between gap-4 w-full md:px-2 sm:px-1">
+			<ModalBody className="flex h-auto">
 				<RadioGroup
 					description=""
 					label="Are you an investor or a startup?"
@@ -193,7 +197,7 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 					defaultValue={formData.type}
 					onValueChange={(value) => handleChange("type", value)}
 				>
-					<div className="flex flex-row  w-fill justify-between sm:gap-2 md:gap-4 mb-1">
+					<div className="flex flex-row  w-fill justify-between sm:gap-2 md:gap-4 mb-1 h-auto">
 						<CustomRadio
 							// description="Join as an investor"
 							value="Investor"
@@ -246,9 +250,9 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 						<Switch
 							thumbIcon={({ isSelected, className }) =>
 								isSelected ? (
-									<DollarSign className={className} size={14} color="#60a5fa" />
+									<DollarSign className={className} size={16} color="#3fafa8" />
 								) : (
-									<X className={className} size={14} color="#60a5fa" />
+									<X className={className} size={16} color="#3fafa8" />
 								)
 							}
 							onValueChange={(isSelected) =>
@@ -410,13 +414,17 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 						</Tab>
 					</Tabs>
 				</div>
-			</div>
-
+			</ModalBody>
 			<ModalFooter>
 				<Button color="danger" variant="light" onPress={onClose}>
 					Cancel
 				</Button>
-				<Button color="primary" type="submit" isLoading={loading}>
+				<Button
+					color="primary"
+					variant="shadow"
+					type="submit"
+					isLoading={loading}
+				>
 					{/* {loading && (
 						<CircularProgress
 							aria-label="Loading..."

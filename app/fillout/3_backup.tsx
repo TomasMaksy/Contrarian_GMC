@@ -117,7 +117,7 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 					{choices.map((choice, index) => (
 						<Autocomplete
 							key={index}
-							className={index < 2 ? "col-span-12" : "col-span-6"}
+							className={"sm:col-span-12 md:col-span-6 flex"}
 							defaultItems={filteredOrganisations}
 							label={`${choice}${getOrdinalSuffix(choice)} Choice`}
 							labelPlacement="outside"

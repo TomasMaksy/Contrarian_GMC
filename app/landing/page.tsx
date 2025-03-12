@@ -4,7 +4,6 @@ import {
 	Button,
 	Image,
 	Modal,
-	ModalBody,
 	ModalContent,
 	useDisclosure,
 } from "@heroui/react";
@@ -48,7 +47,15 @@ const imageSources = [
 export default function About() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const handleOpen = () => {
+		// Disable scrolling on the parent
+		document.body.style.overflow = "hidden";
 		onOpen();
+	};
+
+	const handleClose = () => {
+		// Enable scrolling on the parent again
+		document.body.style.overflow = "";
+		onClose();
 	};
 
 	const { scrollYProgress } = useScroll();
@@ -56,27 +63,41 @@ export default function About() {
 	const translateY2 = useTransform(scrollYProgress, [0, 1], [-1300, 0]);
 
 	return (
-		<main className="dark bg-black relative">
-			{/* <Header /> */}
-			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative md:min-h-screen md:justify-center sm:justify-top sm:pt-12">
-				<div className="w-max h-max flex flex-col justify-center items-center gap-4 mb-48 -mt-64">
+		<main className="dark bg-black scrollbar-hide">
+			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative md:min-h-screen md:justify-center sm:justify-top sm:pt-12 ">
+				<div className="w-max h-max flex flex-col justify-center items-center gap-4 md:mb-48 md:-mt-64 sm:scale-80 md:scale-100 relative z-50">
 					<span className="font-normal text-lg text-default-600 tracking-tight">
 						Hosted by
 					</span>
-					<div className="w-max h-max flex flex-row justify-center items-center gap-10 ml-6">
-						<Image
-							src={bbva_white.src}
-							alt="Contrarian Ventures"
-							width={120}
-							isBlurred
-						/>
-						<Image
-							src={contrarian_white.src}
-							alt="Contrarian Ventures"
-							className="mt-1 "
-							width={140}
-							isBlurred
-						/>
+					<div className="w-max h-max flex flex-row justify-center items-center gap-10 relative z-50 mr-2">
+						<a
+							href="https://www.cventures.vc/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="block "
+						>
+							<Image
+								src={contrarian_white.src}
+								alt="Contrarian Ventures"
+								className="mt-1 z-50"
+								width={150}
+								isBlurred
+							/>
+						</a>
+
+						<a
+							href="https://www.bbva.com/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="block"
+						>
+							<Image
+								src={bbva_white.src}
+								alt="Contrarian Ventures"
+								width={120}
+								isBlurred
+							/>
+						</a>
 					</div>
 				</div>
 				<section className="z-20 flex flex-col items-center justify-center  gap-[18px] sm:gap-6 h-max py-24 md:pb-36">
@@ -183,22 +204,16 @@ export default function About() {
 			<Info />
 			{/* <Footer /> */}
 			{/* <Participants startups={[]} investors={[]} isDrawer={false} /> */}
-
 			<Modal
 				isOpen={isOpen}
 				onClose={onClose}
 				backdrop="blur"
-				size="lg"
-				placement="center"
+				size="xl"
 				scrollBehavior="outside"
+				placement="bottom"
 			>
-				<ModalContent>
-					<main>
-						<ModalBody>
-							{" "}
-							<WaitlistForm onClose={onClose} />
-						</ModalBody>
-					</main>
+				<ModalContent className="h-auto overflow-y-auto">
+					<WaitlistForm onClose={handleClose} />
 				</ModalContent>
 			</Modal>
 		</main>
