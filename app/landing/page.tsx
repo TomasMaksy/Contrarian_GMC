@@ -2,6 +2,7 @@
 import React from "react";
 import {
 	Button,
+	// Divider,
 	Image,
 	Modal,
 	ModalContent,
@@ -15,7 +16,7 @@ import blob2 from "@/app/assets/blob2sm.png";
 import Link from "next/link";
 
 import { Image as HeroImage } from "@heroui/react";
-import { Info } from "./info";
+// import { Info } from "./info";
 import ScrollingBanner2 from "../components/scrolling-banner";
 // import ScrollingBanner from "./scrollingBanner";
 // import Participants from "../participants/components/hero";
@@ -44,6 +45,13 @@ const imageSources = [
 	"photos/GMC-01.jpeg",
 ];
 
+import Card1 from "@/app/landing/components/card1";
+import Card2 from "@/app/landing/components/card2";
+import Card3 from "@/app/landing/components/card3";
+import Card4 from "@/app/landing/components/card4";
+import Card5t from "@/app/landing/components/card5t1";
+import Card6t from "@/app/landing/components/card6t1";
+
 export default function About() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const handleOpen = () => {
@@ -59,12 +67,12 @@ export default function About() {
 	};
 
 	const { scrollYProgress } = useScroll();
-	const translateY = useTransform(scrollYProgress, [0, 1], [-1000, -500]);
-	const translateY2 = useTransform(scrollYProgress, [0, 1], [-1300, 0]);
+	const translateY = useTransform(scrollYProgress, [0, 1], [-1000, -100]);
+	const translateY2 = useTransform(scrollYProgress, [0, 1], [-600, 0]);
 
 	return (
-		<main className="dark bg-black scrollbar-hide overflow-auto">
-			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative min-h-screen justify-between sm:pt-12 ">
+		<main className="dark bg-black scrollbar-hide overflow-hidden relative">
+			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative min-h-screen justify-between sm:pt-12 h-full">
 				<div className="w-max h-max flex flex-col justify-between items-center gap-4 sm:scale-80 md:scale-90 relative z-50">
 					<span className="font-normal text-lg text-default-600 tracking-tight">
 						Hosted by
@@ -181,27 +189,62 @@ export default function About() {
 						</ScrollingBanner2>
 					</div>
 				</section>
-
-				<motion.img
-					src={blob.src}
-					alt="blob green"
-					width={1200}
-					className=" block absolute -left-[300] sm:-bottom-[500px] md:rigth-[1000px] sm:opacity-55 md:opacity-100"
-					style={{ translateY: translateY }}
-				/>
-
-				<motion.img
-					src={blob2.src}
-					alt="blob blue"
-					width={2300}
-					height={2300}
-					className="md:block md:absolute md:top-[900px] md:-right-[800px] hidden"
-					style={{ translateY: translateY2 }}
-				/>
 			</main>
+			<main className="dark relative overflow-hidden flex flex-col gap-12 z-50 items-center">
+				<section className="text-2xl bg-clip-text text-white flex flex-col items-center mb-5 pt-24 tracking-tight">
+					<p className="z-10 mb-5 font-semibold">About the Event </p>
+
+					<p className="text-center font-normal sm:text-[18px] text-default-600 tracking-normal z-10 md:px-64 sm:px-12  max-w-screen-lg ">
+						Growth Meets Capital is a networking rendezvous for the most
+						influential growth investors and startups currently leading the
+						climate charge. Hosted by Contrarian Ventures and BBVA, this is your
+						access to deal-making opportunities you won’t find anywhere else.
+					</p>
+				</section>
+
+				<section className="flex justify-center flex-row md:gap-5 sm:gap-1 md:mx-40 sm:mx-6 sm:mb-12 md:mb-24 ">
+					<Card1 />
+					<Card2 />
+					<Card3 />
+					<Card4 />
+				</section>
+
+				<div className="text-center text-[clamp(40px,10vw,44px)] font-normal leading-[1.2] tracking-[-0.01em] sm:text-[64px] flex flex-col justify-center align-middle pt-12 pb-48 items-center">
+					{/* <Divider className="bg-default-500 w-[800px]" /> */}
+					<div className="flex justify-center flex-row gap-1 md:mx-24 sm:mx-6 z-50 relative py-12">
+						<Card5t />
+						<Card6t />
+					</div>
+					{/* <Divider className="bg-default-500 w-[800px]" /> */}
+				</div>
+			</main>
+			<motion.img
+				src={blob.src}
+				alt="blob green"
+				width={1200}
+				className=" block absolute -left-[300] sm:top-[500px] md:rigth-[1000px] sm:opacity-55 md:opacity-100"
+				style={{ translateY: translateY }}
+			/>
+
+			<motion.img
+				src={blob2.src}
+				alt="blob blue"
+				width={1500}
+				height={1500}
+				className="md:block md:absolute md:top-[900px] md:-right-[500px] hidden"
+				style={{ translateY: translateY2 }}
+			/>
+			<motion.img
+				src={blob2.src}
+				alt="blob blue"
+				width={1400}
+				className="block absolute md:top-[200px] md:-right-[600px] z-0 sm:top-[1200px] sm:right-[200px]"
+				style={{ translateY: translateY }}
+			/>
+
 			{/* <ScrollingBanner /> */}
 
-			<Info />
+			{/* <Info /> */}
 			{/* <Footer /> */}
 			{/* <Participants startups={[]} investors={[]} isDrawer={false} /> */}
 			<Modal

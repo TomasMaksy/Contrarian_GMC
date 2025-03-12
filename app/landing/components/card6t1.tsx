@@ -4,13 +4,7 @@ import type { CardProps } from "@heroui/react";
 
 import React from "react";
 import { Card, CardBody } from "@heroui/react";
-import {
-	m,
-	useMotionValue,
-	domAnimation,
-	LazyMotion,
-	useMotionTemplate,
-} from "framer-motion";
+import { useMotionValue } from "framer-motion";
 
 export default function Card1(props: CardProps) {
 	const mouseX = useMotionValue(0);
@@ -34,25 +28,10 @@ export default function Card1(props: CardProps) {
 		<Card
 			{...props}
 			ref={cardRef}
-			className="group relative w-[420px] bg-transparent shadow-large"
+			className="group relative w-[420px] bg-transparent shadow-none border-none"
 			radius="lg"
 			onMouseMove={onMouseMove}
 		>
-			<LazyMotion features={domAnimation}>
-				<m.div
-					className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-250 group-hover:opacity-100 flex flex-col"
-					style={{
-						background: useMotionTemplate`
-            radial-gradient(
-              500px circle at ${mouseX}px ${mouseY}px,
-              rgba(10, 109, 173, 0),
-              transparent 80%
-            )
-          `, // <- Add your own color here
-					}}
-				/>
-			</LazyMotion>
-
 			<CardBody className="pt-4 flex flex-col items-center align-top text-center justify-start py-4 gap-4 p-4">
 				<p className="lg:text-3xl sm:text-xl text-neutral-50 font-extrabold">
 					Evening dinner
