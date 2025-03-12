@@ -4,7 +4,15 @@ import clsx from "clsx";
 import { Providers } from "./providers"; // Adjust the import path as needed
 import { Analytics } from "@vercel/analytics/react";
 
+import type { Metadata } from "next";
+
 const dmSans = DM_Sans({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+	title: "Growth Meets Capital",
+	description:
+		"Invite-only side event of Energy Tech Summit bringing leading growth investors and entrepreneurs together under one roof.",
+};
 
 export default function RootLayout({
 	children,
