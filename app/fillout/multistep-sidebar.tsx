@@ -58,12 +58,12 @@ const MultiStepSidebar = React.forwardRef<
 			<div
 				ref={ref}
 				className={cn(
-					"flex md:h-full sm:h-full mt-5 w-full gap-x-2 overflow-clip z-10 ",
+					"flex md:h-full sm:h-full w-full gap-x-2 overflow-clip z-10 ",
 					className
 				)}
 				{...props}
 			>
-				<div className=" hidden min-h-[calc(100vh-180px)] w-[400px] flex-shrink-0 flex-col justify-between items-start gap-y-8 rounded-large bg-gradient-to-tl to-[#0a6dad] from-[#42bbb2] px-8 py-6 shadow-small lg:flex">
+				<div className=" hidden min-h-[calc(100vh-150px)] w-[400px] flex-shrink-0 flex-col justify-between items-start gap-y-8 rounded-large bg-gradient-to-tl to-[#0a6dad] from-[#42bbb2] px-8 py-6 shadow-small lg:flex">
 					<div className="flex flex-col items-left gap-4">
 						<Button
 							className="bg-default-50 text-small font-medium text-default-500 shadow-lg"
@@ -121,7 +121,7 @@ const MultiStepSidebar = React.forwardRef<
 						/>
 					</div>
 				</div>
-				<div className="md:container flex h-full w-full flex-col items-center gap-4 md:p-4 ">
+				<div className="md:container flex h-full w-full flex-col items-center gap-4 md:p-4">
 					<div className=" top-0 z-10 w-full rounded-large bg-gradient-to-tl to-[#0a6dad] via-black-500 from-[#3fafa8] py-4 shadow-small md:max-w-xl lg:hidden ">
 						<div className="flex justify-center">
 							{/* Mobile Steps */}

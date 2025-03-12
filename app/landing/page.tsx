@@ -63,9 +63,9 @@ export default function About() {
 	const translateY2 = useTransform(scrollYProgress, [0, 1], [-1300, 0]);
 
 	return (
-		<main className="dark bg-black scrollbar-hide">
-			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative md:min-h-screen md:justify-center sm:justify-top sm:pt-12 ">
-				<div className="w-max h-max flex flex-col justify-center items-center gap-4 md:mb-48 md:-mt-64 sm:scale-80 md:scale-100 relative z-50">
+		<main className="dark bg-black scrollbar-hide overflow-auto">
+			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative min-h-screen justify-between sm:pt-12 ">
+				<div className="w-max h-max flex flex-col justify-between items-center gap-4 sm:scale-80 md:scale-90 relative z-50">
 					<span className="font-normal text-lg text-default-600 tracking-tight">
 						Hosted by
 					</span>
@@ -100,7 +100,7 @@ export default function About() {
 						</a>
 					</div>
 				</div>
-				<section className="z-20 flex flex-col items-center justify-center  gap-[18px] sm:gap-6 h-max py-24 md:pb-36">
+				<section className="z-20 flex flex-col items-center justify-center gap-[18px] sm:gap-6 h-max py- md:pb-12 md:scale-100 sm:scale-90">
 					<Link
 						href={"https://energytechsummit.com/"}
 						target="_blank"
@@ -161,7 +161,7 @@ export default function About() {
 						</Button> */}
 					</div>
 				</section>
-				<section className=" flex-wrap z-50">
+				<section className=" flex-wrap z-50 pb-24">
 					<div className="w-full max-w-screen-lg overflow-hidden">
 						<ScrollingBanner2
 							isReverse={false}

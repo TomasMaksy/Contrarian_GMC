@@ -80,13 +80,13 @@ const SupportCard = React.forwardRef<HTMLDivElement, SupportCardProps>(
 				<Drawer
 					isOpen={isOpen}
 					onOpenChange={onOpenChange}
-					className="bg-black md:border-2 sm:border-0 border-default-100 shadow-large"
+					className="bg-black md:border-2 sm:border-0 border-default-100 shadow-large scrollbar-hide"
 					size="lg"
 				>
-					<DrawerContent>
+					<DrawerContent className="scrollbar-hide">
 						{(onClose) => (
 							<>
-								<DrawerBody>
+								<DrawerBody className="scrollbar-hide">
 									<main className="dark bg-black flex flex-col">
 										{/* Load Hero eagerly */}
 										<Hero

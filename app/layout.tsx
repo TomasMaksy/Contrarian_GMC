@@ -27,7 +27,7 @@ export default function RootLayout({
 			<body
 				className={clsx(
 					dmSans.className,
-					"antialiased bg-[#000] dark text-default-600 min-h-screen flex flex-col"
+					"antialiased bg-[#000] dark min-h-screen text-default-600 flex flex-col "
 				)}
 			>
 				<Providers>{children}</Providers>

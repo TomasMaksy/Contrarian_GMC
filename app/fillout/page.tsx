@@ -404,9 +404,9 @@ export default function Fillout() {
 	}, [direction, page, formValues, setFormValues, startups, investors]);
 
 	return (
-		<main className="dark h-max bg-black relative overflow-x-hidden">
+		<main className="dark h-max bg-black relative overflow-hidden scrollbar-hide">
 			<Header />
-			<div className="items-center container  flex">
+			<div className="items-center container mb-12 flex mt-2">
 				<MultistepSidebar
 					currentPage={page}
 					onBack={onBack}

@@ -26,9 +26,6 @@
     }
   }
 }
-* {
-  touch-action: none;
-}
 
 @layer base {
   :root {
@@ -89,4 +86,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+html, body {
+  overflow-y: auto !important;
 }

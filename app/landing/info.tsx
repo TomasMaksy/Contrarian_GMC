@@ -34,7 +34,7 @@ export const Info = () => {
 				<Card4 />
 			</section>
 
-			<section className=" relative md:py-36 md:pb-60 sm:pb-36 overflow-hidden">
+			<section className=" relative md:py-36 md:pb-60 sm:pb-48 overflow-hidden">
 				<div className="text-center text-[clamp(40px,10vw,44px)] font-normal leading-[1.2] tracking-[-0.01em] sm:text-[64px]  flex flex-col justify-center align-middle">
 					<div className="flex justify-center flex-row gap-1 md:mx-24 sm:mx-6 z-50 pt-12 relative">
 						<Card5t />
