@@ -32,14 +32,14 @@ export default function Card1(props: CardProps) {
 			radius="lg"
 			onMouseMove={onMouseMove}
 		>
-			<CardBody className="pt-4 flex flex-col items-center align-top text-center justify-start py-4 gap-4 p-4">
+			<CardBody className="pt-4 flex flex-col items-center align-top text-center justify-start py-4 gap-4 p-4 w-full">
 				<p className="lg:text-3xl sm:text-xl text-neutral-50 font-extrabold">
 					Evening dinner
 				</p>
 				<p className="align-middle font-black lg:text-lg sm:text-sm text-neutral-400 tracking-tight pt-2">
 					When: <br />{" "}
 					<span className="font-normal tracking-normal ">
-						Day 1 (April 9) 8 PM to 10 PM{" "}
+						Day 1 (April 9) 8 PM to 10 PM
 					</span>
 					<br />
 					<br />

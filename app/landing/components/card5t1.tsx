@@ -33,7 +33,7 @@ export default function Card1(props: CardProps) {
 			radius="lg"
 			onMouseMove={onMouseMove}
 		>
-			<CardBody className="pt-4 flex flex-col items-center align-top text-center justify-start py-4 gap-4 p-4 ">
+			<CardBody className="pt-4 flex flex-col items-center align-top text-center justify-start py-4 gap-4 p-4 w-full ">
 				<p className="lg:text-3xl sm:text-xl text-neutral-50 font-extrabold text-wrap">
 					Day activities
 				</p>

@@ -204,16 +204,16 @@ export default function About() {
 					</p>
 				</section>
 
-				<section className="flex justify-center flex-row md:gap-5 sm:gap-1 md:mx-40 sm:mx-6 sm:mb-12 md:mb-24 ">
+				<section className="flex justify-center flex-row md:gap-5 sm:gap-1 max-w-screen-lg sm:mb-12 md:mb-24 w-full ">
 					<Card1 />
 					<Card2 />
 					<Card3 />
 					<Card4 />
 				</section>
 
-				<div className="text-center text-[clamp(40px,10vw,44px)] font-normal leading-[1.2] tracking-[-0.01em] sm:text-[64px] flex flex-col justify-center align-middle pt-12 pb-48 items-center">
+				<div className="text-center w-full font-normal leading-[1.2] tracking-[-0.01em] sm:text-[64px] flex flex-col justify-center align-middle pt-12 pb-48 items-center gap-6">
 					{/* <Divider className="bg-default-500 w-[800px]" /> */}
-					<div className="flex justify-center flex-row gap-1 md:mx-24 sm:mx-6 z-50 relative py-12">
+					<div className="flex justify-center flex-row md:gap-5 sm:gap-1 max-w-screen-md w-full">
 						<Card5t />
 						<Card6t />
 					</div>
@@ -231,15 +231,15 @@ export default function About() {
 			<motion.img
 				src={blob2.src}
 				alt="blob blue"
-				width={2200}
-				className="block md:absolute md:top-[700px] md:-right-[800px]"
+				width={1500}
+				className="block absolute md:top-[700px] md:-right-[800px] sm:top-[1100px] sm:right-[200px]"
 				style={{ translateY: translateY2 }}
 			/>
 			<motion.img
 				src={blob2.src}
 				alt="blob blue"
 				width={1400}
-				className="md:block absolute md:top-[1800px] md:right-[600px] z-0 hidden opacity-30"
+				className="md:block md:absolute md:top-[1800px] md:right-[600px] z-0 sm:hidden opacity-30"
 				style={{ translateY: translateY3 }}
 			/>
 
