@@ -66,7 +66,6 @@ const Hero = ({ startups, investors, isDrawer = false }: HeroProps) => {
 		: selected === "investors"
 		? loaded_investors
 		: loaded_startups;
-	console.log(displayedData);
 	const { scrollYProgress } = useScroll();
 	const translateY = useTransform(scrollYProgress, [0, 1], [1500, -1000]);
 

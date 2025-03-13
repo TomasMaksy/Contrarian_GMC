@@ -6,7 +6,6 @@ export async function GET() {
     const urls = [
         { loc: "/", lastmod: "2025-03-13", changefreq: "daily", priority: "1.0" },
         { loc: "/home", lastmod: "2025-03-11", changefreq: "monthly", priority: "0.8" },
-        { loc: "/fillout", lastmod: "2025-03-13", changefreq: "weekly", priority: "0.1" },
         { loc: "/participants", lastmod: "2025-03-11", changefreq: "weekly", priority: "0.8" },
 
     ];

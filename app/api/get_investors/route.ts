@@ -49,8 +49,8 @@ export async function GET() {
       return {
         id: record.id,
         name: (record.get("Investor Name") as string) || "Unknown",
-        representative: (record.get("Representative Name") as string) || "N/A",
-        title: (record.get("Representative Title") as string) || "N/A",
+        representative: "N/A",
+        title: "N/A",
         website: (record.get("Website") as string) || "N/A",
         logo: logoUrl, // Use the logo URL
         type: (record.get("Type") as string) || "N/A",
