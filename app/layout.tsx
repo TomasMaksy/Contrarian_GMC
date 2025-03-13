@@ -5,7 +5,6 @@ import { Providers } from "./providers"; // Adjust the import path as needed
 import { Analytics } from "@vercel/analytics/react";
 
 import type { Metadata } from "next";
-import { add } from "lodash";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
