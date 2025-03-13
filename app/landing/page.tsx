@@ -89,7 +89,7 @@ export default function About() {
 							<Image
 								src={contrarian_white.src}
 								alt="Contrarian Ventures"
-								className="mt-1 z-50"
+								className="mt-1 z-40"
 								width={150}
 								isBlurred
 							/>
