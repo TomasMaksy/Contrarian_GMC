@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 import blob from "@/app/assets/blob.png";
 import blob2sm from "@/app/assets/blob2sm.png";
 import blob2 from "@/app/assets/blob2.png";
@@ -10,15 +10,8 @@ import blob2 from "@/app/assets/blob2.png";
 import Link from "next/link";
 // import About from "../about/page";
 
-import contrarian_white from "@/app/assets/Contrarian_logo_white.png";
-import bbva_white from "@/app/assets/BBVA_logo_white.png";
-
-import { Image } from "@heroui/react";
 import NImage from "next/image";
 export const Hero = () => {
-	const { scrollYProgress } = useScroll();
-	const translateY = useTransform(scrollYProgress, [0, 1], [15, -1000]);
-
 	return (
 		<>
 			<section className="min-h-screen w-full pt-8 bg-[radial-gradient(ellipse_120%_90%_at_top_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-center z-0">
@@ -66,83 +59,6 @@ export const Hero = () => {
 								</Link>
 							</div>
 						</div>
-						<div className="lg:hidden sm:scale-75 md:scale-100 mt-12">
-							<div className="text-sm rounded-lg -tracking-tight text-white/50 mb-4 w-full text-start ml-2">
-								Powered by
-							</div>
-							<div className="w-max flex flex-row items-center -mr-1 backdrop-blur-2xl shadow-2xl duration-300 z-50 border border-[#fff]/25 px-5 py-6 rounded-lg ">
-								<a
-									href="https://www.cventures.vc/"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="block "
-								>
-									<Image
-										src={contrarian_white.src}
-										alt="Contrarian Ventures"
-										className="-ml-2 z-50 mt-2 "
-										width={250}
-										isBlurred
-									/>
-								</a>
-
-								<a
-									href="https://www.bbva.com/"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="block"
-								>
-									<Image
-										src={bbva_white.src}
-										alt="Contrarian Ventures"
-										width={200}
-										isBlurred
-										className=""
-									/>
-								</a>
-							</div>
-						</div>
-						<motion.div
-							className="items-center flex flex-col justify-center lg:scale-100 md:scale-60 z-50 sm:mt-12 lg:-mt-24 sm:hidden lg:block"
-							style={{ translateY: translateY }}
-						>
-							<div className="shadow-2xl">
-								<div className="text-sm rounded-lg -tracking-tight text-white/50 mb-4 w-full text-start ml-2">
-									Powered by
-								</div>
-								<div className="w-max flex flex-col items-center -mr-1 relative backdrop-blur-3xl shadow-2xl  h-full opacity-75 hover:opacity-100 duration-300 z-50 border border-[#fff]/25 px-5 py-6 rounded-lg ">
-									<a
-										href="https://www.cventures.vc/"
-										target="_blank"
-										rel="noopener noreferrer"
-										className="block "
-									>
-										<Image
-											src={contrarian_white.src}
-											alt="Contrarian Ventures"
-											className="-ml-2 z-50 "
-											width={400}
-											isBlurred
-										/>
-									</a>
-
-									<a
-										href="https://www.bbva.com/"
-										target="_blank"
-										rel="noopener noreferrer"
-										className="block"
-									>
-										<Image
-											src={bbva_white.src}
-											alt="Contrarian Ventures"
-											width={350}
-											isBlurred
-											className=""
-										/>
-									</a>
-								</div>
-							</div>
-						</motion.div>
 
 						<motion.img
 							src={blob2.src}

@@ -9,7 +9,6 @@ import {
 	Image,
 	// Divider,
 	Chip,
-	Tooltip,
 } from "@heroui/react";
 // import { Icon } from "@iconify/react";
 import type { OrganisationTypes } from "../utils/types";

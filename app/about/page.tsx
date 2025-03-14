@@ -65,9 +65,9 @@ export default function About() {
 
 	const { scrollYProgress } = useScroll();
 
-	const translateY = useTransform(scrollYProgress, [0, 1], [-900, 100]);
-	const translateY2 = useTransform(scrollYProgress, [0, 1], [-600, -300]);
-	const translateY3 = useTransform(scrollYProgress, [0, 1], [-100, -600]);
+	const translateY = useTransform(scrollYProgress, [0, 1], [-700, 100]); //green + on sm
+	const translateY2 = useTransform(scrollYProgress, [0, 1], [-1200, -100]); //blue big + on sm
+	const translateY3 = useTransform(scrollYProgress, [0, 1], [-500, -1000]);
 
 	return (
 		<main className="dark bg-black scrollbar-hide overflow-hidden relative">
