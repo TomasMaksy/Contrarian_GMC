@@ -21,11 +21,11 @@ export const Hero = () => {
 
 	return (
 		<>
-			<section className="h-full w-full pt-8 bg-[radial-gradient(ellipse_120%_90%_at_top_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-center z-0">
+			<section className="min-h-screen w-full pt-8 bg-[radial-gradient(ellipse_120%_90%_at_top_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-center z-0">
 				<div className="container relative">
-					<div className="flex items-center pb-5 lg:flex-row sm:flex-col justify-between sm:mt-24">
+					<div className="flex items-center pb-5 lg:flex-row sm:flex-col justify-between sm:mt-12">
 						<div className="md:w-[478px]">
-							<div className="text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50">
+							<div className=" text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50 w-max">
 								Plan your meetings
 							</div>
 							<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-br from-[#ffffff] to-gray-500 text-transparent bg-clip-text mt-6">
@@ -66,11 +66,47 @@ export const Hero = () => {
 								</Link>
 							</div>
 						</div>
+						<div className="lg:hidden sm:scale-75 md:scale-100 mt-12">
+							<div className="text-sm rounded-lg -tracking-tight text-white/50 mb-4 w-full text-start ml-2">
+								Powered by
+							</div>
+							<div className="w-max flex flex-row items-center -mr-1 backdrop-blur-2xl shadow-2xl duration-300 z-50 border border-[#fff]/25 px-5 py-6 rounded-lg ">
+								<a
+									href="https://www.cventures.vc/"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="block "
+								>
+									<Image
+										src={contrarian_white.src}
+										alt="Contrarian Ventures"
+										className="-ml-2 z-50 mt-2 "
+										width={250}
+										isBlurred
+									/>
+								</a>
+
+								<a
+									href="https://www.bbva.com/"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="block"
+								>
+									<Image
+										src={bbva_white.src}
+										alt="Contrarian Ventures"
+										width={200}
+										isBlurred
+										className=""
+									/>
+								</a>
+							</div>
+						</div>
 						<motion.div
-							className="items-center flex flex-col justify-center lg:scale-100 md:scale-60 z-50 sm:mt-12 lg:-mt-24 "
+							className="items-center flex flex-col justify-center lg:scale-100 md:scale-60 z-50 sm:mt-12 lg:-mt-24 sm:hidden lg:block"
 							style={{ translateY: translateY }}
 						>
-							<div className="lg:scale-100 sm:scale-75 shadow-2xl">
+							<div className="shadow-2xl">
 								<div className="text-sm rounded-lg -tracking-tight text-white/50 mb-4 w-full text-start ml-2">
 									Powered by
 								</div>

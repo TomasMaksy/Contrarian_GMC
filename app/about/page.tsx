@@ -166,7 +166,7 @@ export default function About() {
 				src={blob.src}
 				alt="blob green"
 				width={1200}
-				className=" block absolute  md:top-[800px] sm:top-[800px] md:right-[1000px] sm:-right-[200px] sm:opacity-55 md:opacity-100 z-10"
+				className=" block absolute  md:top-[800px] sm:top-[900px] md:right-[1000px] sm:-right-[200px] sm:opacity-55 md:opacity-100 z-10"
 				style={{ translateY: translateY }}
 			/>
 
@@ -174,7 +174,7 @@ export default function About() {
 				src={blob2.src}
 				alt="blob blue"
 				width={1500}
-				className="block absolute md:top-[700px] md:-right-[800px] sm:top-[1100px] sm:right-[200px]"
+				className="block absolute md:top-[700px] md:-right-[800px] sm:top-[1500px] sm:right-[200px]"
 				style={{ translateY: translateY2 }}
 			/>
 			<motion.img

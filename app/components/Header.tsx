@@ -4,6 +4,7 @@ import Logo from "@/app/assets/logo.png";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@heroui/react";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
 	// Scroll function
@@ -16,6 +17,7 @@ export const Header = () => {
 	// 		window.scrollTo({ top: yPosition, behavior: "smooth" });
 	// 	}
 	// };
+	const router = useRouter(); // Use the hook inside the component
 
 	return (
 		<header className="sticky top-0 backdrop-blur-sm z-50">
@@ -43,14 +45,14 @@ export const Header = () => {
 							<button className="custom-btn-hover text-[14px]">
 								<a href="/participants">Participants</a>
 							</button>
-
-							<Link href="/fillout" passHref>
-								<div className="group">
-									<Button className="bg-[#3fafa8]/70 text-white px-4 py-2 rounded-lg font-medium inline-flex justify-center tracking-tight  hover:bg-[#429f99a5] duration-400 flex-nowrap">
-										Form
-									</Button>
-								</div>
-							</Link>
+							<div className="group">
+								<Button
+									onPress={() => router.push("/fillout")}
+									className="bg-[#3fafa8]/70 text-white px-4 py-2 rounded-lg font-medium inline-flex justify-center tracking-tight  hover:bg-[#429f99a5] duration-300 flex-nowrap"
+								>
+									Form
+								</Button>
+							</div>
 						</nav>
 					</div>
 				</div>
