@@ -2,8 +2,6 @@
 
 import { ArrowRight } from "lucide-react";
 import { easeInOut, motion } from "framer-motion";
-
-import Image from "next/image";
 import blob from "@/app/assets/blob.png";
 import blob2sm from "@/app/assets/blob2sm.png";
 import blob2 from "@/app/assets/blob2.png";
@@ -12,6 +10,11 @@ import blob2 from "@/app/assets/blob2.png";
 import Link from "next/link";
 // import About from "../about/page";
 
+import contrarian_white from "@/app/assets/Contrarian_logo_white.png";
+import bbva_white from "@/app/assets/BBVA_logo_white.png";
+
+import { Image } from "@heroui/react";
+import NImage from "next/image";
 export const Hero = () => {
 	// Scroll function
 	const scrollToAnalysis = () => {
@@ -26,9 +29,9 @@ export const Hero = () => {
 
 	return (
 		<>
-			<section className="fixed h-screen w-full pt-8 md:pt-5 md:pb-12 bg-[radial-gradient(ellipse_120%_90%_at_top_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-between z-0 top-0">
-				<div className="container relative sm:mt-28 md:mt-56 md:mb-72 sm:mb-24">
-					<div className="md:flex items-center pb-5">
+			<section className="h-screen w-full pt-8 bg-[radial-gradient(ellipse_120%_90%_at_top_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-center z-0">
+				<div className="container relative ">
+					<div className="flex items-center pb-5 lg:flex-row sm:flex-col justify-between">
 						<div className="md:w-[478px]">
 							<div className="text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50">
 								Plan your meetings
@@ -44,11 +47,8 @@ export const Hero = () => {
 
 							<div className="flex gap-10 items-center mt-[40px] ">
 								<Link href="/fillout">
-									<button
-										onClick={scrollToAnalysis}
-										className="px-8 pr-12 custom-btn custom-btn-primary relative flex items-center justify-between group hover:bg-[#151515] duration-300 "
-									>
-										<Image
+									<button className="px-8 pr-12 custom-btn custom-btn-primary relative flex items-center justify-between group hover:bg-[#151515] duration-300 ">
+										<NImage
 											src={blob}
 											alt="OpenAI logo"
 											className="h-7 w-7 ease absolute left-[17px] translate-x-0 opacity-100 transition duration-300 group-hover:-translate-x-full group-hover:scale-x-50 group-hover:opacity-0 group-hover:blur-sm"
@@ -60,11 +60,8 @@ export const Hero = () => {
 									</button>
 								</Link>
 								<Link href={"/participants"}>
-									<button
-										onClick={scrollToAnalysis}
-										className="px-8 custom-btn custom-btn-text relative flex items-center justify-between group duration-200"
-									>
-										<Image
+									<button className="px-8 custom-btn custom-btn-text relative flex items-center justify-between group duration-200">
+										<NImage
 											src={blob2sm}
 											alt="OpenAI logo"
 											className="h-7 w-7 ease absolute left-[8px] translate-x-0 opacity-100 transition duration-300 group-hover:-translate-x-full group-hover:scale-x-50 group-hover:opacity-0 group-hover:blur-sm"
@@ -77,11 +74,47 @@ export const Hero = () => {
 								</Link>
 							</div>
 						</div>
+						<div className="items-center flex flex-col justify-center md:scale-100 scale-75 z-50 sm:mt-12 lg:-mt-24 shadow-2xl">
+							<div className="text-sm rounded-lg -tracking-tight text-white/50 mb-4 w-full text-start ml-2">
+								Powered by
+							</div>
+							<div className="w-max flex flex-col items-center -mr-1 relative backdrop-blur-3xl shadow-2xl  h-full opacity-75 hover:opacity-100 duration-300 z-50 border border-[#fff]/25 px-5 py-6 rounded-lg ">
+								<a
+									href="https://www.cventures.vc/"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="block "
+								>
+									<Image
+										src={contrarian_white.src}
+										alt="Contrarian Ventures"
+										className="-ml-2 z-50 "
+										width={400}
+										isBlurred
+									/>
+								</a>
+
+								<a
+									href="https://www.bbva.com/"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="block"
+								>
+									<Image
+										src={bbva_white.src}
+										alt="Contrarian Ventures"
+										width={350}
+										isBlurred
+										className=""
+									/>
+								</a>
+							</div>
+						</div>
 
 						<motion.img
 							src={blob2.src}
 							alt="img"
-							className="md:block md:absolute md:h-[1000px] md:w-auto md:max-w-none md:left-80 lg:left-[700px] hidden hover:opacity-65 duration-300"
+							className="md:block md:absolute md:h-[1000px] md:w-auto md:max-w-none md:left-80 lg:left-[700px] hidden  duration-300"
 							animate={{ translateY: [-100, -280] }}
 							transition={{
 								repeat: Infinity,

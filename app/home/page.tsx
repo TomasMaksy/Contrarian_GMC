@@ -1,7 +1,7 @@
 import { Header } from "@/app/components/Header";
-// import { Hero } from "@/app/components/Hero";
+import { Hero } from "@/app/components/Hero";
 import Footer from "@/app/components/Footer";
-import Landing from "@/app/landing/page";
+import About from "@/app/about/page";
 
 export default function Home() {
 	return (
@@ -9,8 +9,10 @@ export default function Home() {
 			<div className="fixed z-50 top-0 justify-between w-full mb-4">
 				<Header />
 			</div>
+			<Hero />
 			<div className="flex flex-col justify-center">
-				<Landing />
+				{/* <Divider /> */}
+				<About />
 
 				<Footer />
 			</div>
