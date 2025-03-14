@@ -8,9 +8,9 @@ import blob from "@/app/assets/blob.png";
 import blob2sm from "@/app/assets/blob2sm.png";
 import blob2 from "@/app/assets/blob2.png";
 
-import ScrollingBanner from "@/app/about/scrollingBanner";
+// import ScrollingBanner from "@/app/about/scrollingBanner";
 import Link from "next/link";
-import About from "../about/page";
+// import About from "../about/page";
 
 export const Hero = () => {
 	// Scroll function
@@ -26,7 +26,7 @@ export const Hero = () => {
 
 	return (
 		<>
-			<section className="pt-8 md:pt-5 md:pb-12 bg-[radial-gradient(ellipse_120%_70%_at_bottom_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-between">
+			<section className="fixed h-screen w-full pt-8 md:pt-5 md:pb-12 bg-[radial-gradient(ellipse_120%_90%_at_top_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-between z-0 top-0">
 				<div className="container relative sm:mt-28 md:mt-56 md:mb-72 sm:mb-24">
 					<div className="md:flex items-center pb-5">
 						<div className="md:w-[478px]">
@@ -94,8 +94,8 @@ export const Hero = () => {
 				</div>
 			</section>
 
-			<ScrollingBanner />
-			<About />
+			{/* <ScrollingBanner />
+			<About /> */}
 		</>
 	);
 };
