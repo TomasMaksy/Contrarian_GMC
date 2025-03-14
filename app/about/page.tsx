@@ -3,7 +3,7 @@ import React from "react";
 import {
 	Button,
 	// Divider,
-	Image,
+	// Image,
 	Modal,
 	ModalContent,
 	useDisclosure,

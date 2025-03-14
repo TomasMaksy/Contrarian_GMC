@@ -16,17 +16,6 @@ import bbva_white from "@/app/assets/BBVA_logo_white.png";
 import { Image } from "@heroui/react";
 import NImage from "next/image";
 export const Hero = () => {
-	// Scroll function
-	const scrollToAnalysis = () => {
-		const analysisSection = document.getElementById("analysis-section");
-		if (analysisSection) {
-			const yOffset = -140; // Leave 50px above
-			const yPosition =
-				analysisSection.getBoundingClientRect().top + window.scrollY + yOffset;
-			window.scrollTo({ top: yPosition, behavior: "smooth" });
-		}
-	};
-
 	return (
 		<>
 			<section className="h-screen w-full pt-8 bg-[radial-gradient(ellipse_120%_90%_at_top_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-center z-0">
