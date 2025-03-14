@@ -15,7 +15,7 @@ export default function Home() {
 			</div>
 			<Hero />
 
-			<div className="w-full flex flex-col items-center justify-center mb-24 ml-2 mt-12">
+			<div className="w-full flex flex-col items-center justify-center mb-24 ml-3 mt-12">
 				<div className="sm:scale-75 md:scale-100 ">
 					<div className="text-sm rounded-lg -tracking-tight text-white/50  w-full text-center -ml-4">
 						Powered by
@@ -31,7 +31,7 @@ export default function Home() {
 								src={contrarian_white.src}
 								alt="Contrarian Ventures"
 								className="-ml-2 mt-2 "
-								width={230}
+								width={180}
 								isBlurred
 							/>
 						</a>
@@ -45,7 +45,7 @@ export default function Home() {
 							<Image
 								src={bbva_white.src}
 								alt="Contrarian Ventures"
-								width={180}
+								width={140}
 								isBlurred
 								className="z-50"
 							/>
