@@ -107,12 +107,26 @@ const MultiStepSidebar = React.forwardRef<
 					</div>
 					<div className="flex flex-col items-center gap-12 w-full">
 						<div className="flex flex-row items-center gap-4 opacity-75 w-max">
-							<Image
-								src={contrarian_logo}
-								alt="Contrarian Ventures"
-								width={165}
-							/>
-							<Image src={bbva_logo} alt="BBVA logo" width={120} />
+							<a
+								href="https://www.cventures.vc/"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="block "
+							>
+								<Image
+									src={contrarian_logo}
+									alt="Contrarian Ventures"
+									width={165}
+								/>
+							</a>
+							<a
+								href="https://www.bbva.com/"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="block"
+							>
+								<Image src={bbva_logo} alt="BBVA logo" width={120} />
+							</a>
 						</div>
 						<SupportCard
 							startups={startups}

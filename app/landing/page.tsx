@@ -76,7 +76,7 @@ export default function About() {
 		<main className="dark bg-black scrollbar-hide overflow-hidden relative">
 			<main className="bg-black flex flex-1 flex-col items-center overflow-hidden dark relative min-h-screen justify-between sm:pt-12 h-full">
 				<div className="w-max h-max flex flex-col justify-between items-center gap-4 sm:scale-80 md:scale-90 relative z-50">
-					<span className="font-normal text-lg text-default-600 tracking-tight">
+					<span className="font-normal text-lg text-default-600 tracking-tight md:mt-10 sm:mt-16">
 						Hosted by
 					</span>
 					<div className="w-max h-max flex flex-row justify-center items-center gap-10 relative z-50 mr-4">
@@ -171,7 +171,7 @@ export default function About() {
 						</Button> */}
 					</div>
 				</section>
-				<section className=" flex-wrap z-50 pb-24">
+				<section className=" flex-wrap z-40 pb-24">
 					<div className="w-full max-w-screen-lg overflow-hidden">
 						<ScrollingBanner2
 							isReverse={false}
@@ -192,7 +192,7 @@ export default function About() {
 					</div>
 				</section>
 			</main>
-			<main className="dark relative overflow-hidden flex flex-col gap-12 z-50 items-center">
+			<main className="dark relative overflow-hidden flex flex-col gap-12 z-40 items-center">
 				<section className="text-2xl bg-clip-text text-white flex flex-col items-center mb-5 pt-24 tracking-tight">
 					<p className="z-10 mb-5 font-semibold">About the Event </p>
 

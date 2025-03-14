@@ -240,8 +240,8 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 							value={formData.stage}
 							onChange={(e) => handleChange("stage", e.target.value)}
 						>
-							<SelectItem key="Pre-seed">Pre-seed</SelectItem>
-							<SelectItem key="Seed">Seed</SelectItem>
+							{/* <SelectItem key="Pre-seed">Pre-seed</SelectItem>
+							<SelectItem key="Seed">Seed</SelectItem> */}
 							<SelectItem key="Series A">Series A</SelectItem>
 							<SelectItem key="Series B">Series B</SelectItem>
 							<SelectItem key="Series C or above">Series C or above</SelectItem>
@@ -324,21 +324,7 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 						size="lg"
 					/>
 				</div>
-				<div className="pb-5">
-					<Checkbox
-						isSelected={agreed}
-						onValueChange={handleChangeCheckbox}
-						size="md"
-						aria-label="Agree to terms and conditions"
-						isRequired
-					>
-						<span className="leading-[1.15] block pl-1">
-							I understand and agree that my personal data might be used for
-							Energy Tech Summit marketing purposes{" "}
-						</span>
-					</Checkbox>
-					{error && <p className="text-danger text-sm">{error}</p>}
-				</div>
+
 				<div className="flex flex-col gap-1">
 					<p className="text-default-600 p-1 leading-tight font-semibold">
 						Do you have a company that you would like to{" "}
@@ -413,6 +399,21 @@ export default function WaitlistForm({ onClose }: ContactFormProps) {
 							</div>
 						</Tab>
 					</Tabs>
+				</div>
+				<div>
+					<Checkbox
+						isSelected={agreed}
+						onValueChange={handleChangeCheckbox}
+						size="md"
+						aria-label="Agree to terms and conditions"
+						isRequired
+					>
+						<span className="leading-[1.15] block pl-1">
+							I understand and agree that my personal data might be used for
+							Energy Tech Summit marketing purposes{" "}
+						</span>
+					</Checkbox>
+					{error && <p className="text-danger text-sm">{error}</p>}
 				</div>
 			</ModalBody>
 			<ModalFooter>

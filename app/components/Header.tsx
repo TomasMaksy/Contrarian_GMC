@@ -3,6 +3,7 @@
 import Logo from "@/app/assets/logo.png";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@heroui/react";
 
 export const Header = () => {
 	// Scroll function
@@ -39,14 +40,15 @@ export const Header = () => {
 						</div>
 						{/* <Menu className="h-5 w-5 md:hidden" /> */}
 						<nav className="flex gap-4 text-white items-center">
-							<button className="custom-btn-hover sm:text-[12px] md:text-[16px]">
+							<button className="custom-btn-hover text-[14px]">
 								<a href="/participants">Participants</a>
 							</button>
+
 							<Link href="/fillout" passHref>
 								<div className="group">
-									<button className="bg-[#3fafa7cb] text-white px-4 py-2 rounded-lg font-medium inline-flex justify-center tracking-tight sm:text-[12px] md:text-[16px] hover:bg-[#3fafa7a5] duration-400 flex-nowrap">
+									<Button className="bg-[#3fafa8]/70 text-white px-4 py-2 rounded-lg font-medium inline-flex justify-center tracking-tight  hover:bg-[#429f99a5] duration-400 flex-nowrap">
 										Form
-									</button>
+									</Button>
 								</div>
 							</Link>
 						</nav>
