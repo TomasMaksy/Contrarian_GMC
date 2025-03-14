@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { easeInOut, motion } from "framer-motion";
+import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
 import blob from "@/app/assets/blob.png";
 import blob2sm from "@/app/assets/blob2sm.png";
 import blob2 from "@/app/assets/blob2.png";
@@ -16,6 +16,9 @@ import bbva_white from "@/app/assets/BBVA_logo_white.png";
 import { Image } from "@heroui/react";
 import NImage from "next/image";
 export const Hero = () => {
+	const { scrollYProgress } = useScroll();
+	const translateY = useTransform(scrollYProgress, [0, 1], [15, -1000]);
+
 	return (
 		<>
 			<section className="h-screen w-full pt-8 bg-[radial-gradient(ellipse_120%_90%_at_top_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-center z-0">
@@ -63,7 +66,10 @@ export const Hero = () => {
 								</Link>
 							</div>
 						</div>
-						<div className="items-center flex flex-col justify-center md:scale-100 scale-75 z-50 sm:mt-12 lg:-mt-24 shadow-2xl">
+						<motion.div
+							className="items-center flex flex-col justify-center md:scale-100 scale-75 z-50 sm:mt-12 lg:-mt-24 shadow-2xl"
+							style={{ translateY: translateY }}
+						>
 							<div className="text-sm rounded-lg -tracking-tight text-white/50 mb-4 w-full text-start ml-2">
 								Powered by
 							</div>
@@ -98,7 +104,7 @@ export const Hero = () => {
 									/>
 								</a>
 							</div>
-						</div>
+						</motion.div>
 
 						<motion.img
 							src={blob2.src}
