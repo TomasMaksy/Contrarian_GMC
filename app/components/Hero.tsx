@@ -25,10 +25,10 @@ export const Hero = () => {
 				<div className="container relative">
 					<div className="flex items-center pb-5 lg:flex-row sm:flex-col justify-between sm:mt-12 md:scale-100 sm:scale-90">
 						<div className="md:w-[478px] ">
-							<div className=" text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50 w-max ">
+							<div className=" text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50 w-max mt-1">
 								Plan your meetings
 							</div>
-							<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-br from-[#ffffff] to-gray-500 text-transparent bg-clip-text mt-6">
+							<h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-br from-[#ffffff] to-white text-transparent bg-clip-text mt-6">
 								Growth Meets Capital
 							</h1>
 							<p className="text-xl text-default-600 tracking-tight mt-6">
