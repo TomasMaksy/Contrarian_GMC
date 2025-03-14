@@ -23,7 +23,7 @@ export const Hero = () => {
 		<>
 			<section className="min-h-screen w-full pt-8 bg-[radial-gradient(ellipse_120%_90%_at_top_left,#3fafa8,black)] overflow-x-clip flex flex-col items-center justify-center z-0">
 				<div className="container relative">
-					<div className="flex items-center pb-5 lg:flex-row sm:flex-col justify-between sm:mt-12 scale-100 sm:scale-90">
+					<div className="flex items-center pb-5 lg:flex-row sm:flex-col justify-between sm:mt-12 md:scale-100 sm:scale-90">
 						<div className="md:w-[478px] ">
 							<div className=" text-sm inline-flex border border-[#fff]/25 px-3 py-1 rounded-lg -tracking-tight text-white/50 w-max ">
 								Plan your meetings
