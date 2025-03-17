@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    const baseUrl = "https://growthmeetscapital.com"; // Change this to your domain
+    const baseUrl = "https://www.growthmeetscapital.com"; // Change this to your domain
 
     const urls = [
         { loc: "/", lastmod: "2025-03-13", changefreq: "daily", priority: "1.0" },
