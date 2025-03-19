@@ -23,6 +23,7 @@ export default function RootLayout({
 		<html lang="en">
 			<head>
 				<link rel="icon" href="/favicon.ico" />
+				<link rel="canonical" href="https://growthmeetscapital.com/" />
 				<title>Growth Meets Capital</title>
 				<meta
 					name="viewport"
@@ -34,11 +35,7 @@ export default function RootLayout({
 					property="og:description"
 					content={String(metadata.description)}
 				/>
-				<meta
-					property="og:image"
-					content="https://www.growthmeetscapital.com/og-image.jpg"
-				/>
-				<meta property="og:url" content="https://www.growthmeetscapital.com" />
+				<meta property="og:url" content="https://growthmeetscapital.com" />
 				<meta property="og:type" content="website" />
 				<meta property="og:site_name" content="Growth Meets Capital" />
 				<meta name="twitter:card" content="summary_large_image" />
@@ -47,11 +44,6 @@ export default function RootLayout({
 					name="twitter:description"
 					content={String(metadata.description)}
 				/>
-				<meta
-					name="twitter:image"
-					content="https://www.growthmeetscapital.com/og-image.jpg"
-				/>
-				<meta name="twitter:site" content="@YourTwitterHandle" />
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
@@ -83,8 +75,8 @@ export default function RootLayout({
 								"@type": "Organization",
 								name: "Growth Meets Capital",
 							},
-							image: "https://www.growthmeetscapital.com/bg.png",
-							url: "https://www.growthmeetscapital.com",
+							image: "https://growthmeetscapital.com/bg.png",
+							url: "https://growthmeetscapital.com",
 							eventAttendanceMode: "OfflineEventAttendanceMode",
 						}),
 					}}
