@@ -107,7 +107,7 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 									>
 										Fundraising
 									</Chip>
-								) : (
+								) : organisation.fundraising === "No" ? (
 									<Chip
 										variant="bordered"
 										size="md"
@@ -117,7 +117,7 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 									>
 										Not Fundraising
 									</Chip>
-								)}
+								) : null}
 							</div>
 						</div>
 					</CardBody>
