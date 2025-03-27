@@ -137,6 +137,7 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 								}
 							}}
 							disabledKeys={disabledKeys}
+							itemHeight={45}
 						>
 							{(organisation) => (
 								<AutocompleteItem
