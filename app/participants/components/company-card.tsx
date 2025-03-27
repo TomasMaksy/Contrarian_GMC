@@ -13,7 +13,12 @@ import {
 } from "@heroui/react";
 // import { Icon } from "@iconify/react";
 import type { OrganisationTypes } from "../utils/types";
-import { ChartNoAxesColumnIncreasing, DollarSign, Contact } from "lucide-react";
+import {
+	ChartNoAxesColumnIncreasing,
+	DollarSign,
+	Contact,
+	X,
+} from "lucide-react";
 
 interface CompanyCardProps {
 	organisation: OrganisationTypes;
@@ -92,7 +97,7 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 								)}
 							</div>
 							<div className=" ">
-								{organisation.fundraising === "Yes" && (
+								{organisation.fundraising === "Yes" ? (
 									<Chip
 										variant="bordered"
 										size="md"
@@ -101,6 +106,16 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 										startContent={<DollarSign size={15} />}
 									>
 										Fundraising
+									</Chip>
+								) : (
+									<Chip
+										variant="bordered"
+										size="md"
+										radius="md"
+										className="pl-2.5 text-white/50"
+										startContent={<X size={15} />}
+									>
+										Not Fundraising
 									</Chip>
 								)}
 							</div>
