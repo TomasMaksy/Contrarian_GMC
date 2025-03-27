@@ -156,6 +156,31 @@ const IdentificationForm = React.forwardRef<
 						/>
 					</Tabs>
 					<div className="flex flex-col gap-4">
+						<Input
+							className="col-span-12 flex"
+							label="Full Name"
+							labelPlacement="inside"
+							name="first-name"
+							value={idName}
+							onValueChange={setFormName}
+							placeholder="Type your full name here"
+							{...inputProps}
+							isRequired
+							size="lg"
+						/>
+
+						<Input
+							className="col-span-12 flex"
+							label="Email"
+							name="email"
+							placeholder="john.doe@gmail.com"
+							type="email"
+							value={idEmail}
+							onValueChange={setFormEmail}
+							{...inputProps}
+							isRequired
+							size="lg"
+						/>
 						<Autocomplete
 							className="col-span-12 flex"
 							defaultItems={autocompleteOptions} // Dynamically update based on selected tab
@@ -182,31 +207,6 @@ const IdentificationForm = React.forwardRef<
 								</AutocompleteItem>
 							)}
 						</Autocomplete>
-						<Input
-							className="col-span-12 flex"
-							label="First Name"
-							labelPlacement="inside"
-							name="first-name"
-							value={idName}
-							onValueChange={setFormName}
-							placeholder="Type your first name here"
-							{...inputProps}
-							isRequired
-							size="lg"
-						/>
-
-						<Input
-							className="col-span-12 flex"
-							label="Email"
-							name="email"
-							placeholder="john.doe@gmail.com"
-							type="email"
-							value={idEmail}
-							onValueChange={setFormEmail}
-							{...inputProps}
-							isRequired
-							size="lg"
-						/>
 					</div>
 				</form>
 			</main>
