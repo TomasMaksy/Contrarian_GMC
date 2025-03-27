@@ -142,7 +142,6 @@ const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 								<AutocompleteItem
 									key={organisation.id}
 									textValue={organisation.name}
-									className="p-2"
 								>
 									<div className="flex gap-2 items-center">
 										<img

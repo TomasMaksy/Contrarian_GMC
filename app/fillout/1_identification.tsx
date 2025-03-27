@@ -190,6 +190,11 @@ const IdentificationForm = React.forwardRef<
 							value={idOrg}
 							isRequired
 							size="lg"
+							inputProps={{
+								classNames: {
+									label: "text-sm",
+								},
+							}}
 							onValueChange={setFormOrg}
 							onSelectionChange={(key) => {
 								// Find the selected item based on the key and set its full title
