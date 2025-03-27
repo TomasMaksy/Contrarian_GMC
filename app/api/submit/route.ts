@@ -3,9 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(req: NextRequest) {
     try {
         const requestData = await req.json();
-        console.log('Received data:', requestData);
 
-        const { Organisation, Name, Email, ...rest } = requestData;
+        const { Organisation, Name, Email, Type, ...rest } = requestData;
 
         // Extract preferences dynamically
         const formattedPreferences: Record<string, string> = {};
@@ -16,6 +15,7 @@ export async function POST(req: NextRequest) {
         // Prepare the data object to match Airtable's structure
         const fields = {
             Organisation,
+            Type,
             Name,
             Email,
             ...formattedPreferences,

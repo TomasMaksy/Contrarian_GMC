@@ -36,6 +36,7 @@ const IdentificationForm = React.forwardRef<
 			setFormEmail,
 			idOrg,
 			setFormOrg,
+			setFormType,
 
 			...props
 		},
@@ -125,7 +126,10 @@ const IdentificationForm = React.forwardRef<
 					<Tabs
 						aria-label="Options"
 						selectedKey={selectedTab} // Bind selected tab to state
-						onSelectionChange={(key) => setSelectedTab(key as string)} // Update state on tab change
+						onSelectionChange={(key) => {
+							setSelectedTab(key as string); // Update selected tab
+							setFormType(key as string); // Update form type
+						}}
 						size="lg"
 						radius="lg"
 						classNames={{

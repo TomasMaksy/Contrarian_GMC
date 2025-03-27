@@ -25,6 +25,8 @@ export async function GET() {
       base(TABLE_NAME)
         .select({
           view: "Growth Meets Capital Investors",
+          sort: [{ field: "Investor Name", direction: "asc" }], // Sort by Investor Name in ascending order
+
         })
         .eachPage(
           (records: ReadonlyArray<Record<FieldSet>>, fetchNextPage) => {

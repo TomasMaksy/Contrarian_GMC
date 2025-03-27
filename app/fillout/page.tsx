@@ -65,6 +65,7 @@ export default function Fillout() {
 	const [formValues, setFormValues] = React.useState({
 		name: "",
 		email: "",
+		type: "investors",
 		organisation: undefined as FormOrgType | undefined,
 		preferences: Array(12).fill(""),
 		backup: Array(14).fill(""),
@@ -124,7 +125,8 @@ export default function Fillout() {
 
 		// Now, prepare the data to be sent to Airtable
 		const dataToSend = {
-			Organisation: formValues.organisation, // Assuming this is an object with the required field(s)
+			Organisation: formValues.organisation,
+			Type: formValues.type,
 			Name: cleanName,
 			Email: formValues.email,
 			...preferencesData, // Include the preferences dynamically
@@ -223,7 +225,6 @@ export default function Fillout() {
 
 	const onNext = React.useCallback(() => {
 		const validateForm = () => {
-			console.log(formValues);
 			if (page === 0) {
 				// Check if name, email, and organisation are valid (not empty or undefined)
 				return (
@@ -261,7 +262,7 @@ export default function Fillout() {
 				color: "success",
 				timeout: 3000,
 			});
-			redirect("/");
+			redirect("/home");
 		}
 	};
 
@@ -348,6 +349,8 @@ export default function Fillout() {
 				setFormOrg={(org) =>
 					setFormValues((prev) => ({ ...prev, organisation: org }))
 				}
+				type={formValues.type}
+				setFormType={(type) => setFormValues((prev) => ({ ...prev, type }))}
 				startups={startups}
 				investors={investors}
 			/>

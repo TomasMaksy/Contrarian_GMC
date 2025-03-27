@@ -111,7 +111,7 @@ const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 					{choices.map((choice, index) => (
 						<Autocomplete
 							key={index}
-							className="sm:col-span-12 md:col-span-6 flex"
+							className="sm:col-span-12 md:col-span-6 flex gap-2"
 							defaultItems={filteredOrganisations}
 							label={`${choice}${getOrdinalSuffix(choice)} Choice`}
 							labelPlacement="outside"
@@ -133,11 +133,16 @@ const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 							}}
 							isRequired
 							disabledKeys={disabledKeys}
+							classNames={{
+								listbox: "w-full",
+							}}
+							itemHeight={45}
 						>
 							{(organisation) => (
 								<AutocompleteItem
 									key={organisation.id}
 									textValue={organisation.name}
+									className="p-2"
 								>
 									<div className="flex gap-2 items-center">
 										<img

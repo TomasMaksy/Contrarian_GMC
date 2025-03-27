@@ -36,4 +36,6 @@ export type IdentifactionFormProps = React.HTMLAttributes<HTMLFormElement> & {
   setFormOrg: (value: string) => void;
   startups: OrgProps[];
   investors: OrgProps[];
+  type: string;
+  setFormType: (value: string) => void;
 };
