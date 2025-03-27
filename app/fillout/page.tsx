@@ -273,6 +273,8 @@ export default function Fillout() {
 			logo: string;
 			type: string;
 			website: string;
+			fundraising: string;
+			stage: string;
 		}[]
 	>([]);
 
@@ -283,6 +285,8 @@ export default function Fillout() {
 			logo: string;
 			type: string;
 			website: string;
+			fundraising: string;
+			stage: string;
 		}[]
 	>([]);
 
@@ -307,6 +311,8 @@ export default function Fillout() {
 							logo: investor.logo,
 							type: investor.type,
 							website: investor.website,
+							fundraising: investor.fundraising || "",
+							stage: investor.stage || "",
 						}))
 					);
 				} else {
@@ -322,6 +328,8 @@ export default function Fillout() {
 							logo: startup.logo,
 							type: startup.type,
 							website: startup.website,
+							fundraising: startup.fundraising || "", // Ensure default value if undefined
+							stage: startup.stage || "", // Ensure default value if undefined
 						}))
 					);
 				} else {

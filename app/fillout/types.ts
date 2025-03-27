@@ -3,6 +3,8 @@ export type OrgProps = {
   id: string;
   logo: string;
   type: string;
+  fundraising: string;
+  stage: string;
 };
 
 export interface PreferencesFormProps {

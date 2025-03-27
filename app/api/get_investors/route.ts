@@ -47,7 +47,7 @@ export async function GET() {
       const logoUrl = logoField && Array.isArray(logoField) && logoField.length > 0
         ? logoField[0]?.url // Use the URL of the first logo if available
         : "N/A"; // Fallback to "N/A" if no logo or logo field is not an array
-
+      
       return {
         id: record.id,
         name: (record.get("Investor Name") as string) || "Unknown",

@@ -40,6 +40,7 @@ export async function GET() {
         ? logoField[0]?.url // Use the URL of the first logo if available
         : "N/A"; // Fallback to "N/A" if no logo or logo field is not an array
 
+      
       return {
         id: record.id,
         name: (record.get("Startup Name") as string) || "Unknown",
@@ -48,6 +49,8 @@ export async function GET() {
         website: (record.get("Website") as string) || "",
         logo: logoUrl, // Use the logo URL
         type: (record.get("Type") as string) || "",
+        fundraising: (record.get("Fundraising in 2025?") as string) || "N/A",
+        stage: (record.get("Stage") as string) || "N/A",
       };
     });
 

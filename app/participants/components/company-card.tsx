@@ -9,10 +9,11 @@ import {
 	Image,
 	// Divider,
 	Chip,
+	Divider,
 } from "@heroui/react";
 // import { Icon } from "@iconify/react";
 import type { OrganisationTypes } from "../utils/types";
-import { Contact } from "lucide-react";
+import { ChartNoAxesColumnIncreasing, DollarSign, Contact } from "lucide-react";
 
 interface CompanyCardProps {
 	organisation: OrganisationTypes;
@@ -31,7 +32,7 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					<CardBody className="p-4">
+					<CardBody className="p-4 pb-2 max-h-[315px]">
 						<div className="bg-white rounded-2xl w-full flex justify-center items-start  duration-400 relative ">
 							<div className="absolute top-0 left-0 z-50 -ml-2 -mt-2">
 								{organisation.type === "Host" && (
@@ -46,6 +47,7 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 									</Chip>
 								)}
 							</div>
+
 							<Image
 								alt="Card image"
 								className="aspect-video w-full object-contain object-center h-40 py-2 hover:scale-105"
@@ -59,7 +61,10 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 									<h3 className="text-lg font-semibold">{organisation.name}</h3>
 
 									<p className="text-small text-[#3fafa8] ">
-										{organisation.website}
+										{organisation.website ===
+										"https://www.bp.com/en/global/corporate/who-we-are/our-organization/strategy-and-sustainability/bp-ventures.html"
+											? "bp.com"
+											: organisation.website}{" "}
 									</p>
 								</div>
 								{/* <Divider />
@@ -69,6 +74,35 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 								description={organisation.title}
 							/>
 						</div> */}
+							</div>
+						</div>
+						{organisation.stage && <Divider />}
+						<div className="flex flex-row justify-between pt-3">
+							<div className="">
+								{organisation.stage && (
+									<Chip
+										variant="shadow"
+										size="md"
+										radius="md"
+										className=" pl-2.5"
+										startContent={<ChartNoAxesColumnIncreasing size={15} />}
+									>
+										{organisation.stage}
+									</Chip>
+								)}
+							</div>
+							<div className=" ">
+								{organisation.fundraising === "Yes" && (
+									<Chip
+										variant="bordered"
+										size="md"
+										radius="md"
+										className="pl-2.5 text-[#3fafa8]"
+										startContent={<DollarSign size={15} />}
+									>
+										Fundraising
+									</Chip>
+								)}
 							</div>
 						</div>
 					</CardBody>
