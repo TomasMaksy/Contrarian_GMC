@@ -10,6 +10,7 @@ import {
 	// Divider,
 	Chip,
 	Divider,
+	Tooltip,
 } from "@heroui/react";
 // import { Icon } from "@iconify/react";
 import type { OrganisationTypes } from "../utils/types";
@@ -98,25 +99,29 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 							</div>
 							<div className=" ">
 								{organisation.fundraising === "Yes" ? (
-									<Chip
-										variant="bordered"
-										size="md"
-										radius="md"
-										className="pl-2.5 text-[#3fafa8]"
-										startContent={<DollarSign size={15} />}
-									>
-										Fundraising
-									</Chip>
+									<Tooltip content="This company is fundraising in 2025">
+										<Chip
+											variant="bordered"
+											size="md"
+											radius="md"
+											className="pl-2.5 text-[#3fafa8]"
+											startContent={<DollarSign size={15} />}
+										>
+											Fundraising
+										</Chip>
+									</Tooltip>
 								) : organisation.fundraising === "No" ? (
-									<Chip
-										variant="bordered"
-										size="md"
-										radius="md"
-										className="pl-2.5 text-white/50"
-										startContent={<X size={15} />}
-									>
-										Not Fundraising
-									</Chip>
+									<Tooltip content="This company is not fundraising in 2025">
+										<Chip
+											variant="bordered"
+											size="md"
+											radius="md"
+											className="pl-2.5 text-white/50"
+											startContent={<X size={15} />}
+										>
+											Not Fundraising
+										</Chip>
+									</Tooltip>
 								) : null}
 							</div>
 						</div>
