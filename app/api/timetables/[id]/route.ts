@@ -17,10 +17,8 @@ export interface TimetableProps {
 
 const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(BASE_ID);
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const timetableId = params.id;
 
@@ -67,10 +65,11 @@ export async function GET(
     };
 
     return NextResponse.json({ success: true, data: timetable });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error fetching data from Airtable:", error);
+    const errorMessage = error instanceof Error ? error.message : "Failed to fetch timetable record";
     return NextResponse.json(
-      { success: false, error: error.message || "Failed to fetch timetable record" },
+      { success: false, error: errorMessage },
       { status: 500 }
     );
   }
