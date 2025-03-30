@@ -13,6 +13,14 @@ export interface TimetableProps {
   link: string;
   meeting1: string;
   meeting2: string;
+  meeting3: string;
+  meeting4: string;
+  meeting5: string;
+  meeting6: string;
+  meeting7: string;
+  meeting8: string;
+  meeting9: string;
+  meeting10: string;
 }
 
 const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(BASE_ID);
@@ -62,6 +70,14 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
       link: String(record.fields.Link || "N/A"),
       meeting1: String(record.fields["Meeting 1"] || "N/A"),
       meeting2: String(record.fields["Meeting 2"] || "N/A"),
+      meeting3: String(record.fields["Meeting 3"] || "N/A"),
+      meeting4: String(record.fields["Meeting 4"] || "N/A"),
+      meeting5: String(record.fields["Meeting 5"] || "N/A"),
+      meeting6: String(record.fields["Meeting 6"] || "N/A"),
+      meeting7: String(record.fields["Meeting 7"] || "N/A"),
+      meeting8: String(record.fields["Meeting 8"] || "N/A"),
+      meeting9: String(record.fields["Meeting 9"] || "N/A"),
+      meeting10: String(record.fields["Meeting 10"] || "N/A"),
     };
 
     return NextResponse.json({ success: true, data: timetable });
