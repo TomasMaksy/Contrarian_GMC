@@ -80,7 +80,8 @@ const MultiStepSidebar = React.forwardRef<
 								Meeting Preferences Form
 							</div>
 							<div className="mt-1 text-base font-medium leading-6 text-default-700">
-								Select your prefered meetings, starting with your top choice.
+								Select organizations you'd like to meet, starting with your top
+								priorities.{" "}
 							</div>
 						</div>
 						{/* Desktop Steps */}
@@ -99,7 +100,7 @@ const MultiStepSidebar = React.forwardRef<
 								},
 								{
 									title: "Backup options",
-									description: "Choose back-up preferences ",
+									description: "Choose backup preferences ",
 								},
 							]}
 							onStepChange={onChangePage}
@@ -165,7 +166,7 @@ const MultiStepSidebar = React.forwardRef<
 							nextButtonProps={{
 								children:
 									currentPage === 0
-										? "Confirm Identity"
+										? "Confirm"
 										: currentPage === 1
 										? "Confirm Preferences"
 										: currentPage === 2

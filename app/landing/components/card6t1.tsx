@@ -44,7 +44,9 @@ export default function Card1(props: CardProps) {
 					<br />
 					<br />
 					Where: <br />
-					<span className="font-normal tracking-normal">TBC </span>
+					<span className="font-normal tracking-normal">
+						Hotel The Artist Bilbao{" "}
+					</span>
 				</p>
 			</CardBody>
 		</Card>

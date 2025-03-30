@@ -98,11 +98,11 @@ const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 				<div className=" text-3xl font-bold leading-9 text-default-foreground">
 					Your Meeting Preferences
 				</div>
-				<div className="py-4 text-default-500">
+				{/* <div className="py-4 text-default-500">
 					Please provide the names of the organizations you’d like to meet,
 					starting with your
 					<span className="text-[#3fafa8]"> top priority.</span>
-				</div>
+				</div> */}
 				<form
 					ref={ref}
 					className={cn("grid grid-cols-12 flex-col gap-4 py-8", className)}

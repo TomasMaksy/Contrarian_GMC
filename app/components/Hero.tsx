@@ -25,9 +25,9 @@ export const Hero = () => {
 								Growth Meets Capital
 							</h1>
 							<p className="text-xl text-default-600 tracking-tight mt-6">
-								Connect with the right people and maximize your meetings. Share
-								your top preferences, and let our smart algorithm match you with
-								the most relevant startups or investors.{" "}
+								Make the most of your day at Growth Meets Capital. Share your
+								preferences, and we'll curate your agenda with pre-scheduled
+								meetings between investors and founders
 							</p>
 
 							<div className="flex gap-10 items-center mt-[40px] ">

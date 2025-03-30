@@ -441,7 +441,7 @@ export default function Fillout() {
 							nextButtonProps={{
 								children:
 									page === 0
-										? "Confirm Identity"
+										? "Confirm"
 										: page === 1
 										? "Confirm Preferences"
 										: page === 2
@@ -476,36 +476,45 @@ export default function Fillout() {
 			<Modal isOpen={isOpen} onOpenChange={handleClose} backdrop="blur">
 				<ModalContent>
 					{(onClose) => (
-						<div className="flex w-full flex-col items-center gap-5 rounded-large bg-default-50 pt-8 pb-4 shadow-small">
-							<div className="flex w-full flex-col items-center px-8">
-								<ModalHeader className="flex flex-col items-center m-5 text-center font-normal text-2xl">
-									<Icon
-										className="mb-3 text-success-500"
-										icon="solar:check-circle-bold-duotone"
-										width={56}
-									/>
-									<p className="mb-2 text-base font-medium">
+						<div className="flex w-full flex-col items-center gap-5 rounded-large bg-default-50 pt-8 pb-6 shadow-small">
+							<div className="flex w-full flex-col items-center px-4">
+								<ModalHeader className="flex flex-col items-center m-1 text-center font-normal text-2xl">
+									<p className="mb-4 text-base font-medium">
 										Thank you{" "}
-										<span className="font-black ">{formValues.name}</span>!{" "}
-										<br /> The results for{" "}
+										<span className="font-black ">
+											{formValues.name.split(" ")[0]}
+										</span>
+										! <br /> The results for{" "}
 										<span className="font-black text-success/85">
 											{formValues.organisation}
 										</span>{" "}
 										are saved!
 									</p>
+									<Icon
+										className="mb-3 text-success-500"
+										icon="solar:check-circle-bold-duotone"
+										width={56}
+									/>
 									<p className="text-center text-small text-default-500">
-										Your timetable will be emailed to{" "}
-										<span className="font-black">{formValues.email} </span> as
-										soon as possible.
+										Your personalised agenda will be emailed to
+										<span className="font-black">
+											{" "}
+											{formValues.email}{" "}
+										</span>{" "}
+										within the next few days.
+									</p>
+									<p className="text-tiny text-default-400 pt-5">
+										Please note: while we can't guarantee meetings with every
+										selected startup, we'll do our best to tailor the agenda to
+										your priorities.
 									</p>
 								</ModalHeader>
 							</div>
 							<Divider className="w-full bg-default-200" />
 							<ModalBody className="text-left w-full">
-								{/* <p></p> */}
 								<div className="text-[15px]">
 									<div className="text-center">
-										<p className="pt-5">Your chosen preferences:</p>
+										<p className="">Your chosen preferences:</p>
 									</div>
 									<div>
 										<Table
@@ -528,17 +537,16 @@ export default function Fillout() {
 									</div>
 								</div>
 							</ModalBody>
-							<ModalFooter>
-								<Button
-									color="success"
-									variant="light"
-									onPress={onClose}
-									size="lg"
-								>
-									{" "}
-									Close
-								</Button>
-							</ModalFooter>
+							<Button
+								color="success"
+								variant="light"
+								onPress={onClose}
+								size="lg"
+								className=" text-center align-middle"
+							>
+								{" "}
+								Close
+							</Button>
 						</div>
 					)}
 				</ModalContent>

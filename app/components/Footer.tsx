@@ -77,12 +77,14 @@ export default function Footer() {
 		<footer className="flex w-full flex-col bg-black z-50">
 			<div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-6 py-12 lg:px-8">
 				<div className="flex items-center justify-center">
-					<Image
-						src={contratian_logo}
-						alt="Contrarian Ventures Logo"
-						className="max-h-10 w-auto mb-8"
-						width={100}
-					/>
+					<a href="https://www.cventures.vc/" target="_blank">
+						<Image
+							src={contratian_logo}
+							alt="Contrarian Ventures Logo"
+							className="max-h-10 w-auto mb-8"
+							width={100}
+						/>
+					</a>
 				</div>
 				<Spacer y={4} />
 				<div className="flex flex-wrap justify-center gap-x-4 gap-y-1">

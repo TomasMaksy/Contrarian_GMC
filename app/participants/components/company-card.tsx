@@ -28,7 +28,7 @@ interface CompanyCardProps {
 export function CompanyCard({ organisation }: CompanyCardProps) {
 	return (
 		<div>
-			<Card className="w-full p-2 z-20">
+			<Card className="w-full p-1 z-20 pb-2">
 				<a
 					href={
 						organisation.website.startsWith("http")
@@ -107,7 +107,7 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 											className="pl-2.5 text-[#3fafa8]"
 											startContent={<DollarSign size={15} />}
 										>
-											Fundraising
+											Fundraising in 2025
 										</Chip>
 									</Tooltip>
 								) : organisation.fundraising === "No" ? (
@@ -116,10 +116,10 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 											variant="bordered"
 											size="md"
 											radius="md"
-											className="pl-2.5 text-white/50"
+											className="pl-1 text-white/50"
 											startContent={<X size={15} />}
 										>
-											Not Fundraising
+											Not Fundraising in 2025
 										</Chip>
 									</Tooltip>
 								) : null}

@@ -18,7 +18,7 @@ export default function Home() {
 			<div className="w-full flex flex-col items-center justify-center mb-24 ml-3 mt-12">
 				<div className="sm:scale-75 md:scale-100 ">
 					<div className="text-sm rounded-lg -tracking-tight text-white/50  w-full text-center -ml-4">
-						Powered by
+						Hosted by
 					</div>
 					<div className="w-max flex flex-row items-center gap-6 duration-300 px-5 py-6 rounded-lg mr-8 opacity-80 hover:opacity-100 z-50 ">
 						<a
