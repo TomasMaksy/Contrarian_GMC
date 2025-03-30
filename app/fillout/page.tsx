@@ -28,7 +28,6 @@ import {
 	ModalContent,
 	ModalHeader,
 	ModalBody,
-	ModalFooter,
 	useDisclosure,
 } from "@heroui/modal";
 import {
@@ -504,9 +503,9 @@ export default function Fillout() {
 										within the next few days.
 									</p>
 									<p className="text-tiny text-default-400 pt-5">
-										Please note: while we can't guarantee meetings with every
-										selected startup, we'll do our best to tailor the agenda to
-										your priorities.
+										Please note: while we can&apos;t guarantee meetings with
+										every selected startup, we&apos;ll do our best to tailor the
+										agenda to your priorities.
 									</p>
 								</ModalHeader>
 							</div>

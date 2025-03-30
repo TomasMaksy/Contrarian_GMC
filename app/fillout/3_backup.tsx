@@ -106,7 +106,7 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 					Choose Your Backup Preferences
 				</div>
 				<div className="py-4 text-base leading-5 text-default-500">
-					We'll use these if your top selections aren't available.
+					We&apos;ll use these if your top selections aren&apos;t available.
 				</div>
 				<form
 					ref={ref}

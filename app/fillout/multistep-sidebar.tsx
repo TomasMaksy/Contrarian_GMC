@@ -80,8 +80,8 @@ const MultiStepSidebar = React.forwardRef<
 								Meeting Preferences Form
 							</div>
 							<div className="mt-1 text-base font-medium leading-6 text-default-700">
-								Select organizations you'd like to meet, starting with your top
-								priorities.{" "}
+								Select organizations you&apos;d like to meet, starting with your
+								top priorities.{" "}
 							</div>
 						</div>
 						{/* Desktop Steps */}
