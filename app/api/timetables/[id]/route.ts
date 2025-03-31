@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import Airtable, { FieldSet, Record } from "airtable";
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY as string;
-const BASE_ID = "appJDzxyOB7vPkIcM";
+const BASE_ID = "apppnPtARbtxMjV3h";
 const TABLE_NAME = "tblP9bukennHgvKuR";
 
 export interface TimetableProps {
