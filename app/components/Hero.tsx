@@ -45,13 +45,13 @@ export const Hero = () => {
 									</button>
 								</Link>
 								<Link href={"/participants"}>
-									<button className="px-8 custom-btn custom-btn-text relative flex items-center justify-between group duration-200">
+									<button className="px-8 custom-btn custom-btn-text relative flex items-center justify-between group duration-200 custom-btn-hover">
 										<NImage
 											src={blob2sm}
 											alt="OpenAI logo"
 											className="h-7 w-7 ease absolute left-[8px] translate-x-0 opacity-100 transition duration-300 group-hover:-translate-x-full group-hover:scale-x-50 group-hover:opacity-0 group-hover:blur-sm"
 										/>
-										<span className="ease translate-x-3 transition duration-300 group-hover:-translate-x-4">
+										<span className="ease translate-x-3 transition duration-300 group-hover:-translate-x-4 ">
 											See participants
 										</span>
 										<ArrowRight className="h-5 w-5 ease absolute right-4 translate-x-full scale-x-50 opacity-0 blur-sm transition duration-300 group-hover:translate-x-0 group-hover:scale-x-100 group-hover:opacity-100 group-hover:blur-none" />
