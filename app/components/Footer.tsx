@@ -76,8 +76,8 @@ export default function Footer() {
 	return (
 		<footer className="flex w-full flex-col bg-black z-50">
 			<div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-6 py-12 lg:px-8">
-				<div className="flex flex-col items-center justify-center gap-5">
-					<span className="text-tiny text-default-400 tracking-wider">
+				<div className="flex flex-col items-center justify-center gap-4">
+					<span className="text-tiny text-default-400 tracking-wide pl-1">
 						Brought to you by
 					</span>
 					<a href="https://www.cventures.vc/" target="_blank">
