@@ -66,7 +66,7 @@ export default function Fillout() {
 		email: "",
 		type: "investors",
 		organisation: undefined as FormOrgType | undefined,
-		preferences: Array(12).fill(""),
+		preferences: Array(16).fill(""),
 		backup: Array(14).fill(""),
 	});
 
@@ -118,7 +118,7 @@ export default function Fillout() {
 		);
 
 		// Ensure that we have 26 preferences (fill with empty strings if necessary)
-		for (let i = updatedPreferencesData.length; i < 26; i++) {
+		for (let i = updatedPreferencesData.length; i < 30; i++) {
 			preferencesData[`Preference ${i + 1}`] = "";
 		}
 

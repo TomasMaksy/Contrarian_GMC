@@ -76,7 +76,10 @@ export default function Footer() {
 	return (
 		<footer className="flex w-full flex-col bg-black z-50">
 			<div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-6 py-12 lg:px-8">
-				<div className="flex items-center justify-center">
+				<div className="flex flex-col items-center justify-center gap-5">
+					<span className="text-tiny text-default-400 tracking-wider">
+						Brought to you by
+					</span>
 					<a href="https://www.cventures.vc/" target="_blank">
 						<Image
 							src={contratian_logo}

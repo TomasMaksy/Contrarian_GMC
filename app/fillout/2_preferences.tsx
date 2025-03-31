@@ -40,62 +40,10 @@ const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 			)
 			.filter((key): key is string => key !== undefined); // Ensure the result is an array of strings
 
-		const choices = Array.from({ length: 12 }, (_, i) => i + 1);
-
-		// // Fetch investors and startups data
-		// useEffect(() => {
-		// 	const fetchData = async () => {
-		// 		try {
-		// 			const [investorsRes, startupsRes] = await Promise.all([
-		// 				fetch("/api/get_investors"),
-		// 				fetch("/api/get_startups"),
-		// 			]);
-
-		// 			const investorsData = await investorsRes.json();
-		// 			const startupsData = await startupsRes.json();
-
-		// 			if (investorsData.success && Array.isArray(investorsData.data)) {
-		// 				setInvestors(
-		// 					investorsData.data.map(
-		// 						(investor: { id: string; name: string; logo: string }) => ({
-		// 							value: investor.id,
-		// 							name: investor.name,
-		// 							logo: investor.logo,
-		// 						})
-		// 					)
-		// 				);
-		// 			} else {
-		// 				console.error("Unexpected investors response:", investorsData);
-		// 				setInvestors([]);
-		// 			}
-
-		// 			if (startupsData.success && Array.isArray(startupsData.data)) {
-		// 				setStartups(
-		// 					startupsData.data.map(
-		// 						(startup: { id: string; name: string; logo: string }) => ({
-		// 							value: startup.id,
-		// 							name: startup.name,
-		// 							logo: startup.logo,
-		// 						})
-		// 					)
-		// 				);
-		// 			} else {
-		// 				console.error("Unexpected startups response:", startupsData);
-		// 				setStartups([]);
-		// 			}
-		// 		} catch (error) {
-		// 			console.error("Error fetching data:", error);
-		// 			setInvestors([]);
-		// 			setStartups([]);
-		// 		}
-		// 	};
-
-		// 	fetchData();
-		// }, []);
-
+		const choices = Array.from({ length: 16 }, (_, i) => i + 1);
 		return (
 			<>
-				<div className=" text-3xl font-bold leading-9 text-default-foreground">
+				<div className=" text-3xl font-bold leading-9 text-default-foreground -mt-3">
 					Your Meeting Preferences
 				</div>
 				{/* <div className="py-4 text-default-500">
@@ -105,7 +53,7 @@ const PreferencesForm = React.forwardRef<HTMLFormElement, PreferencesFormProps>(
 				</div> */}
 				<form
 					ref={ref}
-					className={cn("grid grid-cols-12 flex-col gap-4 py-8", className)}
+					className={cn("grid grid-cols-12 flex-col gap-4 py-4", className)}
 					{...props}
 				>
 					{choices.map((choice, index) => (

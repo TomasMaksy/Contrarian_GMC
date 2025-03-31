@@ -91,7 +91,7 @@ const ChooseBackupForm = React.forwardRef<HTMLFormElement, BackupFormProps>(
 			.map((pref) => organisations.find((org) => org.name === pref)?.id)
 			.filter((key): key is string => key !== undefined); // Ensure the result is an array of strings
 
-		const choices = Array.from({ length: 14 }, (_, i) => i + 13);
+		const choices = Array.from({ length: 14 }, (_, i) => i + 17);
 
 		const handleValueChange = (index: number, value: string) => {
 			// Check if the value is already selected as a preference (to avoid duplicates)

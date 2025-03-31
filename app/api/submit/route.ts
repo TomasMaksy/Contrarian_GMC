@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
 
         // Extract preferences dynamically
         const formattedPreferences: Record<string, string> = {};
-        for (let i = 1; i <= 24; i++) {
+        for (let i = 1; i <= 30; i++) {
             formattedPreferences[`Preference ${i}`] = rest[`Preference ${i}`] || "";
         }
 
