@@ -18,7 +18,7 @@ import { Header } from "../components/Header";
 import { easeInOut, motion } from "framer-motion";
 import blob from "@/app/assets/blob.png";
 
-import { addToast, Button, form } from "@heroui/react";
+import { addToast, Button } from "@heroui/react";
 import { redirect } from "next/navigation";
 
 import { OrganisationTypes } from "../participants/utils/types";
