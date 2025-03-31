@@ -18,7 +18,7 @@ import { Header } from "../components/Header";
 import { easeInOut, motion } from "framer-motion";
 import blob from "@/app/assets/blob.png";
 
-import { addToast, Button } from "@heroui/react";
+import { addToast, Button, form } from "@heroui/react";
 import { redirect } from "next/navigation";
 
 import { OrganisationTypes } from "../participants/utils/types";
@@ -69,7 +69,7 @@ export default function Fillout() {
 		preferences: Array(16).fill(""),
 		backup: Array(14).fill(""),
 	});
-
+	console.log(formValues);
 	const setFormPreference = (index: number, value: string) => {
 		setFormValues((prev) => {
 			const updatedPreferences = [...prev.preferences];
@@ -504,8 +504,12 @@ export default function Fillout() {
 									</p>
 									<p className="text-tiny text-default-400 pt-5">
 										Please note: while we can&apos;t guarantee meetings with
-										every selected startup, we&apos;ll do our best to tailor the
-										agenda to your priorities.
+										every selected{" "}
+										<span>
+											{formValues.type === "investors" ? "startup" : "investor"}
+										</span>
+										, we&apos;ll do our best to tailor the agenda to your
+										priorities.
 									</p>
 								</ModalHeader>
 							</div>
