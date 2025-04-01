@@ -3,7 +3,7 @@ import Airtable, { FieldSet, Record } from "airtable";
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY as string;
 const BASE_ID = "apppnPtARbtxMjV3h";
-const TABLE_NAME = "tblP9bukennHgvKuR";
+const TABLE_NAME = "tblzdhGykBx9LuxzU";
 
 export interface TimetableProps {
   id: string;
