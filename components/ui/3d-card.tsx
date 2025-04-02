@@ -25,6 +25,13 @@ export const CardContainer = ({
 	containerClassName?: string;
 }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (containerRef.current) {
+			containerRef.current.style.transform = `rotateY(-9.5deg) rotateX(10.5deg)`;
+		}
+	}, []); // Runs only once on mount
+
 	const [isMouseEntered, setIsMouseEntered] = useState(false);
 
 	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -33,6 +40,7 @@ export const CardContainer = ({
 			containerRef.current.getBoundingClientRect();
 		const x = (e.clientX - left - width / 2) / 25;
 		const y = (e.clientY - top - height / 2) / 25;
+
 		containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
 	};
 
@@ -44,13 +52,13 @@ export const CardContainer = ({
 	const handleMouseLeave = () => {
 		if (!containerRef.current) return;
 		setIsMouseEntered(false);
-		containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
+		containerRef.current.style.transform = `rotateY(-9.5deg) rotateX(10.5deg)`;
 	};
 	return (
 		<MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
 			<div
 				className={cn(
-					"py-20 flex items-center justify-center",
+					"py-2 flex items-center justify-center",
 					containerClassName
 				)}
 				style={{
@@ -80,12 +88,15 @@ export const CardContainer = ({
 export const CardBody = ({
 	children,
 	className,
+	ref,
 }: {
 	children: React.ReactNode;
 	className?: string;
+	ref?: React.Ref<HTMLDivElement>;
 }) => {
 	return (
 		<div
+			ref={ref}
 			className={cn(
 				"h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
 				className
@@ -120,6 +131,7 @@ export const CardItem = ({
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[key: string]: any;
 }) => {
+	console.log(translateX, translateY, translateZ, rotateX, rotateY, rotateZ);
 	const ref = useRef<HTMLDivElement>(null);
 	const [isMouseEntered] = useMouseEnter();
 
@@ -128,7 +140,7 @@ export const CardItem = ({
 		if (isMouseEntered) {
 			ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
 		} else {
-			ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+			ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(80px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
 		}
 	}, [
 		isMouseEntered,
@@ -147,7 +159,10 @@ export const CardItem = ({
 	return (
 		<Tag
 			ref={ref}
-			className={cn("w-fit transition duration-200 ease-linear", className)}
+			className={cn(
+				"w-fit transition duration-200 ease-linear shadow-lg shadow-success/10",
+				className
+			)}
 			{...rest}
 		>
 			{children}
