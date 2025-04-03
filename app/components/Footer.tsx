@@ -11,6 +11,10 @@ import contratian_logo from "@/app/assets/Contrarian_logo_white.png";
 
 type SocialIconProps = Omit<IconProps, "icon">;
 
+type FooterProps = {
+	backgroundColor?: string;
+};
+
 const navLinks = [
 	{
 		name: "Home",
@@ -72,9 +76,14 @@ const socialItems = [
 	// },
 ];
 
-export default function Footer() {
+export default function Footer({ backgroundColor }: FooterProps) {
+	const backgroundStyle = backgroundColor
+		? {
+				background: `linear-gradient(to top, ${backgroundColor}, black)`,
+		  }
+		: { background: "black" };
 	return (
-		<footer className="flex w-full flex-col bg-black z-50">
+		<footer className="flex w-full flex-col z-50" style={backgroundStyle}>
 			<div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-6 py-12 lg:px-8">
 				<div className="flex flex-col items-center justify-center gap-4">
 					<span className="text-tiny text-default-400 tracking-wide pl-1">

@@ -6,28 +6,19 @@ import Image from "next/image";
 import { Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
-export const Header = () => {
-	// Scroll function
-	// const scrollToAnalysis = () => {
-	// 	const analysisSection = document.getElementById("analysis-section");
-	// 	if (analysisSection) {
-	// 		const yOffset = -140; // Leave 50px above
-	// 		const yPosition =
-	// 			analysisSection.getBoundingClientRect().top + window.scrollY + yOffset;
-	// 		window.scrollTo({ top: yPosition, behavior: "smooth" });
-	// 	}
-	// };
-	const router = useRouter(); // Use the hook inside the component
+interface HeaderProps {
+	variant?: "static"; // Only applies "sticky" if explicitly passed
+}
+
+export const Header = ({ variant }: HeaderProps) => {
+	const router = useRouter();
 
 	return (
-		<header className="sticky top-0 backdrop-blur-sm z-50">
-			{/* <div className="flex justify-center items-center bg-[#3fafa8] text-white py-1 gap-3">
-				<p className="hidden md:block">Agenda Tool</p>
-				<div className="flex justify-center items-center py-3 bg-[#3fafa8]">
-					<p className="text-white/60">Growth Meets Capital Demo</p>
-				</div>
-			</div> */}
-
+		<header
+			className={`${
+				variant === "static" ? "" : "sticky top-0 backdrop-blur-sm z-50"
+			}`}
+		>
 			<div className="py-5 mx-8">
 				<div className="md:container">
 					<div className="flex items-center justify-between gap-3 align-middle">

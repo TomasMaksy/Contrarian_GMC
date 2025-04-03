@@ -1,27 +1,45 @@
 import { NextResponse } from "next/server";
 import Airtable, { FieldSet, Record } from "airtable";
 
+
+
+interface Startup {
+  id: string;
+  name: string;
+  representative: string;
+  title: string;
+  website: string;
+  logo: string;
+  type: string;
+  fundraising: string;
+  stage: string;
+}
+
 const AIRTABLE_READONLY_API = process.env.AIRTABLE_READONLY_API as string;
 const BASE_ID = "appCup7R4k8cZF33V";
 const TABLE_NAME = "GMC Startups";
 
-import type { OrganisationTypes } from "@/app/participants/utils/types";
-
 const base = new Airtable({ apiKey: AIRTABLE_READONLY_API }).base(BASE_ID);
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const namesParam = searchParams.get("names"); // e.g., "Startup1,Startup2"
+  const requestedNames = namesParam
+    ?.split(",")
+    .map((name) => name.trim()) || [];
+
   try {
+    // Fetch all startups from Airtable
     const records = await new Promise<Record<FieldSet>[]>((resolve, reject) => {
       const allRecords: Record<FieldSet>[] = [];
 
       base(TABLE_NAME)
         .select({
           view: "Growth Meets Capital Startups",
-          sort: [{ field: "Startup Name", direction: "asc" }], // Sort by Investor Name in ascending order
-
+          sort: [{ field: "Startup Name", direction: "asc" }],
         })
         .eachPage(
-          (records: ReadonlyArray<Record<FieldSet>>, fetchNextPage) => {
+          (records, fetchNextPage) => {
             allRecords.push(...records);
             fetchNextPage();
           },
@@ -32,31 +50,93 @@ export async function GET() {
         );
     });
 
-    // Format the records into a clean JSON response
-    const investors: OrganisationTypes[] = records.map((record) => {
-      // Safely handle the logo field
-      const logoField = record.get("Logo");
-      const logoUrl = logoField && Array.isArray(logoField) && logoField.length > 0
-        ? logoField[0]?.url // Use the URL of the first logo if available
-        : "N/A"; // Fallback to "N/A" if no logo or logo field is not an array
+    // If no search parameters -> return all startups sorted
+    if (requestedNames.length === 0) {
+      const allSortedRecords = records.map((record) => {
+        const logoField = record.get("Logo");
+        const logoUrl =
+          Array.isArray(logoField) && logoField.length > 0
+            ? logoField[0]?.url
+            : "N/A";
 
-      
-      return {
-        id: record.id,
-        name: (record.get("Startup Name") as string) || "Unknown",
-        representative:  "",
-        title: "",
-        website: (record.get("Website") as string) || "",
-        logo: logoUrl, // Use the logo URL
-        type: (record.get("Type") as string) || "",
-        fundraising: (record.get("Fundraising in 2025?") as string) || "N/A",
-        stage: (record.get("Stage") as string) || "N/A",
-      };
+        return {
+          id: record.id,
+          name: (record.get("Startup Name") as string) || "Unknown",
+          representative: "N/A",
+          title: "N/A",
+          website: (record.get("Website") as string) || "N/A",
+          logo: logoUrl,
+          type: (record.get("Type") as string) || "N/A",
+          fundraising: (record.get("Fundraising in 2025?") as string) || "N/A",
+          stage: (record.get("Stage") as string) || "N/A",
+        };
+      });
+
+      return NextResponse.json({ success: true, data: allSortedRecords });
+    }
+
+    // Function to return a default startup object
+    const getDefaultStartup = (name = "N/A"): Startup => ({
+      id: "N/A",
+      name,
+      representative: "N/A",
+      title: "N/A",
+      website: "N/A",
+      logo: "N/A",
+      type: "N/A",
+      fundraising: "N/A",
+      stage: "N/A",
     });
 
-    return NextResponse.json({ success: true, data: investors });
+    // Create an array to store the final results in the correct order
+    const finalResults: Startup[] = [];
+    
+    // Loop through requested names and process each
+    for (const name of requestedNames) {
+      if (!name) {
+        finalResults.push(getDefaultStartup());
+        continue;
+      }
+
+      // Find the record for the given startup name
+      const record = records.find(
+        (record) => (record.get("Startup Name") as string) === name
+      );
+      // If no record is found, insert an empty object at the current position
+      if (record) {
+        const logoField = record.get("Logo");
+        const logoUrl =
+          Array.isArray(logoField) && logoField.length > 0
+            ? logoField[0]?.url
+            : "N/A";
+
+        finalResults.push({
+          id: record.id,
+          name: (record.get("Startup Name") as string) || "Unknown",
+          representative: "N/A",
+          title: "N/A",
+          website: (record.get("Website") as string) || "N/A",
+          logo: logoUrl,
+          type: (record.get("Type") as string) || "N/A",
+          fundraising: (record.get("Fundraising in 2025?") as string) || "N/A",
+          stage: (record.get("Stage") as string) || "N/A",
+        });
+      } else {
+        finalResults.push(getDefaultStartup(name));
+      }
+    }
+
+    // Ensure exactly 10 objects in response by filling with default entries
+    while (finalResults.length < 10) {
+      finalResults.push(getDefaultStartup());
+    }
+
+    return NextResponse.json({ success: true, data: finalResults });
   } catch (error) {
     console.error("Error fetching data from Airtable:", error);
-    return NextResponse.json({ success: false, error: "Failed to fetch records" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Failed to fetch records" },
+      { status: 500 }
+    );
   }
 }

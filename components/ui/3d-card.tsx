@@ -7,9 +7,8 @@ import React, {
 	useContext,
 	useRef,
 	useEffect,
+	useCallback,
 } from "react";
-
-import { useCallback } from "react";
 
 const MouseEnterContext = createContext<
 	[boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
@@ -25,17 +24,30 @@ export const CardContainer = ({
 	containerClassName?: string;
 }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const [isMouseEntered, setIsMouseEntered] = useState(false);
+	const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+	// Check screen size on mount & resize
+	useEffect(() => {
+		const checkScreenSize = () => {
+			setIsLargeScreen(window.innerWidth >= 1024); // lg breakpoint in Tailwind
+		};
+
+		checkScreenSize();
+		window.addEventListener("resize", checkScreenSize);
+		return () => window.removeEventListener("resize", checkScreenSize);
+	}, []);
 
 	useEffect(() => {
 		if (containerRef.current) {
-			containerRef.current.style.transform = `rotateY(-9.5deg) rotateX(10.5deg)`;
+			containerRef.current.style.transform = isLargeScreen
+				? `rotateY(-9.5deg) rotateX(10.5deg)`
+				: `rotateY(0deg) rotateX(0deg)`;
 		}
-	}, []); // Runs only once on mount
-
-	const [isMouseEntered, setIsMouseEntered] = useState(false);
+	}, [isLargeScreen]);
 
 	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		if (!containerRef.current) return;
+		if (!containerRef.current || !isLargeScreen) return;
 		const { left, top, width, height } =
 			containerRef.current.getBoundingClientRect();
 		const x = (e.clientX - left - width / 2) / 25;
@@ -45,15 +57,16 @@ export const CardContainer = ({
 	};
 
 	const handleMouseEnter = () => {
+		if (!isLargeScreen) return;
 		setIsMouseEntered(true);
-		if (!containerRef.current) return;
 	};
 
 	const handleMouseLeave = () => {
-		if (!containerRef.current) return;
+		if (!containerRef.current || !isLargeScreen) return;
 		setIsMouseEntered(false);
 		containerRef.current.style.transform = `rotateY(-9.5deg) rotateX(10.5deg)`;
 	};
+
 	return (
 		<MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
 			<div
@@ -61,9 +74,7 @@ export const CardContainer = ({
 					"py-2 flex items-center justify-center",
 					containerClassName
 				)}
-				style={{
-					perspective: "1000px",
-				}}
+				style={{ perspective: "1000px" }}
 			>
 				<div
 					ref={containerRef}
@@ -76,6 +87,9 @@ export const CardContainer = ({
 					)}
 					style={{
 						transformStyle: "preserve-3d",
+						transform: isLargeScreen
+							? "rotateY(-9.5deg) rotateX(10.5deg)"
+							: "rotateY(0deg) rotateX(0deg)",
 					}}
 				>
 					{children}
@@ -131,18 +145,30 @@ export const CardItem = ({
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[key: string]: any;
 }) => {
-	console.log(translateX, translateY, translateZ, rotateX, rotateY, rotateZ);
 	const ref = useRef<HTMLDivElement>(null);
 	const [isMouseEntered] = useMouseEnter();
+	const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+	// Check screen size on mount & resize
+	useEffect(() => {
+		const checkScreenSize = () => {
+			setIsLargeScreen(window.innerWidth >= 1024);
+		};
+
+		checkScreenSize();
+		window.addEventListener("resize", checkScreenSize);
+		return () => window.removeEventListener("resize", checkScreenSize);
+	}, []);
 
 	const handleAnimations = useCallback(() => {
 		if (!ref.current) return;
-		if (isMouseEntered) {
+		if (isLargeScreen && isMouseEntered) {
 			ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
 		} else {
 			ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(80px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
 		}
 	}, [
+		isLargeScreen,
 		isMouseEntered,
 		translateX,
 		translateY,
@@ -150,7 +176,7 @@ export const CardItem = ({
 		rotateX,
 		rotateY,
 		rotateZ,
-	]); // Add dependencies
+	]);
 
 	useEffect(() => {
 		handleAnimations();
@@ -159,10 +185,12 @@ export const CardItem = ({
 	return (
 		<Tag
 			ref={ref}
-			className={cn(
-				"w-fit transition duration-200 ease-linear shadow-lg shadow-success/10",
-				className
-			)}
+			className={cn("w-fit transition duration-200 ease-linear ", className)}
+			style={{
+				transform: isLargeScreen
+					? "translateX(0px) translateY(0px) translateZ(80px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)"
+					: "translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)",
+			}}
 			{...rest}
 		>
 			{children}
