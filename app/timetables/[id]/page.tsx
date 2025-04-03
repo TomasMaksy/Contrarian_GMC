@@ -1,6 +1,7 @@
 "use client";
 import { toPng } from "html-to-image";
 import { saveAs } from "file-saver";
+import contratian_logo from "@/app/assets/Contrarian_logo_white.png";
 
 import { Header } from "@/app/components/Header";
 import { Cover } from "@/app/components/ui/cover";
@@ -18,6 +19,7 @@ import {
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Footer from "@/app/components/Footer";
+import Image from "next/image";
 
 interface TimetableProps {
 	id: string;
@@ -167,6 +169,7 @@ const TimetablePage = () => {
 			backgroundColor: "#000",
 			width,
 			height,
+			pixelRatio: 3,
 			style: {
 				transform: "none",
 				cssText:
@@ -196,22 +199,21 @@ const TimetablePage = () => {
 						isCapturing ? "w-[px]" : "w-full overflow-x-auto"
 					}`}
 				>
-					<div className="min-w-[700px] flex flex-col items-center gap-10 m-8 pt-4">
+					<div className="min-w-[700px] flex flex-col items-center gap-10 m-6 pt-4">
 						<div className="items-center flex flex-col gap-4 mb-8">
 							<h1 className="text-lg md:text-xl lg:text-3xl font-semibold max-w-7xl mx-auto text-center relative z-20 bg-clip-text text-white tracking-tighter">
 								<span className="text-4xl md:text-5xl lg:text-6xl font-bold">
 									Hey! <span className="text-white">👋</span> <br />
 									{timetable.orgName}
 								</span>
-								<br /> This is your personalised
-								<Cover> agenda!</Cover>
+								<br /> This is your personalised agenda!
 							</h1>
 						</div>
 
 						<div
 							className={`${
 								isCapturing ? "w-full" : "w-screen"
-							} overflow-x-auto pb-10 flex flex-col md:items-center sm:items-start gap-4`}
+							} overflow-x-auto pb-10 flex flex-col md:items-center sm:items-start gap-4 scrollbar-hide`}
 						>
 							<div className="min-w-[700px] w-[680px]">
 								<Table
@@ -407,14 +409,29 @@ const TimetablePage = () => {
 							</div>
 							<div className="flex justify-center">
 								<span className="text-sm text-default-500 sm:w-full md:w-[700px] md:scale-100 sm:scale-90 mt-2">
-									*Fundraising - Does the company intend to fundraise in 2025
+									*Does the company intend to fundraise in 2025
 								</span>
 							</div>
+							{isCapturing && (
+								<div className="flex flex-col items-center justify-center gap-4 pt-12">
+									<span className="text-tiny text-default-400 tracking-wide pl-1">
+										Powered by{" "}
+									</span>
+									<a href="https://www.cventures.vc/" target="_blank">
+										<Image
+											src={contratian_logo}
+											alt="Contrarian Ventures Logo"
+											className="max-h-10 w-auto mb-8"
+											width={100}
+										/>
+									</a>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
 				<Button onPress={downloadPDF} color="success" variant="bordered">
-					Save as PDF
+					Save as image.
 				</Button>
 			</div>
 			<Footer />
