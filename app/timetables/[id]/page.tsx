@@ -211,7 +211,7 @@ const TimetablePage = () => {
 					pdf.rect(0, 0, 1200, 1700, "F");
 
 					// Perfectly scaled and centered image
-					pdf.addImage(dataUrl, "PNG", 80, 80, img.width, img.height);
+					pdf.addImage(dataUrl, "PNG", 80, 20, img.width, img.height);
 					pdf.save("TimetableGMC.pdf");
 				};
 			})
