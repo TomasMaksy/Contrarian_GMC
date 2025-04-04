@@ -459,7 +459,7 @@ const TimetablePage = () => {
 								</motion.div>
 							</div>
 							<div className="flex justify-center">
-								{timetable.type === "startups" && (
+								{timetable.type === "investors" && (
 									<span className="text-sm text-default-500 sm:w-full md:w-[700px] md:scale-100 sm:scale-90 mt-2">
 										*Does the company intend to fundraise in 2025
 									</span>
