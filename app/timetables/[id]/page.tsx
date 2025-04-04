@@ -20,6 +20,8 @@ import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Footer from "@/app/components/Footer";
 import Image from "next/image";
+import { useInView } from "react-intersection-observer";
+import { motion, useAnimation } from "framer-motion";
 
 interface TimetableProps {
 	id: string;
@@ -69,6 +71,22 @@ const TimetablePage = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const [isCapturing, setIsCapturing] = useState(false);
+
+	const controls = useAnimation();
+	const controlsTable = useAnimation();
+	const { ref: ref2, inView } = useInView({ triggerOnce: true });
+	const { ref: tableRef, inView: tableInView } = useInView({
+		triggerOnce: true,
+	});
+	useEffect(() => {
+		if (inView) {
+			controls.start("visible");
+		}
+	}, [inView, controls]);
+
+	useEffect(() => {
+		if (tableInView) controlsTable.start("visible");
+	}, [tableInView, controlsTable]);
 
 	// Generate search params from meeting values
 	const generateSearchParams = (timetable: TimetableProps) => {
@@ -140,7 +158,7 @@ const TimetablePage = () => {
 	if (loading)
 		return (
 			<div className="h-screen w-full flex flex-col justify-center items-center">
-				<div className="h-screen w-screen flex flex-col justify-center items-center">
+				<div className="h-screen w-full flex flex-col justify-center items-center">
 					<h1 className="sm:text-2xl md:text-6xl font-semibold max-w-7xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white tracking-tighter">
 						<span className="sm:text-2xl md:text-6xl ">
 							Hey! <span className="text-white">👋</span>
@@ -190,20 +208,20 @@ const TimetablePage = () => {
 	};
 
 	return (
-		<section className="w-screen overflow-x-hidden">
+		<section className="w-full overflow-x-hidden">
 			<Header variant="static" />
-			<div className="flex flex-col items-center ">
+			<div className="flex flex-col items-center overflow-hidden scrollbar-hide w-full ">
 				<div
 					ref={timetableRef}
-					className={`flex flex-col items-center justify-center relative transition-all duration-300 ${
-						isCapturing ? "w-[px]" : "w-full overflow-x-auto"
+					className={`flex flex-col items-center justify-center relative transition-all duration-300 scrollbar-hide  ${
+						isCapturing ? "w-[700px]" : "w-full overflow-hidden"
 					}`}
 				>
-					<div className="min-w-[700px] flex flex-col items-center gap-10 m-6 pt-4">
-						<div className="items-center flex flex-col gap-4 mb-8">
+					<div className="min-w-[700px] flex flex-col items-center gap-10 m-6 pt-4 ">
+						<div className="items-center flex flex-col gap-8 mb-8">
 							<h1 className="text-lg md:text-xl lg:text-3xl font-semibold max-w-7xl mx-auto text-center relative z-20 bg-clip-text text-white tracking-tighter">
 								<span className="text-4xl md:text-5xl lg:text-6xl font-bold">
-									Hey! <span className="text-white">👋</span> <br />
+									Hey <span className="text-white">👋</span> <br />
 									{timetable.orgName}
 								</span>
 								<br /> This is your personalised agenda!
@@ -213,199 +231,214 @@ const TimetablePage = () => {
 						<div
 							className={`${
 								isCapturing ? "w-full" : "w-screen"
-							} overflow-x-auto pb-10 flex flex-col md:items-center sm:items-start gap-4 scrollbar-hide`}
+							} overflow-x-auto pb-10 flex flex-col md:items-center sm:items-start gap-4 scrollbar-hide `}
 						>
-							<div className="min-w-[700px] w-[680px]">
-								<Table
-									aria-label="Timetable"
-									className="w-full shadow-[12px_12px_40px_1px_rgba(74,222,128,0.15)] rounded-xl sm:scale-95 lg:scale-100 "
-									isStriped
+							<div className="min-w-[700px] w-[680px] ">
+								<motion.div
+									ref={tableRef}
+									initial="hidden"
+									animate={controlsTable}
+									variants={{
+										hidden: { opacity: 0, y: 50 },
+										visible: {
+											opacity: 1,
+											y: 0,
+											transition: { duration: 0.6 },
+										},
+									}}
 								>
-									<TableHeader>
-										<TableColumn align="center" width={20}>
-											#
-										</TableColumn>
-										<TableColumn align="center" width={80}>
-											Start Time
-										</TableColumn>
-										<TableColumn align="center" width={80}>
-											End Time
-										</TableColumn>
+									<Table
+										aria-label="Timetable"
+										className="w-full shadow-[12px_12px_40px_1px_rgba(74,222,128,0.15)] rounded-xl sm:scale-95 lg:scale-100 "
+										isStriped
+									>
+										<TableHeader>
+											<TableColumn align="center" width={20}>
+												#
+											</TableColumn>
+											<TableColumn align="center" width={80}>
+												Start Time
+											</TableColumn>
+											<TableColumn align="center" width={80}>
+												End Time
+											</TableColumn>
 
-										{timetable.type === "startups" ? (
-											<>
-												<TableColumn align="center" width={100}>
-													Table Number
-												</TableColumn>
-												<TableColumn>Investor Name</TableColumn>
-											</>
-										) : (
-											<>
-												<TableColumn align="center" width={100}>
-													Table Number
-												</TableColumn>
-												<TableColumn>Startup Name</TableColumn>
-												<TableColumn width={90}>Stage</TableColumn>
-												<TableColumn width={80}>Fundraising*</TableColumn>
-											</>
-										)}
-									</TableHeader>
-
-									<TableBody>
-										{meetingTimes.map((time, index) =>
-											timetable.type === "startups" ? (
-												<TableRow key={`startup-${index}`}>
-													<TableCell align="center">{index + 1}</TableCell>
-													<TableCell align="center">{time.start}</TableCell>
-													<TableCell align="center">{time.end}</TableCell>
-													<TableCell align="center">
-														<Chip
-															color={
-																counterpartData[index].table === 0
-																	? "warning"
-																	: "success"
-															}
-															size="md"
-															variant="flat"
-														>
-															{counterpartData[index].table === 0
-																? "N/A"
-																: `Table ${counterpartData[index].table}`}
-														</Chip>
-													</TableCell>
-
-													<TableCell>
-														{/* Startup Name + Logo logic */}
-														{timetable[
-															`meeting${index + 1}` as keyof TimetableProps
-														] ? (
-															<a
-																href={
-																	counterpartData[index]?.website.startsWith(
-																		"http"
-																	)
-																		? counterpartData[index]?.website
-																		: `https://${counterpartData[index]?.website}`
-																}
-																target="_blank"
-																rel="noopener noreferrer"
-															>
-																<div className="flex gap-3 items-center group">
-																	<img
-																		alt={
-																			counterpartData[index].logo ||
-																			"Error Image"
-																		}
-																		className="w-12 h-8 rounded-lg object-contain bg-white px-0.5"
-																		src={
-																			counterpartData[index].logo === "N/A"
-																				? "/Error-512.webp"
-																				: counterpartData[index].logo
-																		}
-																		width={48}
-																		height={32}
-																	/>
-																	<span className="font-semibold group-hover:text-success duration-500">
-																		{
-																			timetable[
-																				`meeting${
-																					index + 1
-																				}` as keyof TimetableProps
-																			]
-																		}
-																	</span>
-																</div>
-															</a>
-														) : (
-															<span className="font-semibold text-gray-500">
-																Free time
-															</span>
-														)}
-													</TableCell>
-												</TableRow>
+											{timetable.type === "startups" ? (
+												<>
+													<TableColumn align="center" width={100}>
+														Table Number
+													</TableColumn>
+													<TableColumn>Investor Name</TableColumn>
+												</>
 											) : (
-												<TableRow key={`investor-${index}`}>
-													<TableCell align="center">{index + 1}</TableCell>
-													<TableCell align="center">{time.start}</TableCell>
-													<TableCell align="center">{time.end}</TableCell>
-													<TableCell align="center">
-														<Chip color="success" size="md" variant="flat">
-															Table {timetable.table}
-														</Chip>
-													</TableCell>
-													<TableCell>
-														{/* Investor Name + Logo logic */}
-														{timetable[
-															`meeting${index + 1}` as keyof TimetableProps
-														] ? (
-															<a
-																href={
-																	counterpartData[index]?.website.startsWith(
-																		"http"
-																	)
-																		? counterpartData[index]?.website
-																		: `https://${counterpartData[index]?.website}`
+												<>
+													<TableColumn align="center" width={100}>
+														Table Number
+													</TableColumn>
+													<TableColumn>Startup Name</TableColumn>
+													<TableColumn width={90}>Stage</TableColumn>
+													<TableColumn width={80}>Fundraising*</TableColumn>
+												</>
+											)}
+										</TableHeader>
+
+										<TableBody>
+											{meetingTimes.map((time, index) =>
+												timetable.type === "startups" ? (
+													<TableRow key={`startup-${index}`}>
+														<TableCell align="center">{index + 1}</TableCell>
+														<TableCell align="center">{time.start}</TableCell>
+														<TableCell align="center">{time.end}</TableCell>
+														<TableCell align="center">
+															<Chip
+																color={
+																	counterpartData[index].table === 0
+																		? "warning"
+																		: "success"
 																}
-																target="_blank"
-																rel="noopener noreferrer"
+																size="md"
+																variant="flat"
 															>
-																<div className="flex gap-3 items-center group">
-																	<img
-																		alt={
-																			counterpartData[index].logo ||
-																			"Error Image"
-																		}
-																		className="w-12 h-8 rounded-lg object-contain bg-white px-0.5"
-																		src={
-																			counterpartData[index].logo === "N/A"
-																				? "/Error-512.webp"
-																				: counterpartData[index].logo
-																		}
-																		width={48}
-																		height={32}
-																	/>
-																	<span className="font-semibold group-hover:text-success duration-500">
-																		{
-																			timetable[
-																				`meeting${
-																					index + 1
-																				}` as keyof TimetableProps
-																			]
-																		}
-																	</span>
-																</div>
-															</a>
-														) : (
-															<span className="font-semibold text-gray-500 w-full ">
-																Free time
-															</span>
-														)}
-													</TableCell>
-													<TableCell>
-														{counterpartData[index]?.stage || "N/A"}
-													</TableCell>
-													<TableCell>
-														<Chip
-															classNames={{
-																base: "border-0",
-															}}
-															color={
-																counterpartData[index]?.fundraising === "Yes"
-																	? "success"
-																	: counterpartData[index]?.fundraising === "No"
-																	? "danger"
-																	: "default"
-															}
-															variant="dot"
-														>
-															{counterpartData[index]?.fundraising || "N/A"}
-														</Chip>
-													</TableCell>
-												</TableRow>
-											)
-										)}
-									</TableBody>
-								</Table>
+																{counterpartData[index].table === 0
+																	? "N/A"
+																	: `Table ${counterpartData[index].table}`}
+															</Chip>
+														</TableCell>
+
+														<TableCell>
+															{/* Startup Name + Logo logic */}
+															{timetable[
+																`meeting${index + 1}` as keyof TimetableProps
+															] ? (
+																<a
+																	href={
+																		counterpartData[index]?.website.startsWith(
+																			"http"
+																		)
+																			? counterpartData[index]?.website
+																			: `https://${counterpartData[index]?.website}`
+																	}
+																	target="_blank"
+																	rel="noopener noreferrer"
+																>
+																	<div className="flex gap-3 items-center group">
+																		<img
+																			alt={
+																				counterpartData[index].logo ||
+																				"Error Image"
+																			}
+																			className="w-12 h-8 rounded-lg object-contain bg-white px-0.5"
+																			src={
+																				counterpartData[index].logo === "N/A"
+																					? "/Error-512.webp"
+																					: counterpartData[index].logo
+																			}
+																			width={48}
+																			height={32}
+																		/>
+																		<span className="font-semibold group-hover:text-success duration-500">
+																			{
+																				timetable[
+																					`meeting${
+																						index + 1
+																					}` as keyof TimetableProps
+																				]
+																			}
+																		</span>
+																	</div>
+																</a>
+															) : (
+																<span className="font-semibold text-gray-500">
+																	Free time
+																</span>
+															)}
+														</TableCell>
+													</TableRow>
+												) : (
+													<TableRow key={`investor-${index}`}>
+														<TableCell align="center">{index + 1}</TableCell>
+														<TableCell align="center">{time.start}</TableCell>
+														<TableCell align="center">{time.end}</TableCell>
+														<TableCell align="center">
+															<Chip color="success" size="md" variant="flat">
+																Table {timetable.table}
+															</Chip>
+														</TableCell>
+														<TableCell>
+															{/* Investor Name + Logo logic */}
+															{timetable[
+																`meeting${index + 1}` as keyof TimetableProps
+															] ? (
+																<a
+																	href={
+																		counterpartData[index]?.website.startsWith(
+																			"http"
+																		)
+																			? counterpartData[index]?.website
+																			: `https://${counterpartData[index]?.website}`
+																	}
+																	target="_blank"
+																	rel="noopener noreferrer"
+																>
+																	<div className="flex gap-3 items-center group">
+																		<img
+																			alt={
+																				counterpartData[index].logo ||
+																				"Error Image"
+																			}
+																			className="w-12 h-8 rounded-lg object-contain bg-white px-0.5"
+																			src={
+																				counterpartData[index].logo === "N/A"
+																					? "/Error-512.webp"
+																					: counterpartData[index].logo
+																			}
+																			width={48}
+																			height={32}
+																		/>
+																		<span className="font-semibold group-hover:text-success duration-500">
+																			{
+																				timetable[
+																					`meeting${
+																						index + 1
+																					}` as keyof TimetableProps
+																				]
+																			}
+																		</span>
+																	</div>
+																</a>
+															) : (
+																<span className="font-semibold text-gray-500 w-full ">
+																	Free time
+																</span>
+															)}
+														</TableCell>
+														<TableCell>
+															{counterpartData[index]?.stage || "N/A"}
+														</TableCell>
+														<TableCell>
+															<Chip
+																classNames={{
+																	base: "border-0",
+																}}
+																color={
+																	counterpartData[index]?.fundraising === "Yes"
+																		? "success"
+																		: counterpartData[index]?.fundraising ===
+																		  "No"
+																		? "danger"
+																		: "default"
+																}
+																variant="dot"
+															>
+																{counterpartData[index]?.fundraising || "N/A"}
+															</Chip>
+														</TableCell>
+													</TableRow>
+												)
+											)}
+										</TableBody>
+									</Table>
+								</motion.div>
 							</div>
 							<div className="flex justify-center">
 								<span className="text-sm text-default-500 sm:w-full md:w-[700px] md:scale-100 sm:scale-90 mt-2">
@@ -431,8 +464,27 @@ const TimetablePage = () => {
 					</div>
 				</div>
 				<Button onPress={downloadPDF} color="success" variant="bordered">
-					Save as image.
+					Save as PDF
 				</Button>
+			</div>
+			<div className="container my-16 mt-40">
+				<motion.div
+					ref={ref2}
+					initial="hidden"
+					animate={controls}
+					variants={{
+						hidden: { opacity: 0, y: 50 },
+						visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+					}}
+				>
+					<img
+						alt="Agenda"
+						src="/GMC_agenda_hq.png"
+						width={1920}
+						height={1080}
+						className="w-full h-auto object-cover"
+					/>
+				</motion.div>
 			</div>
 			<Footer />
 		</section>
