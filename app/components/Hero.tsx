@@ -31,7 +31,7 @@ export const Hero = () => {
 							</p>
 
 							<div className="flex gap-10 items-center mt-[40px] ">
-								<Link href="/fillout">
+								<Link href="/agenda">
 									<button className="px-8 pr-12 custom-btn custom-btn-primary relative flex items-center justify-between group hover:bg-[#151515] duration-300 ">
 										<NImage
 											src={blob}
@@ -39,7 +39,7 @@ export const Hero = () => {
 											className="h-7 w-7 ease absolute left-[17px] translate-x-0 opacity-100 transition duration-300 group-hover:-translate-x-full group-hover:scale-x-50 group-hover:opacity-0 group-hover:blur-sm"
 										/>
 										<span className="ease translate-x-6 transition duration-300 group-hover:-translate-x-1">
-											Fill out the form
+											See the Agenda
 										</span>
 										<ArrowRight className="h-5 w-5 ease absolute right-4 translate-x-full scale-x-50 opacity-0 blur-sm transition duration-300 group-hover:translate-x-0 group-hover:scale-x-100 group-hover:opacity-100 group-hover:blur-none" />
 									</button>

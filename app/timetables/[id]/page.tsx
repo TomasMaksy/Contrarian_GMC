@@ -1,7 +1,9 @@
 "use client";
+
 import { toPng } from "html-to-image";
-import { saveAs } from "file-saver";
+
 import contratian_logo from "@/app/assets/Contrarian_logo_white.png";
+import jsPDF from "jspdf";
 
 import { Header } from "@/app/components/Header";
 import { Cover } from "@/app/components/ui/cover";
@@ -174,21 +176,19 @@ const TimetablePage = () => {
 	const downloadPDF = async () => {
 		if (!timetableRef.current) return;
 
-		setIsCapturing(true); // 🔥 Make it wider
-
-		// Wait for next DOM paint
-		await new Promise((r) => setTimeout(r, 100));
+		setIsCapturing(true);
+		await new Promise((r) => setTimeout(r, 300));
 
 		const node = timetableRef.current;
-		const width = node.scrollWidth;
-		const height = node.scrollHeight;
+		const nodeHeight = node.scrollHeight;
 
 		toPng(node, {
 			backgroundColor: "#000",
-			width,
-			height,
-			pixelRatio: 3,
+			width: 1180,
+			height: nodeHeight,
+			pixelRatio: 1.5,
 			style: {
+				fontFamily: "'DM Sans', sans-serif",
 				transform: "none",
 				cssText:
 					"font-smoothing: antialiased; -webkit-font-smoothing: antialiased;",
@@ -197,13 +197,29 @@ const TimetablePage = () => {
 			},
 		})
 			.then((dataUrl) => {
-				saveAs(dataUrl, "TimetableGMC.png");
+				const img = document.createElement("img");
+				img.src = dataUrl;
+
+				img.onload = () => {
+					// PDF init
+					const pdf = new jsPDF({
+						unit: "px",
+						format: [1200, 1700],
+					});
+
+					pdf.setFillColor(0, 0, 0);
+					pdf.rect(0, 0, 1200, 1700, "F");
+
+					// Perfectly scaled and centered image
+					pdf.addImage(dataUrl, "PNG", 80, 80, img.width, img.height);
+					pdf.save("TimetableGMC.pdf");
+				};
 			})
 			.catch((err) => {
 				console.error("Error generating PNG", err);
 			})
 			.finally(() => {
-				setIsCapturing(false); // ✅ Restore normal state
+				setIsCapturing(false);
 			});
 	};
 
@@ -213,16 +229,16 @@ const TimetablePage = () => {
 			<div className="flex flex-col items-center overflow-hidden scrollbar-hide w-full ">
 				<div
 					ref={timetableRef}
-					className={`flex flex-col items-center justify-center relative transition-all duration-300 scrollbar-hide  ${
+					className={`flex flex-col items-center justify-center relative transition-all duration-300 scrollbar-hide  mt-5 ${
 						isCapturing ? "w-[700px]" : "w-full overflow-hidden"
 					}`}
 				>
-					<div className="min-w-[700px] flex flex-col items-center gap-10 m-6 pt-4 ">
-						<div className="items-center flex flex-col gap-8 mb-8">
-							<h1 className="text-lg md:text-xl lg:text-3xl font-semibold max-w-7xl mx-auto text-center relative z-20 bg-clip-text text-white tracking-tighter">
+					<div className="min-w-[700px] flex flex-col items-center gap-10 mt-10 ">
+						<div className="items-center flex flex-col gap-8">
+							<h1 className="text-lg md:text-xl lg:text-2xl font-normal max-w-7xl mx-auto text-center relative z-20 bg-clip-text text-white tracking-tighter">
 								<span className="text-4xl md:text-5xl lg:text-6xl font-bold">
 									Hey <span className="text-white">👋</span> <br />
-									{timetable.orgName}
+									{timetable.orgName} <br />
 								</span>
 								<br /> This is your personalised agenda!
 							</h1>
@@ -230,10 +246,12 @@ const TimetablePage = () => {
 
 						<div
 							className={`${
-								isCapturing ? "w-full" : "w-screen"
-							} overflow-x-auto pb-10 flex flex-col md:items-center sm:items-start gap-4 scrollbar-hide `}
+								isCapturing
+									? "w-[700px] items-center"
+									: "w-screen md:items-center sm:items-start"
+							} overflow-x-auto pb-10 flex flex-col gap-4 scrollbar-hide p-8`}
 						>
-							<div className="min-w-[700px] w-[680px] ">
+							<div className="min-w-[700px] w-[680px]">
 								<motion.div
 									ref={tableRef}
 									initial="hidden"
@@ -249,7 +267,7 @@ const TimetablePage = () => {
 								>
 									<Table
 										aria-label="Timetable"
-										className="w-full shadow-[12px_12px_40px_1px_rgba(74,222,128,0.15)] rounded-xl sm:scale-95 lg:scale-100 "
+										className="w-full shadow-[12px_12px_40px_1px_rgba(74,222,128,0.15)] rounded-xl "
 										isStriped
 									>
 										<TableHeader>
@@ -441,9 +459,11 @@ const TimetablePage = () => {
 								</motion.div>
 							</div>
 							<div className="flex justify-center">
-								<span className="text-sm text-default-500 sm:w-full md:w-[700px] md:scale-100 sm:scale-90 mt-2">
-									*Does the company intend to fundraise in 2025
-								</span>
+								{timetable.type === "startups" && (
+									<span className="text-sm text-default-500 sm:w-full md:w-[700px] md:scale-100 sm:scale-90 mt-2">
+										*Does the company intend to fundraise in 2025
+									</span>
+								)}
 							</div>
 							{isCapturing && (
 								<div className="flex flex-col items-center justify-center gap-4 pt-12">
@@ -474,7 +494,7 @@ const TimetablePage = () => {
 					animate={controls}
 					variants={{
 						hidden: { opacity: 0, y: 50 },
-						visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+						visible: { opacity: 1, y: 0, transition: { duration: 1 } },
 					}}
 				>
 					<img

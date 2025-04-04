@@ -38,10 +38,10 @@ export const Header = ({ variant }: HeaderProps) => {
 							</button>
 							<div className="group">
 								<Button
-									onPress={() => router.push("/fillout")}
-									className="bg-[#3fafa8]/70 text-white px-4 py-2 rounded-lg font-medium inline-flex justify-center tracking-tight  hover:bg-[#429f99a5] duration-300 flex-nowrap"
+									onPress={() => router.push("/agenda")}
+									className="bg-[#3fafa8]/70 text-white px-4 py-2 rounded-lg font-light inline-flex justify-center tracking-wider  hover:bg-[#429f99a5] duration-300 flex-nowrap"
 								>
-									Form
+									Agenda
 								</Button>
 							</div>
 						</nav>
