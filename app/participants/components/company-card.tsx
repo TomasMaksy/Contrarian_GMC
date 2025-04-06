@@ -26,6 +26,7 @@ interface CompanyCardProps {
 }
 
 export function CompanyCard({ organisation }: CompanyCardProps) {
+	console.log(organisation.stage);
 	return (
 		<div>
 			<Card className="w-full p-1 z-20 pb-2">
@@ -82,15 +83,15 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 						</div> */}
 							</div>
 						</div>
-						{organisation.stage && <Divider />}
+						{organisation.stage !== "N/A" && <Divider />}
 						<div className="flex flex-row justify-between pt-3">
 							<div className="">
-								{organisation.stage && (
+								{organisation.stage !== "N/A" && (
 									<Chip
 										variant="shadow"
 										size="md"
 										radius="md"
-										className=" pl-2.5"
+										className="pl-2.5"
 										startContent={<ChartNoAxesColumnIncreasing size={15} />}
 									>
 										{organisation.stage}
