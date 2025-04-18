@@ -11,6 +11,7 @@ import {
 	Chip,
 	Divider,
 	Tooltip,
+	User,
 } from "@heroui/react";
 // import { Icon } from "@iconify/react";
 import type { OrganisationTypes } from "../utils/types";
@@ -30,17 +31,17 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 	return (
 		<div>
 			<Card className="w-full p-1 z-20 pb-2">
-				<a
-					href={
-						organisation.website.startsWith("http")
-							? organisation.website
-							: `https://${organisation.website}`
-					}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<CardBody className="p-4 pb-2 max-h-[315px]">
-						<div className="bg-white rounded-2xl w-full flex justify-center items-start  duration-400 relative ">
+				<CardBody className="p-4 pb-2 min-h-[375px] flex flex-col justify-between">
+					<a
+						href={
+							organisation.website.startsWith("http")
+								? organisation.website
+								: `https://${organisation.website}`
+						}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div className="bg-white rounded-2xl w-full flex justify-center items-start duration-400 relative ">
 							<div className="absolute top-0 left-0 z-50 -ml-2 -mt-2">
 								{organisation.type === "Host" && (
 									<Chip
@@ -64,7 +65,7 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 
 						<div className="flex flex-row align-top justify-between pt-3">
 							<div className="flex flex-col gap-4 h-full">
-								<div className="flex flex-col flex-grow mb-5">
+								<div className="flex flex-col flex-grow ">
 									<h3 className="text-lg font-semibold">{organisation.name}</h3>
 
 									<p className="text-small text-[#3fafa8] ">
@@ -74,19 +75,25 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 											: organisation.website}{" "}
 									</p>
 								</div>
-								{/* <Divider />
-						<div className="flex flex-col flex-grow items-start pl-1">
-							<User
-								name={organisation.representative}
-								description={organisation.title}
-							/>
-						</div> */}
 							</div>
 						</div>
-						{organisation.stage !== "N/A" && <Divider />}
-						<div className="flex flex-row justify-between pt-3">
-							<div className="">
-								{organisation.stage !== "N/A" && (
+					</a>
+					<div className="flex py-4 items-start w-full justify-start">
+						<User
+							classNames={{
+								base: "border-1 w-full py-2 border-default-300 rounded-full items-center justify-start pl-2",
+								name: "font-semibold",
+								description: "text-[#3fafa8]",
+							}}
+							name={organisation.representative}
+							description={organisation.email}
+						/>
+					</div>
+					{organisation.stage !== "N/A" && (
+						<>
+							<Divider />
+							<div className="flex flex-row justify-between pt-3">
+								<div>
 									<Chip
 										variant="shadow"
 										size="md"
@@ -96,38 +103,39 @@ export function CompanyCard({ organisation }: CompanyCardProps) {
 									>
 										{organisation.stage}
 									</Chip>
-								)}
+								</div>
+								<div>
+									{organisation.fundraising === "Yes" ? (
+										<Tooltip content="This company is fundraising in 2025">
+											<Chip
+												variant="bordered"
+												size="md"
+												radius="md"
+												className="pl-2.5 text-[#3fafa8]"
+												startContent={<DollarSign size={15} />}
+											>
+												Fundraising in 2025
+											</Chip>
+										</Tooltip>
+									) : organisation.fundraising === "No" ? (
+										<Tooltip content="This company is not fundraising in 2025">
+											<Chip
+												variant="bordered"
+												size="md"
+												radius="md"
+												className="pl-1 text-white/50"
+												startContent={<X size={15} />}
+											>
+												Not Fundraising in 2025
+											</Chip>
+										</Tooltip>
+									) : null}
+								</div>
 							</div>
-							<div className=" ">
-								{organisation.fundraising === "Yes" ? (
-									<Tooltip content="This company is fundraising in 2025">
-										<Chip
-											variant="bordered"
-											size="md"
-											radius="md"
-											className="pl-2.5 text-[#3fafa8]"
-											startContent={<DollarSign size={15} />}
-										>
-											Fundraising in 2025
-										</Chip>
-									</Tooltip>
-								) : organisation.fundraising === "No" ? (
-									<Tooltip content="This company is not fundraising in 2025">
-										<Chip
-											variant="bordered"
-											size="md"
-											radius="md"
-											className="pl-1 text-white/50"
-											startContent={<X size={15} />}
-										>
-											Not Fundraising in 2025
-										</Chip>
-									</Tooltip>
-								) : null}
-							</div>
-						</div>
-					</CardBody>
-				</a>
+						</>
+					)}
+				</CardBody>
+
 				{/* <Divider />
 				<CardFooter className="justify-center flex mt-2 w-full">
 					<div className="flex flex-row w-full items-center ">

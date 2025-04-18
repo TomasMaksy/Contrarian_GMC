@@ -269,6 +269,8 @@ export default function Fillout() {
 		{
 			id: string;
 			name: string;
+			representative: string;
+			email: string;
 			logo: string;
 			type: string;
 			website: string;
@@ -281,6 +283,8 @@ export default function Fillout() {
 		{
 			id: string;
 			name: string;
+			representative: string;
+			email: string;
 			logo: string;
 			type: string;
 			website: string;
@@ -307,6 +311,8 @@ export default function Fillout() {
 						investorsData.data.map((investor) => ({
 							id: investor.id, // Unique identifier
 							name: investor.name,
+							representative: investor.representative,
+							email: investor.email,
 							logo: investor.logo,
 							type: investor.type,
 							website: investor.website,
@@ -324,6 +330,8 @@ export default function Fillout() {
 						startupsData.data.map((startup) => ({
 							id: startup.id, // Unique identifier
 							name: startup.name,
+							representative: startup.representative,
+							email: startup.email,
 							logo: startup.logo,
 							type: startup.type,
 							website: startup.website,

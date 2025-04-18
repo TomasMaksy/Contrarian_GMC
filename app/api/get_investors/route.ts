@@ -10,6 +10,7 @@ export interface InvestorRecord {
   id: string;
   name: string;
   representative: string;
+  email: string;
   title: string;
   website: string;
   logo: string;
@@ -56,6 +57,7 @@ export async function GET(request: Request) {
       name,
       representative: "N/A",
       title: "N/A",
+      email: "N/A",
       website: "N/A",
       logo: "N/A",
       type: "N/A",
@@ -76,7 +78,8 @@ export async function GET(request: Request) {
         return {
           id: record.id,
           name: (record.get("Investor Name") as string) || "Unknown",
-          representative: "N/A",
+          representative: (record.get("Representative Name") as string) || "N/A",
+          email: (record.get("Email") as string) || "N/A",
           title: "N/A",
           website: (record.get("Website") as string) || "N/A",
           logo: logoUrl,
@@ -108,7 +111,8 @@ export async function GET(request: Request) {
         return {
           id: record.id,
           name: (record.get("Investor Name") as string) || "Unknown",
-          representative: "N/A",
+          representative: (record.get("Representative Name") as string) || "N/A",
+          email: (record.get("Email") as string) || "N/A",
           title: "N/A",
           website: (record.get("Website") as string) || "N/A",
           logo: logoUrl,
