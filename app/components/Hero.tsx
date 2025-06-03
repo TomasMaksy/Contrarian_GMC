@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Scroll } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { easeInOut, motion } from "framer-motion";
 import blob from "@/app/assets/blob.png";
 import blob2sm from "@/app/assets/blob2sm.png";

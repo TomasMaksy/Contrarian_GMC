@@ -6,7 +6,6 @@ import About from "@/app/about/page";
 import { Image } from "@heroui/react";
 import contrarian_white from "@/app/assets/Contrarian_logo_white.png";
 import bbva_white from "@/app/assets/BBVA_logo_white.png";
-import ScrollingBanner from "../landing/scrollingBanner";
 
 export default function Home() {
 	return (
