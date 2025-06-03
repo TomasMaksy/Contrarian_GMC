@@ -6,6 +6,7 @@ import About from "@/app/about/page";
 import { Image } from "@heroui/react";
 import contrarian_white from "@/app/assets/Contrarian_logo_white.png";
 import bbva_white from "@/app/assets/BBVA_logo_white.png";
+import ScrollingBanner from "../landing/scrollingBanner";
 
 export default function Home() {
 	return (
@@ -14,7 +15,6 @@ export default function Home() {
 				<Header />
 			</div>
 			<Hero />
-
 			<div className="w-full flex flex-col items-center justify-center mb-24 ml-3 mt-12">
 				<div className="sm:scale-75 md:scale-100 ">
 					<div className="text-sm rounded-lg -tracking-tight text-white/50  w-full text-center -ml-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Scroll } from "lucide-react";
 import { easeInOut, motion } from "framer-motion";
 import blob from "@/app/assets/blob.png";
 import blob2sm from "@/app/assets/blob2sm.png";
@@ -11,6 +11,7 @@ import Link from "next/link";
 // import About from "../about/page";
 
 import NImage from "next/image";
+
 export const Hero = () => {
 	return (
 		<>

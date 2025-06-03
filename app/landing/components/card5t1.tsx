@@ -40,7 +40,7 @@ export default function Card1(props: CardProps) {
 				<p className="align-middle font-black lg:text-lg sm:text-sm text-neutral-400 tracking-wider pt-2 text-center ">
 					When:
 					<span className="font-normal tracking-normal">
-						<br /> Day 1 (April 9) 9:30 AM to 6 PM{" "}
+						<br /> Day 1 (April 9) 9:30 AM to 6 PM
 					</span>
 					<br />
 					<br />
