@@ -112,7 +112,7 @@ export default function About() {
 						</Link>
 						<div className="text-center font-bold leading-[1.2] tracking-tighter sm:text-[64px]">
 							<div className="bg-hero-section-title bg-clip-text bg-gradient-to-tr from-gray-300 to-[#ffffff] text-transparent sm:scale-90 md:scale-100 leading-[0.9]">
-								Growth Meets Capital
+								Growth Meets Capitall
 							</div>
 						</div>
 						<p className="text-center font-normal leading-7 text-default-600 w-[480px] sm:w-[370px] sm:text-[18px]">

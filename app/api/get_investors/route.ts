@@ -3,7 +3,7 @@ import Airtable, { FieldSet, Record } from "airtable";
 
 const AIRTABLE_READONLY_API = process.env.AIRTABLE_READONLY_API as string;
 const BASE_ID = "appCup7R4k8cZF33V";
-const TABLE_NAME = "GMC Investors";
+const TABLE_NAME = "tbl7Sa8B9LylZaYQ1";
 
 // Define the Airtable record type
 export interface InvestorRecord {

@@ -18,7 +18,7 @@ interface Startup {
 
 const AIRTABLE_READONLY_API = process.env.AIRTABLE_READONLY_API as string;
 const BASE_ID = "appCup7R4k8cZF33V";
-const TABLE_NAME = "GMC Startups";
+const TABLE_NAME = "tblDvZCr0MilynhrF";
 
 const base = new Airtable({ apiKey: AIRTABLE_READONLY_API }).base(BASE_ID);
 
